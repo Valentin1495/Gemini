@@ -1,22 +1,28 @@
 import Link from 'next/link';
-import { Button } from './ui/button';
+import LoginButton from './login-button';
+import { getServerSession } from 'next-auth';
+import { options } from '@/app/api/auth/[...nextauth]/options';
+import UserDropdownMenu from './user-dropdown-menu';
 
 type Props = {};
-export default function Navbar({}: Props) {
+export default async function Navbar({}: Props) {
+  const session = await getServerSession(options);
+
   return (
-    <nav className='py-3 flex justify-between items-center'>
-      <Link
-        href={'/'}
-        className='font-bold text-xl text-purple-700 hover:opacity-70'
-      >
-        QuizGPT
-      </Link>
-      <Button
-        asChild
-        className='font-semibold text-purple-500 bg-purple-100 hover:bg-purple-700 hover:text-purple-100'
-      >
-        <Link href='/api/auth/signin'>Sign in</Link>
-      </Button>
+    <nav className='fixed inset-x-0 py-3'>
+      <div className='flex justify-between items-center container'>
+        <Link
+          href={'/'}
+          className='font-bold text-xl text-purple-700 hover:opacity-70'
+        >
+          QuizGPT
+        </Link>
+        {session?.user ? (
+          <UserDropdownMenu user={session.user} />
+        ) : (
+          <LoginButton />
+        )}
+      </div>
     </nav>
   );
 }
