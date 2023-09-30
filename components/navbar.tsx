@@ -2,7 +2,7 @@ import Link from 'next/link';
 import LoginButton from './login-button';
 import { getServerSession } from 'next-auth';
 import { options } from '@/app/api/auth/[...nextauth]/options';
-import UserDropdownMenu from './user-dropdown-menu';
+import UserAvatar from './user-avatar';
 
 type Props = {};
 export default async function Navbar({}: Props) {
@@ -13,15 +13,11 @@ export default async function Navbar({}: Props) {
       <div className='flex justify-between items-center container'>
         <Link
           href={'/'}
-          className='font-bold text-xl text-purple-700 hover:opacity-70'
+          className='font-bold text-xl text-primary hover:opacity-70'
         >
-          QuizGPT
+          AICompanion
         </Link>
-        {session?.user ? (
-          <UserDropdownMenu user={session.user} />
-        ) : (
-          <LoginButton />
-        )}
+        {session?.user ? <UserAvatar user={session.user} /> : <LoginButton />}
       </div>
     </nav>
   );

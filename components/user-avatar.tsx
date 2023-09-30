@@ -6,8 +6,8 @@ export default function UserAvatar({ user }: UserType) {
     <Avatar>
       <AvatarImage
         src={user.image as string}
-        className='w-10 h-10'
-        alt='profile-pic'
+        className='object-cover'
+        alt='Profile picture'
       />
       <AvatarFallback></AvatarFallback>
     </Avatar>

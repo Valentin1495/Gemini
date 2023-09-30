@@ -76,7 +76,4 @@
 }
 
 @layer components {
-  .container {
-    @apply max-w-md md:max-w-xl lg:max-w-3xl mx-auto;
-  }
 }

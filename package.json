@@ -1,5 +1,5 @@
 {
-  "name": "quiz-gpt",
+  "name": "aicompanion",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -21,7 +21,7 @@
     "clsx": "^2.0.0",
     "eslint": "8.49.0",
     "eslint-config-next": "13.4.19",
-    "next": "13.4.19",
+    "next": "^13.5.3",
     "next-auth": "^4.23.1",
     "postcss": "8.4.29",
     "react": "18.2.0",
