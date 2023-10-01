@@ -5,8 +5,7 @@ import { options } from '@/app/api/auth/[...nextauth]/options';
 import UserDropdownMenu from './user-dropdown-menu';
 import { ModeToggle } from './mode-toggle';
 
-type Props = {};
-export default async function Navbar({}: Props) {
+export default async function Navbar() {
   const session = await getServerSession(options);
 
   return (

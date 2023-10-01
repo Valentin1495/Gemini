@@ -1,3 +1,9 @@
+import SearchInput from '@/components/search-input';
+
 export default function Home() {
-  return <main></main>;
+  return (
+    <main>
+      <SearchInput />
+    </main>
+  );
 }
