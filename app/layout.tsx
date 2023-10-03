@@ -1,4 +1,3 @@
-import Navbar from '@/components/navbar';
 import './globals.css';
 import type { Metadata } from 'next';
 import AuthProvider from '@/components/auth-provider';
@@ -23,10 +22,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <AuthProvider>
-            <Navbar />
-            <div className='pt-16 px-3'>{children}</div>
-          </AuthProvider>
+          <AuthProvider>{children}</AuthProvider>
         </ThemeProvider>
       </body>
     </html>

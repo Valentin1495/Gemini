@@ -5,8 +5,12 @@ import { signIn } from 'next-auth/react';
 
 export default function LoginButton() {
   return (
-    <Button onClick={() => signIn('google')} variant={'login'}>
-      Login
+    <Button
+      onClick={() => signIn('google', { callbackUrl: '/dashboard' })}
+      variant={'login'}
+      size={'lg'}
+    >
+      Get Started
     </Button>
   );
 }

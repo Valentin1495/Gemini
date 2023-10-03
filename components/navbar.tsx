@@ -15,7 +15,7 @@ export default async function Navbar() {
           href={'/'}
           className='font-bold text-2xl text-primary hover:opacity-80 transition'
         >
-          AICompanion
+          AIStoryteller
         </Link>
         <div className='flex items-center gap-x-2'>
           <ModeToggle />
