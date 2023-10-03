@@ -15,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body>
+      <body className='max-w-7xl mx-auto p-10'>
         <ThemeProvider
           attribute='class'
           defaultTheme='system'
