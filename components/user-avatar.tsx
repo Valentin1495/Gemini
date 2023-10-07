@@ -5,7 +5,7 @@ export default function UserAvatar({ user }: UserType) {
   return (
     <Avatar>
       <AvatarImage
-        src={user.image as string}
+        src={user?.image as string | undefined}
         className='object-cover'
         alt='Profile picture'
       />

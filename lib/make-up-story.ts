@@ -10,7 +10,7 @@ export const makeUpStory = async (topic: string) => {
   const messages = [
     {
       content: `
-      Make up a short story about ${topic}.
+      Make up a short story about this: ${topic}.
       `,
     },
   ];
@@ -28,7 +28,7 @@ export const makeUpStory = async (topic: string) => {
         {
           input: {
             content: `
-            Make up a short story about "Sharky", a tooth-brushing shark superhero.`,
+            Make up a short story about this: "Sharky", a tooth-brushing shark superhero.`,
           },
           output: {
             content: `

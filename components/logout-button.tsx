@@ -5,7 +5,10 @@ import { DropdownMenuItem } from './ui/dropdown-menu';
 
 export default function LogoutButton() {
   return (
-    <DropdownMenuItem onClick={() => signOut()} className=''>
+    <DropdownMenuItem
+      onClick={() => signOut({ callbackUrl: '/' })}
+      className=''
+    >
       Sign out
     </DropdownMenuItem>
   );

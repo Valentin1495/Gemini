@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import LoginButton from './login-button';
 import { getServerSession } from 'next-auth';
 import { options } from '@/app/api/auth/[...nextauth]/options';
 import UserDropdownMenu from './user-dropdown-menu';
@@ -9,7 +8,7 @@ export default async function Navbar() {
   const session = await getServerSession(options);
 
   return (
-    <nav className='fixed inset-x-0 p-3'>
+    <nav className='fixed inset-x-0 px-10'>
       <div className='flex justify-between items-center'>
         <Link
           href={'/'}
@@ -19,11 +18,7 @@ export default async function Navbar() {
         </Link>
         <div className='flex items-center gap-x-2'>
           <ModeToggle />
-          {session?.user ? (
-            <UserDropdownMenu user={session.user} />
-          ) : (
-            <LoginButton />
-          )}
+          <UserDropdownMenu user={session?.user} />
         </div>
       </div>
     </nav>

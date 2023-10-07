@@ -2,6 +2,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import AuthProvider from '@/components/auth-provider';
 import { ThemeProvider } from '@/components/theme-provider';
+import { Toaster } from 'react-hot-toast';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -15,7 +16,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className='max-w-7xl mx-auto p-10'>
+      <body>
+        <Toaster />
         <ThemeProvider
           attribute='class'
           defaultTheme='system'
