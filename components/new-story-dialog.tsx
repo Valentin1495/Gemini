@@ -29,16 +29,16 @@ export default function NewStoryDialog({}: Props) {
     if (result?.message) {
       setPending(false);
       toast.error(result.message);
-      formRef.current?.reset();
     } else {
       setPending(false);
       toast.success('Created a new story');
+      formRef.current?.reset();
     }
   };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger className='flex gap-x-1.5 border-dashed border-2 border-cyan-500 text-cyan-600 p-3 rounded-md'>
+      <DialogTrigger className='flex gap-x-1.5 border-dashed border-2 border-primary text-primary p-3 rounded-md'>
         <PlusIcon className='w-6 h-6' />
         New Story
       </DialogTrigger>
@@ -67,7 +67,7 @@ export default function NewStoryDialog({}: Props) {
             </Button>
 
             <Link
-              href={'/generate_prompt'}
+              href={'/generate_topic'}
               aria-disabled={pending}
               className='flex gap-x-1.5 items-center bg-secondary font-bold px-2 py-1.5 rounded-md hover:bg-slate-200 dark:hover:bg-slate-700 transition aria-disabled:pointer-events-none aria-disabled:opacity-50'
             >
