@@ -45,7 +45,7 @@ export default function IdeationForm({}: Props) {
           id='context'
           name='context'
           className='dark:bg-slate-800 bg-slate-50 shadow-lg placeholder:text-slate-400 dark:placeholder:text-slate-500'
-          placeholder='e.g. A cute cat'
+          placeholder='e.g. An astronaut'
           required
         />
         <Button
@@ -63,14 +63,17 @@ export default function IdeationForm({}: Props) {
           <section className='mt-10 mb-5 bg-secondary rounded-lg space-y-2.5 w-fit p-5'>
             <h2 className='text-lg'>Topic Ideation Result</h2>
             {extractedPrompt.map((el, i) => (
-              <article key={i} className='flex justify-between gap-x-5'>
+              <article
+                key={i}
+                className='flex justify-between gap-x-5 items-center'
+              >
                 <p className='text-lg text-primary/75'>{el}</p>
                 <Button
                   className='dark:bg-primary/20 dark:text-primary dark:hover:bg-primary/10 min-w-fit'
                   size={'sm'}
                   onClick={() => {
                     navigator.clipboard.writeText(el);
-                    toast('Prompt copied to clipboard', {
+                    toast('Topic copied to clipboard', {
                       icon: '✂️',
                     });
                   }}
@@ -84,7 +87,7 @@ export default function IdeationForm({}: Props) {
             className='bg-secondary p-3 rounded-lg hover:opacity-80 transition'
             href={'/dashboard?show_dialog=y'}
           >
-            Generate story with one of these topices
+            Go back
           </Link>
         </div>
       ) : null}

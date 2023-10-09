@@ -4,7 +4,13 @@ import { Separator } from '@/components/ui/separator';
 import { redirect } from 'next/navigation';
 import NewStoryDialog from '@/components/new-story-dialog';
 
-export default async function Dashboard() {
+type Props = {
+  searchParams: {
+    show_dialog?: string;
+  };
+};
+
+export default async function Dashboard({ searchParams }: Props) {
   const session = (await getServerSession(options)) as Session;
 
   if (!session) {
@@ -17,7 +23,7 @@ export default async function Dashboard() {
       <Separator className='my-4' />
       {/* <p className='text-primary/50'>You have no stories yet.</p> */}
 
-      <NewStoryDialog />
+      <NewStoryDialog showDialog={searchParams.show_dialog} />
     </main>
   );
 }

@@ -12,13 +12,15 @@ import { MagicWandIcon, PlusIcon } from '@radix-ui/react-icons';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { createStory } from '@/lib/actions';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 
-type Props = {};
+type Props = {
+  showDialog?: string;
+};
 
-export default function NewStoryDialog({}: Props) {
+export default function NewStoryDialog({ showDialog }: Props) {
   const [pending, setPending] = useState(false);
   const [open, setOpen] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
@@ -35,6 +37,12 @@ export default function NewStoryDialog({}: Props) {
       formRef.current?.reset();
     }
   };
+
+  useEffect(() => {
+    if (showDialog) {
+      setOpen(true);
+    }
+  }, [showDialog]);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
