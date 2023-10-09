@@ -1,22 +1,31 @@
 'use server';
 
+import { getServerSession } from 'next-auth';
 import { createImage } from './create-image';
 import { generatePrompt } from './generate-prompt';
 import { makeUpStory } from './make-up-story';
-import { Redis } from '@upstash/redis';
+import { options } from '@/app/api/auth/[...nextauth]/options';
+import { revalidatePath } from 'next/cache';
+import { redis } from './redis';
 
 export async function createStory(formData: FormData) {
-  const redis = new Redis({
-    url: process.env.UPSTASH_REDIS_REST_URL as string,
-    token: process.env.UPSTASH_REDIS_REST_TOKEN as string,
-  });
+  const session = await getServerSession(options);
+  const email = session?.user?.email as string;
 
   try {
     const topic = formData.get('topic') as string;
     const story = await makeUpStory(topic);
-
     // const imageData = await createImage(topic);
-    // const imageUrl = imageData.images[0].image;
+    // const url = imageData.images[0].image;
+
+    const post = {
+      createdAt: new Date(),
+      story,
+    };
+
+    await redis.lpush(`user:${email}:posts`, JSON.stringify(post));
+
+    revalidatePath('/dashboard');
   } catch (error: any) {
     return { message: error.message };
   }

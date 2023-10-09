@@ -47,6 +47,7 @@ export default function IdeationForm({}: Props) {
           className='dark:bg-slate-800 bg-slate-50 shadow-lg placeholder:text-slate-400 dark:placeholder:text-slate-500'
           placeholder='e.g. An astronaut'
           required
+          autoFocus
         />
         <Button
           variant={'secondary'}

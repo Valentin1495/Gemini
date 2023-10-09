@@ -15,6 +15,7 @@ import { createStory } from '@/lib/actions';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
+import Loader from './loader';
 
 type Props = {
   showDialog?: string;
@@ -35,6 +36,7 @@ export default function NewStoryDialog({ showDialog }: Props) {
       setPending(false);
       toast.success('Created a new story');
       formRef.current?.reset();
+      setOpen(false);
     }
   };
 
@@ -70,8 +72,13 @@ export default function NewStoryDialog({ showDialog }: Props) {
             required
           />
           <section className='flex gap-x-2.5'>
-            <Button type='submit' size={'sm'} disabled={pending}>
-              {pending ? 'Generating...' : 'Generate'}
+            <Button
+              type='submit'
+              size={'sm'}
+              disabled={pending}
+              className='w-[75.5px]'
+            >
+              {pending ? <Loader width='w-5' height='h-5' /> : 'Generate'}
             </Button>
 
             <Link
