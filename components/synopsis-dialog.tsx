@@ -8,7 +8,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { MagicWandIcon, PlusIcon } from '@radix-ui/react-icons';
+import { MagicWandIcon, RocketIcon } from '@radix-ui/react-icons';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { createStory } from '@/lib/actions';
@@ -16,14 +16,15 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 import Loader from './loader';
+import { useSearchParams } from 'next/navigation';
+import { copyToClipboard } from '@/lib/copy-to-clipboard';
 
-type Props = {
-  showDialog?: string;
-};
-
-export default function NewStoryDialog({ showDialog }: Props) {
+export default function SynopsisDialog() {
+  const searchParams = useSearchParams();
+  const showDialog = searchParams.get('show_dialog');
   const [pending, setPending] = useState(false);
   const [open, setOpen] = useState(false);
+  const [synopsis, setSynopsis] = useState('');
   const formRef = useRef<HTMLFormElement>(null);
 
   const formAction = async (formData: FormData) => {
@@ -32,29 +33,31 @@ export default function NewStoryDialog({ showDialog }: Props) {
     if (result?.message) {
       setPending(false);
       toast.error(result.message);
-    } else {
+    }
+
+    if (result?.synopsis) {
       setPending(false);
-      toast.success('Created a new story');
       formRef.current?.reset();
-      setOpen(false);
+      toast.success('Created a synopsis');
+      setSynopsis(result.synopsis);
     }
   };
 
   useEffect(() => {
-    if (showDialog) {
+    if (showDialog === 'y') {
       setOpen(true);
     }
   }, [showDialog]);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger className='flex gap-x-1.5 border-dashed border-2 border-primary text-primary p-3 rounded-md'>
-        <PlusIcon className='w-6 h-6' />
-        New Story
+      <DialogTrigger className='flex gap-x-1.5 items-center text-primary hover:text-primary/70 transition'>
+        <RocketIcon className='w-6 h-6' />
+        Suggestion
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>New Story</DialogTitle>
+          <DialogTitle>New Synopsis</DialogTitle>
           <DialogDescription>
             Enter a topic with a detailed description.
           </DialogDescription>
@@ -91,6 +94,14 @@ export default function NewStoryDialog({ showDialog }: Props) {
             </Link>
           </section>
         </form>
+        {synopsis && (
+          <p
+            onClick={() => copyToClipboard(synopsis)}
+            className='mt-5 text-primary transition hover:cursor-pointer bg-secondary hover:bg-secondary/75 py-1.5 px-3 rounded-lg'
+          >
+            {synopsis}
+          </p>
+        )}
       </DialogContent>
     </Dialog>
   );

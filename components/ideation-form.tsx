@@ -8,6 +8,7 @@ import { useRef, useState } from 'react';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 import Loader from './loader';
+import { copyToClipboard } from '@/lib/copy-to-clipboard';
 
 type Props = {};
 export default function IdeationForm({}: Props) {
@@ -72,12 +73,7 @@ export default function IdeationForm({}: Props) {
                 <Button
                   className='dark:bg-primary/20 dark:text-primary dark:hover:bg-primary/10 min-w-fit'
                   size={'sm'}
-                  onClick={() => {
-                    navigator.clipboard.writeText(el);
-                    toast('Topic copied to clipboard', {
-                      icon: '✂️',
-                    });
-                  }}
+                  onClick={() => copyToClipboard(el)}
                 >
                   Copy this
                 </Button>
