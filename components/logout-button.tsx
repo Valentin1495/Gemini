@@ -7,7 +7,7 @@ export default function LogoutButton() {
   return (
     <DropdownMenuItem
       onClick={() => signOut({ callbackUrl: '/' })}
-      className=''
+      className='cursor-pointer'
     >
       Sign out
     </DropdownMenuItem>

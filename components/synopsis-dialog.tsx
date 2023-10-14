@@ -8,7 +8,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { MagicWandIcon, RocketIcon } from '@radix-ui/react-icons';
+import { MagicWandIcon, RocketIcon, Pencil2Icon } from '@radix-ui/react-icons';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { createStory } from '@/lib/actions';
@@ -18,6 +18,7 @@ import toast from 'react-hot-toast';
 import Loader from './loader';
 import { useSearchParams } from 'next/navigation';
 import { copyToClipboard } from '@/lib/copy-to-clipboard';
+import { v4 as uuidv4 } from 'uuid';
 
 export default function SynopsisDialog() {
   const searchParams = useSearchParams();
@@ -25,6 +26,7 @@ export default function SynopsisDialog() {
   const [pending, setPending] = useState(false);
   const [open, setOpen] = useState(false);
   const [synopsis, setSynopsis] = useState('');
+  const [storyId, setStoryId] = useState('');
   const formRef = useRef<HTMLFormElement>(null);
 
   const formAction = async (formData: FormData) => {
@@ -47,62 +49,73 @@ export default function SynopsisDialog() {
     if (showDialog === 'y') {
       setOpen(true);
     }
+
+    setStoryId(uuidv4());
   }, [showDialog]);
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger className='flex gap-x-1.5 items-center text-primary hover:text-primary/70 transition'>
-        <RocketIcon className='w-6 h-6' />
-        Suggestion
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>New Synopsis</DialogTitle>
-          <DialogDescription>
-            Enter a topic with a detailed description.
-          </DialogDescription>
-        </DialogHeader>
-        <form
-          action={formAction}
-          onSubmit={() => setPending(true)}
-          className='space-y-2'
-          ref={formRef}
-        >
-          <Input
-            id='topic'
-            name='topic'
-            placeholder='a teddy bear on a skateboard in Times Square'
-            required
-          />
-          <section className='flex gap-x-2.5'>
-            <Button
-              type='submit'
-              size={'sm'}
-              disabled={pending}
-              className='w-[75.5px]'
-            >
-              {pending ? <Loader width='w-5' height='h-5' /> : 'Generate'}
-            </Button>
-
-            <Link
-              href={'/generate_topic'}
-              aria-disabled={pending}
-              className='flex gap-x-1.5 items-center bg-secondary font-bold px-2 py-1.5 rounded-md hover:bg-slate-200 dark:hover:bg-slate-700 transition aria-disabled:pointer-events-none aria-disabled:opacity-50'
-            >
-              <MagicWandIcon className='w-3.5 h-3.5' />
-              <span className='text-sm'>Ideation</span>
-            </Link>
-          </section>
-        </form>
-        {synopsis && (
-          <p
-            onClick={() => copyToClipboard(synopsis)}
-            className='mt-5 text-primary transition hover:cursor-pointer bg-secondary hover:bg-secondary/75 py-1.5 px-3 rounded-lg'
+    <div className='flex items-center gap-x-3'>
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogTrigger className='flex gap-x-1.5 items-center text-primary hover:text-primary/70 transition'>
+          <RocketIcon className='w-6 h-6' />
+          AI
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>New Synopsis</DialogTitle>
+            <DialogDescription>
+              Enter a topic with a detailed description.
+            </DialogDescription>
+          </DialogHeader>
+          <form
+            action={formAction}
+            onSubmit={() => setPending(true)}
+            className='space-y-2'
+            ref={formRef}
           >
-            {synopsis}
-          </p>
-        )}
-      </DialogContent>
-    </Dialog>
+            <Input
+              id='topic'
+              name='topic'
+              placeholder='a teddy bear on a skateboard in Times Square'
+              required
+            />
+            <section className='flex gap-x-2.5'>
+              <Button
+                type='submit'
+                size={'sm'}
+                disabled={pending}
+                className='w-[75.5px]'
+              >
+                {pending ? <Loader width='w-5' height='h-5' /> : 'Generate'}
+              </Button>
+
+              <Link
+                href={'/generate_topic'}
+                aria-disabled={pending}
+                className='flex gap-x-1.5 items-center bg-secondary font-bold px-2 py-1.5 rounded-md hover:bg-slate-200 dark:hover:bg-slate-700 transition aria-disabled:pointer-events-none aria-disabled:opacity-50'
+              >
+                <MagicWandIcon className='w-3.5 h-3.5' />
+                <span className='text-sm'>Ideation</span>
+              </Link>
+            </section>
+          </form>
+          {synopsis && (
+            <p
+              onClick={() => copyToClipboard(synopsis)}
+              className='mt-5 text-primary transition hover:cursor-pointer bg-secondary hover:bg-secondary/75 py-1.5 px-3 rounded-lg'
+            >
+              {synopsis}
+            </p>
+          )}
+        </DialogContent>
+      </Dialog>
+      <Link
+        href={`/new_story?story_id=${storyId}`}
+        className='flex items-center gap-x-1.5 text-primary hover:text-primary/70 transition'
+      >
+        <Pencil2Icon className='w-6 h-6' />
+        Write
+      </Link>
+    </div>
   );
 }

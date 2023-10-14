@@ -7,7 +7,7 @@ export default async function Home() {
   const session = await getServerSession(options);
 
   if (session) {
-    redirect('/dashboard');
+    redirect('/explore');
   }
 
   return (
