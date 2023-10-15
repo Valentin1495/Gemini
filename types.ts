@@ -14,6 +14,11 @@ export type D = {
   idx: number;
 };
 
+export type P = {
+  numOfPublished: number;
+  idx: number;
+};
+
 export type DraftType = {
   author: string;
   username: string;
@@ -23,9 +28,10 @@ export type DraftType = {
   timestamp: Timestamp;
 };
 
+export type PublishedType = DraftType & {
+  karloImage: string;
+};
+
 export type ExtendedDraft = DraftType & D;
 
-export type Publiished = ExtendedDraft & {
-  karloImage: string;
-  username: string;
-};
+export type ExtendedPublished = PublishedType & P;

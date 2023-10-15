@@ -8,7 +8,7 @@ export default async function Navbar() {
   const session = await getServerSession(options);
 
   return (
-    <nav className='fixed inset-x-0 px-10'>
+    <nav className='fixed inset-x-0 top-0 py-5 px-10 bg-secondary/90 shadow-md'>
       <div className='flex justify-between items-center'>
         <Link
           href={'/'}

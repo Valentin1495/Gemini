@@ -10,6 +10,8 @@ import UserAvatar from './user-avatar';
 import { UserType } from '@/types';
 import LogoutButton from './logout-button';
 import Link from 'next/link';
+import WriteButton from './write-button';
+import { ArchiveIcon } from '@radix-ui/react-icons';
 
 export default function UserDropdownMenu({ user }: UserType) {
   return (
@@ -17,19 +19,33 @@ export default function UserDropdownMenu({ user }: UserType) {
       <DropdownMenuTrigger>
         <UserAvatar user={user} />
       </DropdownMenuTrigger>
-      <DropdownMenuContent className='mr-3'>
+
+      <DropdownMenuContent>
         <DropdownMenuLabel>
           <h3>{user?.name}</h3>
           <h3>{user?.email}</h3>
         </DropdownMenuLabel>
+
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <Link href={'/stories/drafts'} className='w-full'>
+          <WriteButton />
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+
+        <DropdownMenuItem>
+          <Link
+            href={'/stories/drafts'}
+            className='w-full flex items-center gap-x-1.5'
+          >
+            <ArchiveIcon className='w-6 h-6' />
             Stories
           </Link>
         </DropdownMenuItem>
+
         <DropdownMenuSeparator />
-        <LogoutButton />
+        <DropdownMenuItem>
+          <LogoutButton />
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

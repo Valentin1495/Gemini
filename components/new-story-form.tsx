@@ -49,6 +49,7 @@ export default function NewStoryForm() {
         placeholder='Prompt for thumbnail'
         value={prompt}
         onChange={(e) => setPrompt(e.target.value)}
+        required
       />
       <Textarea
         name='content'

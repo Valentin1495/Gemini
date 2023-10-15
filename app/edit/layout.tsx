@@ -1,6 +1,7 @@
 import '@/app/globals.css';
 import type { Metadata } from 'next';
 import Navbar from '@/components/navbar';
+import { Toaster } from 'react-hot-toast';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -14,9 +15,10 @@ export default function EditLayout({
 }) {
   return (
     <html lang='en'>
-      <body className='max-w-7xl mx-auto p-10'>
+      <body className='p-10'>
+        <Toaster />
         <Navbar />
-        {children}
+        <div className='max-w-5xl mx-auto'>{children}</div>
       </body>
     </html>
   );

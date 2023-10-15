@@ -3,14 +3,18 @@ import ActiveLinks from '@/components/active-links';
 import Draft from '@/components/draft';
 import { db } from '@/lib/firebase';
 import { DraftType } from '@/types';
-import { collection, getDocs, query, where } from 'firebase/firestore';
+import { collection, getDocs, orderBy, query, where } from 'firebase/firestore';
 import { getServerSession } from 'next-auth';
 
 export default async function Drafts() {
   const session = await getServerSession(options);
   const email = session?.user?.email;
 
-  const qDrafts = query(collection(db, 'drafts'), where('author', '==', email));
+  const qDrafts = query(
+    collection(db, 'drafts'),
+    where('author', '==', email),
+    orderBy('timestamp', 'desc')
+  );
   const qPublished = query(
     collection(db, 'published'),
     where('author', '==', email)
@@ -35,15 +39,19 @@ export default async function Drafts() {
   return (
     <main className='pt-16'>
       <ActiveLinks numOfStories={numOfStories} />
-      <div className='space-y-5'>
-        {drafts.map((draft, i) => (
-          <Draft
-            key={draft.storyId}
-            idx={i}
-            numOfDrafts={numOfDrafts}
-            {...draft}
-          />
-        ))}
+      <div className='space-y-5 mt-10'>
+        {drafts.length ? (
+          drafts.map((draft, i) => (
+            <Draft
+              key={draft.storyId}
+              idx={i}
+              numOfDrafts={numOfDrafts}
+              {...draft}
+            />
+          ))
+        ) : (
+          <p>You have no drafts.</p>
+        )}
       </div>
     </main>
   );
