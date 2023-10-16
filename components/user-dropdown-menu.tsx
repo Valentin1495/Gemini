@@ -20,7 +20,7 @@ export default function UserDropdownMenu({ user }: UserType) {
         <UserAvatar user={user} />
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent>
+      <DropdownMenuContent className='mr-3'>
         <DropdownMenuLabel>
           <h3>{user?.name}</h3>
           <h3>{user?.email}</h3>

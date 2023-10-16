@@ -1,43 +1,75 @@
 import { formatDate } from '@/lib/format-date';
 import { ExtendedPublished } from '@/types';
 import Link from 'next/link';
-import { Separator } from './ui/separator';
 import Image from 'next/image';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 
 export default function Published({
   prompt,
   story,
   timestamp,
   storyId,
+  karloImage,
   idx,
   numOfPublished,
 }: ExtendedPublished) {
   const formattedDate = formatDate(timestamp);
 
   return (
-    <div className='space-y-5'>
-      <section>
-        <article className='flex flex-col'>
+    <Dialog>
+      <DialogTrigger className='relative aspect-square w-full rounded-sm overflow-hidden'>
+        <Image
+          src={karloImage}
+          alt='Thumbnail'
+          fill
+          className='object-cover absolute'
+        />
+        <section className='bg-white/75 p-1.5 text-left font-bold inset-0 opacity-0 hover:opacity-100 absolute transition'>
+          {prompt}
+        </section>
+      </DialogTrigger>
+      <DialogContent className='p-0 max-w-fit'>
+        <section className='relative aspect-square w-96 overflow-hidden rounded-t-lg'>
+          <Image
+            src={karloImage}
+            alt='Thumbnail'
+            fill
+            className='object-cover'
+          />
+        </section>
+        <section className='w-96 px-5 pb-5 flex flex-col items-center'>
           <Link
-            className='font-bold text-primary w-fit'
+            className='text-primary font-bold w-fit text-center'
             href={`/edit/published?story_id=${storyId}`}
           >
             {prompt}
           </Link>
           <Link
-            className='text-primary/60 w-fit'
+            className='text-primary/60 w-fit text-center summary'
             href={`/edit/published?story_id=${storyId}`}
           >
             {story ? story : 'Empty story'}
           </Link>
-          <p className='text-primary/75 font-light mt-2.5'>
+          <p className='text-primary/75 text-sm mt-2.5'>
             Last published on {formattedDate}
           </p>
-        </article>
-        {/* <Image /> */}
-      </section>
-
-      {idx + 1 !== numOfPublished && <Separator />}
-    </div>
+        </section>
+      </DialogContent>
+    </Dialog>
   );
 }
+// <div className='space-y-5'>
+//   <section className=''>
+
+//     <article className='flex flex-col sm:w-2/3'>
+
+//     </article>
+//   </section>
+// </div>

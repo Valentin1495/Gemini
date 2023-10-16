@@ -45,7 +45,7 @@ export default async function PublishedStories({ searchParams }: Props) {
         numOfStories={numOfStories}
         showToast={searchParams?.show_toast}
       />
-      <div className='space-y-5 mt-10'>
+      <div className='grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mt-10'>
         {published.length ? (
           published.map((published, i) => (
             <Published
