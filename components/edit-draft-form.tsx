@@ -100,6 +100,7 @@ export default function EditDraftForm({ storyId, draft }: Props) {
         placeholder='Tell your story...'
         className='h-96'
         value={newStory}
+        required
         onChange={(e) => setNewStory(e.target.value)}
       />
       <section className='flex justify-center'>

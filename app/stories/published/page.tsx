@@ -3,7 +3,15 @@ import ActiveLinks from '@/components/active-links';
 import Published from '@/components/published';
 import { db } from '@/lib/firebase';
 import { PublishedType } from '@/types';
-import { collection, getDocs, orderBy, query, where } from 'firebase/firestore';
+import {
+  collection,
+  doc,
+  getDocs,
+  orderBy,
+  query,
+  setDoc,
+  where,
+} from 'firebase/firestore';
 import { getServerSession } from 'next-auth';
 
 type Props = {
@@ -31,6 +39,14 @@ export default async function PublishedStories({ searchParams }: Props) {
     return { ...doc.data(), storyId: doc.id };
   }) as PublishedType[];
 
+  published.map(async (story) => {
+    await setDoc(
+      doc(db, 'published', story.storyId),
+      { storyId: story.storyId },
+      { merge: true }
+    );
+  });
+
   const numOfDrafts = drafts.length;
   const numOfPublished = published.length;
 
@@ -47,13 +63,8 @@ export default async function PublishedStories({ searchParams }: Props) {
       />
       <div className='grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mt-10'>
         {published.length ? (
-          published.map((published, i) => (
-            <Published
-              key={published.storyId}
-              idx={i}
-              numOfPublished={numOfPublished}
-              {...published}
-            />
+          published.map((published) => (
+            <Published key={published.storyId} {...published} />
           ))
         ) : (
           <p className='mt-5'>You have no drafts.</p>

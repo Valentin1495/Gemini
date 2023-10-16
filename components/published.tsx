@@ -1,15 +1,8 @@
 import { formatDate } from '@/lib/format-date';
-import { ExtendedPublished } from '@/types';
+import { PublishedType } from '@/types';
 import Link from 'next/link';
 import Image from 'next/image';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 
 export default function Published({
   prompt,
@@ -17,9 +10,7 @@ export default function Published({
   timestamp,
   storyId,
   karloImage,
-  idx,
-  numOfPublished,
-}: ExtendedPublished) {
+}: PublishedType) {
   const formattedDate = formatDate(timestamp);
 
   return (
@@ -55,7 +46,7 @@ export default function Published({
             className='text-primary/60 w-fit text-center summary'
             href={`/edit/published?story_id=${storyId}`}
           >
-            {story ? story : 'Empty story'}
+            {story}
           </Link>
           <p className='text-primary/75 text-sm mt-2.5'>
             Last published on {formattedDate}
@@ -65,11 +56,3 @@ export default function Published({
     </Dialog>
   );
 }
-// <div className='space-y-5'>
-//   <section className=''>
-
-//     <article className='flex flex-col sm:w-2/3'>
-
-//     </article>
-//   </section>
-// </div>
