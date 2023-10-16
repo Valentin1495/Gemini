@@ -16,7 +16,8 @@ export default async function EditDraft({ searchParams }: Props) {
   const draft = querySnapshot.docs.map((doc) => doc.data())[0] as DraftType;
 
   return (
-    <main className='pt-16'>
+    <main className='pt-16 space-y-10'>
+      <h1 className='text-xl text-primary'>Edit Draft</h1>
       <EditDraftForm storyId={story_id} draft={draft} />
     </main>
   );

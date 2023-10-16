@@ -1,8 +1,12 @@
+'use client';
+
 import { formatDate } from '@/lib/format-date';
 import { PublishedType } from '@/types';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import DeleteButton from './delete-button';
+import { useState } from 'react';
 
 export default function Published({
   prompt,
@@ -12,9 +16,10 @@ export default function Published({
   karloImage,
 }: PublishedType) {
   const formattedDate = formatDate(timestamp);
+  const [open, setOpen] = useState(false);
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger className='relative aspect-square w-full rounded-sm overflow-hidden'>
         <Image
           src={karloImage}
@@ -22,7 +27,7 @@ export default function Published({
           fill
           className='object-cover absolute'
         />
-        <section className='bg-white/75 p-1.5 text-left font-bold inset-0 opacity-0 hover:opacity-100 absolute transition'>
+        <section className='bg-white/75 text-primary dark:text-primary-foreground p-1.5 text-left font-bold inset-0 opacity-0 hover:opacity-100 absolute transition'>
           {prompt}
         </section>
       </DialogTrigger>
@@ -48,9 +53,12 @@ export default function Published({
           >
             {story}
           </Link>
-          <p className='text-primary/75 text-sm mt-2.5'>
-            Last published on {formattedDate}
-          </p>
+          <article className='flex items-center mt-2.5 relative'>
+            <p className='text-primary/75 text-sm'>
+              Last published on {formattedDate}
+            </p>
+            <DeleteButton storyId={storyId} setOpen={setOpen} />
+          </article>
         </section>
       </DialogContent>
     </Dialog>

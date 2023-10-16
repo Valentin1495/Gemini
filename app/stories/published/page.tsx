@@ -1,17 +1,9 @@
 import { options } from '@/app/api/auth/[...nextauth]/options';
 import ActiveLinks from '@/components/active-links';
-import Published from '@/components/published';
+import RealtimePublished from '@/components/realtime-published';
 import { db } from '@/lib/firebase';
 import { PublishedType } from '@/types';
-import {
-  collection,
-  doc,
-  getDocs,
-  orderBy,
-  query,
-  setDoc,
-  where,
-} from 'firebase/firestore';
+import { collection, getDocs, orderBy, query, where } from 'firebase/firestore';
 import { getServerSession } from 'next-auth';
 
 type Props = {
@@ -22,7 +14,7 @@ type Props = {
 
 export default async function PublishedStories({ searchParams }: Props) {
   const session = await getServerSession(options);
-  const email = session?.user?.email;
+  const email = session?.user?.email as string;
 
   const qDrafts = query(collection(db, 'drafts'), where('author', '==', email));
   const qPublished = query(
@@ -39,14 +31,6 @@ export default async function PublishedStories({ searchParams }: Props) {
     return { ...doc.data(), storyId: doc.id };
   }) as PublishedType[];
 
-  published.map(async (story) => {
-    await setDoc(
-      doc(db, 'published', story.storyId),
-      { storyId: story.storyId },
-      { merge: true }
-    );
-  });
-
   const numOfDrafts = drafts.length;
   const numOfPublished = published.length;
 
@@ -61,15 +45,7 @@ export default async function PublishedStories({ searchParams }: Props) {
         numOfStories={numOfStories}
         showToast={searchParams?.show_toast}
       />
-      <div className='grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mt-10'>
-        {published.length ? (
-          published.map((published) => (
-            <Published key={published.storyId} {...published} />
-          ))
-        ) : (
-          <p className='mt-5'>You have no drafts.</p>
-        )}
-      </div>
+      <RealtimePublished author={email} />
     </main>
   );
 }

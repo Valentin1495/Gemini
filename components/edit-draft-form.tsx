@@ -73,7 +73,6 @@ export default function EditDraftForm({ storyId, draft }: Props) {
     if (result?.newImageUrl) {
       setPending(false);
       formRef.current?.reset();
-
       router.push('/stories/published?show_toast=y');
     }
   };
