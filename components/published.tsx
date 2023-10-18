@@ -1,6 +1,5 @@
 'use client';
 
-import { formatDate } from '@/lib/format-date';
 import { PublishedType } from '@/types';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -15,7 +14,6 @@ export default function Published({
   storyId,
   karloImage,
 }: PublishedType) {
-  const formattedDate = formatDate(timestamp);
   const [open, setOpen] = useState(false);
 
   return (
@@ -55,7 +53,7 @@ export default function Published({
           </Link>
           <article className='flex items-center mt-2.5 relative'>
             <p className='text-primary/75 text-sm'>
-              Last published on {formattedDate}
+              Last published on {timestamp}
             </p>
             <DeleteButton storyId={storyId} setOpen={setOpen} />
           </article>

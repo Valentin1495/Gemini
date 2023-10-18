@@ -4,11 +4,6 @@ export type UserType = {
   user?: Omit<User, 'id'>;
 };
 
-export type Timestamp = {
-  seconds: number;
-  nanoseconds: number;
-};
-
 export type D = {
   numOfDrafts: number;
   idx: number;
@@ -25,7 +20,7 @@ export type DraftType = {
   prompt: string;
   story: string;
   storyId: string;
-  timestamp: Timestamp;
+  timestamp: string;
 };
 
 export type PublishedType = DraftType & {

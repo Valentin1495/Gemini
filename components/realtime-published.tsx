@@ -12,6 +12,7 @@ import {
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import Published from './published';
+import { ReaderIcon } from '@radix-ui/react-icons';
 
 type Props = {
   author: string;
@@ -49,13 +50,19 @@ export default function RealtimePublished({ author }: Props) {
   }, []);
 
   return (
-    <div className='grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mt-10'>
-      {publishedList?.length
-        ? publishedList.map((story) => (
-            <Published key={story.storyId} {...story} />
-          ))
-        : !loading && <p>You have no stories.</p>}
-      {loading && <p>loading...</p>}
+    <div className='space-y-5'>
+      <span className='flex items-center gap-x-1.5 mt-10'>
+        <ReaderIcon className='w-5 h-5' />
+        {publishedList?.length}
+      </span>
+      <section className='grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2'>
+        {publishedList?.length
+          ? publishedList.map((story) => (
+              <Published key={story.storyId} {...story} />
+            ))
+          : !loading && <p>You have no stories.</p>}
+        {loading && <p>loading...</p>}
+      </section>
     </div>
   );
 }

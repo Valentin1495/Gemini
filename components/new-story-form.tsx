@@ -6,22 +6,20 @@ import { Textarea } from '@/components/ui/textarea';
 import useDebounce from '@/hooks/use-debounce';
 import { getNewImageUrl } from '@/lib/actions';
 import { db } from '@/lib/firebase';
-import {
-  addDoc,
-  collection,
-  deleteDoc,
-  doc,
-  serverTimestamp,
-  setDoc,
-} from 'firebase/firestore';
-import { useSession } from 'next-auth/react';
+import { addDoc, collection, deleteDoc, doc, setDoc } from 'firebase/firestore';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import Loader from './loader';
+import { format } from 'date-fns';
 
-export default function NewStoryForm() {
+type Props = {
+  email: string;
+  username: string;
+};
+
+export default function NewStoryForm({ email, username }: Props) {
   const [prompt, setPrompt] = useState('');
   const [story, setStory] = useState('');
   const [pending, setPending] = useState(false);
@@ -32,27 +30,22 @@ export default function NewStoryForm() {
   const debouncedPrompt = useDebounce(prompt);
   const debouncedStory = useDebounce(story);
   const router = useRouter();
-  const { data: session } = useSession();
-  const email = session?.user?.email as string;
-  const username = session?.user?.name as string;
 
   useEffect(() => {
-    if (debouncedStory || debouncedPrompt) {
-      const data = {
-        author: email,
-        username,
-        prompt: debouncedPrompt,
-        story: debouncedStory,
-        storyId,
-        timestamp: serverTimestamp(),
-      };
+    const data = {
+      author: email,
+      username,
+      prompt: debouncedPrompt,
+      story: debouncedStory,
+      storyId,
+      timestamp: format(Date.now(), 'MMM dd, yyyy'),
+    };
 
-      const saveStory = async () => {
-        await setDoc(doc(db, 'drafts', storyId), data);
-      };
+    const autoSave = async () => {
+      await setDoc(doc(db, 'drafts', storyId), data);
+    };
 
-      saveStory();
-    }
+    autoSave();
   }, [debouncedStory, debouncedPrompt]);
 
   const publishStory = async (formData: FormData) => {
@@ -65,7 +58,7 @@ export default function NewStoryForm() {
       username,
       prompt: debouncedPrompt,
       story: debouncedStory,
-      timestamp: serverTimestamp(),
+      timestamp: format(Date.now(), 'MMM dd, yyyy'),
       karloImage: result.newImageUrl,
     });
 
@@ -83,7 +76,7 @@ export default function NewStoryForm() {
 
   return (
     <form
-      className='space-y-5'
+      className='space-y-5 max-w-3xl mx-auto'
       onSubmit={() => setPending(true)}
       ref={formRef}
       action={publishStory}
@@ -92,7 +85,7 @@ export default function NewStoryForm() {
         name='prompt'
         id='prompt'
         type='text'
-        placeholder='Prompt for thumbnail'
+        placeholder='a teddy bear on a skateboard in Times Square'
         value={prompt}
         onChange={(e) => setPrompt(e.target.value)}
         required

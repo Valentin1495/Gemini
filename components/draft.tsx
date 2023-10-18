@@ -1,7 +1,10 @@
-import { formatDate } from '@/lib/format-date';
 import { ExtendedDraft } from '@/types';
 import Link from 'next/link';
 import { Separator } from './ui/separator';
+import { TrashIcon } from '@radix-ui/react-icons';
+import { deleteDoc, doc } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
+import toast from 'react-hot-toast';
 
 export default function Draft({
   prompt,
@@ -11,7 +14,15 @@ export default function Draft({
   idx,
   numOfDrafts,
 }: ExtendedDraft) {
-  const formattedDate = formatDate(timestamp);
+  const deleteDraft = async () => {
+    await deleteDoc(doc(db, 'drafts', storyId));
+
+    toast('Deleted a draft', {
+      icon: '🗑️',
+    });
+  };
+
+  if (!prompt || !story) return null;
 
   return (
     <div className='space-y-5'>
@@ -20,17 +31,22 @@ export default function Draft({
           className='font-bold text-primary w-fit'
           href={`/edit/draft?story_id=${storyId}`}
         >
-          {prompt ? prompt : 'Empty prompt'}
+          {prompt}
         </Link>
         <Link
           className='text-primary/60 w-fit summary'
           href={`/edit/draft?story_id=${storyId}`}
         >
-          {story ? story : 'Empty story'}
+          {story}
         </Link>
-        <p className='text-primary/75 font-light mt-2.5'>
-          Last edited on {formattedDate}
-        </p>
+        <article className='mt-2.5 flex items-center gap-x-2.5'>
+          <p className='text-primary/75 font-light'>
+            Last edited on {timestamp}
+          </p>
+          <button onClick={deleteDraft} className='transition hover:opacity-75'>
+            <TrashIcon className='w-5 h-5 text-destructive' />
+          </button>
+        </article>
       </section>
       {idx + 1 !== numOfDrafts && <Separator />}
     </div>

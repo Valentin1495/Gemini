@@ -71,7 +71,7 @@ export default function SynopsisDialog() {
           <Input
             id='topic'
             name='topic'
-            placeholder='a teddy bear on a skateboard in Times Square'
+            placeholder='an astronaut walking in a green desert'
             required
           />
           <section className='flex gap-x-2.5'>

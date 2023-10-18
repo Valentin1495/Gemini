@@ -15,7 +15,9 @@ export default function DeleteButton({ storyId, setOpen }: Props) {
   const deleteStory = async () => {
     await deleteDoc(doc(db, 'published', storyId));
     setOpen(false);
-    toast.success('Deleted a story');
+    toast('Deleted a story', {
+      icon: '🗑️',
+    });
   };
 
   return (

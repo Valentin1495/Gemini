@@ -6,11 +6,12 @@ import { Textarea } from '@/components/ui/textarea';
 import useDebounce from '@/hooks/use-debounce';
 import { db } from '@/lib/firebase';
 import { PublishedType } from '@/types';
-import { doc, serverTimestamp, updateDoc } from 'firebase/firestore';
+import { doc, updateDoc } from 'firebase/firestore';
 import { useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import Loader from './loader';
+import { format } from 'date-fns';
 
 type Props = {
   storyId: string;
@@ -30,7 +31,7 @@ export default function EditPublishedForm({ storyId, published }: Props) {
     try {
       await updateDoc(doc(db, 'published', storyId), {
         story: debouncedStory,
-        timestamp: serverTimestamp(),
+        timestamp: format(Date.now(), 'MMM dd, yyyy'),
       });
       setPending(false);
       formRef.current?.reset();

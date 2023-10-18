@@ -12,13 +12,13 @@ import {
   collection,
   deleteDoc,
   doc,
-  serverTimestamp,
   updateDoc,
 } from 'firebase/firestore';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import Loader from './loader';
+import { format } from 'date-fns';
 
 type Props = {
   storyId: string;
@@ -39,7 +39,7 @@ export default function EditDraftForm({ storyId, draft }: Props) {
     const data = {
       prompt: debouncedPrompt,
       story: debouncedStory,
-      timestamp: serverTimestamp(),
+      timestamp: format(Date.now(), 'MMM dd, yyyy'),
     };
 
     const updateStory = async () => {
@@ -61,7 +61,7 @@ export default function EditDraftForm({ storyId, draft }: Props) {
       username,
       prompt: debouncedPrompt,
       story: debouncedStory,
-      timestamp: serverTimestamp(),
+      timestamp: format(Date.now(), 'MMM dd, yyyy'),
       karloImage: result.newImageUrl,
     });
 

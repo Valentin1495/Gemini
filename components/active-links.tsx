@@ -6,16 +6,11 @@ import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 
 type Props = {
-  numOfStories: {
-    drafts: number;
-    published: number;
-  };
   showToast?: string;
 };
 
-export default function ActiveLinks({ numOfStories, showToast }: Props) {
+export default function ActiveLinks({ showToast }: Props) {
   const pathname = usePathname();
-  const { drafts, published } = numOfStories;
 
   useEffect(() => {
     if (showToast === 'y') {
@@ -30,10 +25,10 @@ export default function ActiveLinks({ numOfStories, showToast }: Props) {
       <h1 className='text-4xl font-bold text-primary'>Your Stories</h1>
       <section className='space-x-2.5 mb-10'>
         <ActiveLink href='/stories/drafts' pathname={pathname}>
-          Drafts {drafts}
+          Drafts
         </ActiveLink>
         <ActiveLink href='/stories/published' pathname={pathname}>
-          Published {published}
+          Published
         </ActiveLink>
       </section>
     </div>

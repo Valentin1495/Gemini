@@ -2,7 +2,7 @@
 
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { addDoc, collection } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import { Pencil2Icon } from '@radix-ui/react-icons';
 
@@ -19,7 +19,7 @@ export default function WriteButton() {
       username,
       prompt: '',
       story: '',
-      timestamp: serverTimestamp(),
+      timestamp: new Date(),
     };
     const doc = await addDoc(collection(db, 'drafts'), data);
 
