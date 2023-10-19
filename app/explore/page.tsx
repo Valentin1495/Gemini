@@ -6,6 +6,7 @@ import SynopsisDialog from '@/components/synopsis-dialog';
 import WriteButton from '@/components/write-button';
 import { collection, getDocs, query } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+import RealtimeStories from '@/components/realtime-stories';
 
 export default async function Explore() {
   const session = await getServerSession(options);
@@ -28,6 +29,7 @@ export default async function Explore() {
         </div>
       </div>
       <Separator className='my-4' />
+      <RealtimeStories />
     </main>
   );
 }

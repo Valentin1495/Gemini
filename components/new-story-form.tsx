@@ -12,14 +12,13 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import Loader from './loader';
-import { format } from 'date-fns';
+import { UserType } from '@/types';
 
 type Props = {
-  email: string;
-  username: string;
+  session: UserType;
 };
 
-export default function NewStoryForm({ email, username }: Props) {
+export default function NewStoryForm({ session }: Props) {
   const [prompt, setPrompt] = useState('');
   const [story, setStory] = useState('');
   const [pending, setPending] = useState(false);
@@ -33,12 +32,13 @@ export default function NewStoryForm({ email, username }: Props) {
 
   useEffect(() => {
     const data = {
-      author: email,
-      username,
+      author: session.user?.email,
+      username: session.user?.name,
+      profilePic: session.user?.image,
       prompt: debouncedPrompt,
       story: debouncedStory,
       storyId,
-      timestamp: format(Date.now(), 'MMM dd, yyyy'),
+      timestamp: Date.now(),
     };
 
     const autoSave = async () => {
@@ -54,11 +54,13 @@ export default function NewStoryForm({ email, username }: Props) {
     await deleteDoc(doc(db, 'drafts', storyId));
 
     await addDoc(collection(db, 'published'), {
-      author: email,
-      username,
+      author: session.user?.email,
+      username: session.user?.name,
+      profilePic: session.user?.image,
       prompt: debouncedPrompt,
       story: debouncedStory,
-      timestamp: format(Date.now(), 'MMM dd, yyyy'),
+      storyId,
+      timestamp: Date.now(),
       karloImage: result.newImageUrl,
     });
 

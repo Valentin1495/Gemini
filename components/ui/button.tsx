@@ -10,17 +10,17 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          'bg-primary text-primary-foreground shadow hover:bg-primary/90 font-bold',
+          'bg-primary text-primary-foreground shadow hover:bg-primary/90 font-bold transition',
         destructive:
-          'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90',
+          'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90 transition',
         outline:
-          'border border-input bg-transparent shadow-sm hover:bg-accent hover:text-accent-foreground font-bold',
+          'border border-input bg-transparent shadow-sm hover:bg-accent hover:text-accent-foreground font-bold transition',
         secondary:
-          'bg-secondary text-secondary-foreground font-bold shadow-sm hover:bg-secondary/80',
-        ghost: 'hover:bg-accent hover:text-accent-foreground',
-        link: 'text-primary underline-offset-4 hover:underline',
+          'bg-secondary text-secondary-foreground font-bold shadow-sm hover:bg-secondary/80 transition',
+        ghost: 'hover:bg-accent hover:text-accent-foreground transition',
+        link: 'text-primary underline-offset-4 hover:underline transition',
         login:
-          'bg-gradient-to-r from-sky-500 via-blue-500 to-cyan-500 text-white font-bold hover:opacity-90 transition',
+          'bg-gradient-to-r from-sky-500 via-blue-500 to-cyan-500 text-white font-bold hover:opacity-90 transition transition',
       },
       size: {
         default: 'h-9 px-4 py-2',

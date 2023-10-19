@@ -17,7 +17,6 @@ import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import Draft from './draft';
 import { FileTextIcon } from '@radix-ui/react-icons';
-import { format } from 'date-fns';
 
 type Props = {
   email: string;

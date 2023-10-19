@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import DeleteButton from './delete-button';
 import { useState } from 'react';
+import { format } from 'date-fns';
 
 export default function Published({
   prompt,
@@ -14,6 +15,7 @@ export default function Published({
   storyId,
   karloImage,
 }: PublishedType) {
+  const formattedTimestamp = format(new Date(timestamp), 'MMM dd, yyyy');
   const [open, setOpen] = useState(false);
 
   return (
@@ -53,7 +55,7 @@ export default function Published({
           </Link>
           <article className='flex items-center mt-2.5 relative'>
             <p className='text-primary/75 text-sm'>
-              Last published on {timestamp}
+              Published on {formattedTimestamp}
             </p>
             <DeleteButton storyId={storyId} setOpen={setOpen} />
           </article>

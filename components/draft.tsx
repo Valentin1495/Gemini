@@ -5,6 +5,7 @@ import { TrashIcon } from '@radix-ui/react-icons';
 import { deleteDoc, doc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import toast from 'react-hot-toast';
+import { format } from 'date-fns';
 
 export default function Draft({
   prompt,
@@ -14,6 +15,8 @@ export default function Draft({
   idx,
   numOfDrafts,
 }: ExtendedDraft) {
+  const formattedTimestamp = format(new Date(timestamp), 'MMM dd, yyyy');
+
   const deleteDraft = async () => {
     await deleteDoc(doc(db, 'drafts', storyId));
 
@@ -41,7 +44,7 @@ export default function Draft({
         </Link>
         <article className='mt-2.5 flex items-center gap-x-2.5'>
           <p className='text-primary/75 font-light'>
-            Last edited on {timestamp}
+            Last edited on {formattedTimestamp}
           </p>
           <button onClick={deleteDraft} className='transition hover:opacity-75'>
             <TrashIcon className='w-5 h-5 text-destructive' />

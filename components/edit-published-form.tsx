@@ -11,7 +11,6 @@ import { useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import Loader from './loader';
-import { format } from 'date-fns';
 
 type Props = {
   storyId: string;
@@ -31,7 +30,7 @@ export default function EditPublishedForm({ storyId, published }: Props) {
     try {
       await updateDoc(doc(db, 'published', storyId), {
         story: debouncedStory,
-        timestamp: format(Date.now(), 'MMM dd, yyyy'),
+        timestamp: Date.now(),
       });
       setPending(false);
       formRef.current?.reset();

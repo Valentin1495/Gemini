@@ -18,7 +18,6 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import Loader from './loader';
-import { format } from 'date-fns';
 
 type Props = {
   storyId: string;
@@ -26,7 +25,7 @@ type Props = {
 };
 
 export default function EditDraftForm({ storyId, draft }: Props) {
-  const { prompt, story, username, author } = draft;
+  const { prompt, story, username, author, profilePic } = draft;
   const [newPrompt, setNewPrompt] = useState(prompt);
   const [newStory, setNewStory] = useState(story);
   const [pending, setPending] = useState(false);
@@ -39,7 +38,7 @@ export default function EditDraftForm({ storyId, draft }: Props) {
     const data = {
       prompt: debouncedPrompt,
       story: debouncedStory,
-      timestamp: format(Date.now(), 'MMM dd, yyyy'),
+      timestamp: Date.now(),
     };
 
     const updateStory = async () => {
@@ -59,9 +58,10 @@ export default function EditDraftForm({ storyId, draft }: Props) {
     await addDoc(collection(db, 'published'), {
       author,
       username,
+      profilePic,
       prompt: debouncedPrompt,
       story: debouncedStory,
-      timestamp: format(Date.now(), 'MMM dd, yyyy'),
+      timestamp: Date.now(),
       karloImage: result.newImageUrl,
     });
 

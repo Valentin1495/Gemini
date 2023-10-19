@@ -12,8 +12,8 @@ export default async function Home() {
 
   return (
     <main className='flex flex-col items-center min-h-screen justify-center gap-y-10 bg-gradient-to-r from-sky-100 via-blue-100 to-cyan-100'>
-      <h1 className='text-7xl text-center font-bold text-primary'>
-        AI <span className='text-primary/50'>story telling</span> assistant
+      <h1 className='text-7xl text-center font-bold text-muted-foreground'>
+        AIStoryteller
       </h1>
       <LoginButton />
     </main>

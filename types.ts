@@ -17,10 +17,11 @@ export type P = {
 export type DraftType = {
   author: string;
   username: string;
+  profilePic: string;
   prompt: string;
   story: string;
   storyId: string;
-  timestamp: string;
+  timestamp: number;
 };
 
 export type PublishedType = DraftType & {
