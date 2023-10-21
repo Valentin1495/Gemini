@@ -4,8 +4,6 @@ import { Separator } from '@/components/ui/separator';
 import { redirect } from 'next/navigation';
 import SynopsisDialog from '@/components/synopsis-dialog';
 import WriteButton from '@/components/write-button';
-import { collection, getDocs, query } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
 import RealtimeStories from '@/components/realtime-stories';
 
 export default async function Explore() {
@@ -14,10 +12,6 @@ export default async function Explore() {
   if (!session) {
     redirect('/');
   }
-
-  // const q = query(collection(db, 'published'))
-  // const querySnapshot = await getDocs(q)
-  // const stories = querySnapshot.docs.map(doc => doc.data())
 
   return (
     <main className='pt-16'>

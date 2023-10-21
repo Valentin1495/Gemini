@@ -42,13 +42,13 @@ export default function Published({
         </section>
         <section className='w-96 px-5 pb-5 flex flex-col items-center'>
           <Link
-            className='text-primary font-bold w-fit text-center'
+            className='text-primary font-bold w-fit text-center prompt-summary'
             href={`/edit/published?story_id=${storyId}`}
           >
             {prompt}
           </Link>
           <Link
-            className='text-primary/60 w-fit text-center summary'
+            className='text-primary/60 w-fit text-center story-summary'
             href={`/edit/published?story_id=${storyId}`}
           >
             {story}

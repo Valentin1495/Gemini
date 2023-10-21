@@ -37,7 +37,7 @@ export default function Draft({
           {prompt}
         </Link>
         <Link
-          className='text-primary/60 w-fit summary'
+          className='text-primary/60 w-fit story-summary'
           href={`/edit/draft?story_id=${storyId}`}
         >
           {story}

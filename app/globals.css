@@ -80,9 +80,17 @@
     @apply border-4 border-slate-300 border-t-4 border-t-slate-500 rounded-full animate-spin;
   }
 
-  .summary {
+  .story-summary {
     display: -webkit-box;
     -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .prompt-summary {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
     overflow: hidden;

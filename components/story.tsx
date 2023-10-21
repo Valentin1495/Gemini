@@ -9,7 +9,6 @@ import Image from 'next/image';
 import { CopyIcon } from '@radix-ui/react-icons';
 import { copyToClipboard } from '@/lib/copy-to-clipboard';
 import { format } from 'date-fns';
-import { Button } from './ui/button';
 import Link from 'next/link';
 
 export default function Story({
@@ -21,6 +20,7 @@ export default function Story({
   username,
 }: PublishedType) {
   const formattedDate = format(new Date(timestamp), 'MM/dd/yyyy');
+  const modifiedUsername = username.split(' ').join('');
 
   return (
     <Dialog>
@@ -56,7 +56,7 @@ export default function Story({
           />
           <h1 className='text-primary text-sm'>{username}</h1>
         </DialogHeader>
-        <section className='relative aspect-square w-96 overflow-hidden rounded-lg'>
+        <section className='relative aspect-square w-80 overflow-hidden rounded-lg'>
           <Image
             src={karloImage}
             alt='Thumbnail'
@@ -64,7 +64,7 @@ export default function Story({
             className='object-cover'
           />
         </section>
-        <section className='w-96 space-y-2'>
+        <section className='w-80 space-y-2'>
           <article className='flex items-center gap-x-2.5'>
             <h1 className='text-primary font-bold'>Prompt</h1>
             <button
@@ -75,12 +75,14 @@ export default function Story({
               Copy
             </button>
           </article>
-          <p className='bg-secondary/75 text-slate-400 px-4 py-3 rounded-lg'>
-            {prompt}
-          </p>
+          <article className='bg-secondary/75 px-4 py-3'>
+            <p className='text-slate-400  rounded-lg prompt-summary'>
+              {prompt}
+            </p>
+          </article>
         </section>
         <Link
-          href={`/@${username}/${storyId}`}
+          href={`/@${modifiedUsername}/${storyId}`}
           className='bg-primary text-primary-foreground shadow hover:bg-primary/90 font-bol transition text-center rounded-sm py-2'
         >
           Read the Story
