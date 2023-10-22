@@ -5,8 +5,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import DeleteButton from './delete-button';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { format } from 'date-fns';
+import { doc, updateDoc } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
 
 export default function Published({
   prompt,
@@ -15,6 +17,16 @@ export default function Published({
   storyId,
   karloImage,
 }: PublishedType) {
+  useEffect(() => {
+    const addStoryId = async () => {
+      await updateDoc(doc(db, 'published', storyId), {
+        storyId,
+      });
+    };
+
+    addStoryId();
+  }, []);
+
   const formattedTimestamp = format(new Date(timestamp), 'MMM dd, yyyy');
   const [open, setOpen] = useState(false);
 

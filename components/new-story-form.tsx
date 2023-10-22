@@ -58,7 +58,6 @@ export default function NewStoryForm({ session }: Props) {
       profilePic: session.user?.image,
       prompt: debouncedPrompt,
       story: debouncedStory,
-      storyId,
       timestamp: Date.now(),
       karloImage: result.newImageUrl,
     });

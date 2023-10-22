@@ -22,7 +22,7 @@ export default async function EditPublished({ searchParams }: Props) {
 
   return (
     <main className='pt-16 space-y-10'>
-      <h1 className='text-xl text-primary'>Edit Story</h1>
+      <h1 className='text-xl text-primary font-bold'>{published.username}</h1>
       <EditPublishedForm storyId={story_id} published={published} />
     </main>
   );

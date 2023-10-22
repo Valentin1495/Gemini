@@ -69,7 +69,7 @@ export default function EditPublishedForm({ storyId, published }: Props) {
           type='submit'
           variant={'secondary'}
           size={'lg'}
-          disabled={pending}
+          disabled={pending || story === debouncedStory}
           className='w-24'
         >
           {pending ? <Loader width='w-7' height='h-7' /> : 'Publish'}
