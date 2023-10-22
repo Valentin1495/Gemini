@@ -17,7 +17,6 @@ export type P = {
 export type DraftType = {
   author: string;
   username: string;
-  profilePic: string;
   prompt: string;
   story: string;
   storyId: string;
@@ -25,6 +24,7 @@ export type DraftType = {
 };
 
 export type PublishedType = DraftType & {
+  profilePic: string;
   karloImage: string;
 };
 

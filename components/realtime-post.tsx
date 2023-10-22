@@ -7,6 +7,7 @@ import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import PostSkeleton from './post-skeleton';
 
 type Props = {
   storyId: string;
@@ -38,7 +39,7 @@ export default function RealtimePost({ storyId }: Props) {
     };
   }, []);
 
-  if (!post) return null;
+  if (!post) return <PostSkeleton />;
 
   return (
     <div className='space-y-10'>

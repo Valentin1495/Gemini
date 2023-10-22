@@ -12,10 +12,10 @@ import {
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import Story from './story';
+import StorySkeleton from './story-skeleton';
 
 export default function RealtimeStories() {
   const [allPublished, setAllPublished] = useState<PublishedType[]>();
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const q = query(collection(db, 'published'), orderBy('timestamp', 'desc'));
@@ -27,11 +27,9 @@ export default function RealtimeStories() {
           doc.data()
         ) as PublishedType[];
         setAllPublished(allPublishedList);
-        setLoading(false);
       },
       (error) => {
         toast.error(error.message);
-        setLoading(false);
       }
     );
 
@@ -40,12 +38,15 @@ export default function RealtimeStories() {
     };
   }, []);
 
+  if (!allPublished) return <StorySkeleton />;
+
   return (
-    <div className='grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2'>
-      {allPublished?.length
-        ? allPublished.map((story) => <Story key={story.storyId} {...story} />)
-        : !loading && <p>You have no stories.</p>}
-      {loading && <p>loading...</p>}
+    <div className='grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1.5'>
+      {allPublished.length ? (
+        allPublished.map((story) => <Story key={story.storyId} {...story} />)
+      ) : (
+        <p>There are no stories.</p>
+      )}
     </div>
   );
 }

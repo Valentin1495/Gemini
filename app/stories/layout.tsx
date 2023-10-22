@@ -2,6 +2,7 @@ import '@/app/globals.css';
 import type { Metadata } from 'next';
 import Navbar from '@/components/navbar';
 import { Toaster } from 'react-hot-toast';
+import { ThemeProvider } from '@/components/theme-provider';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -16,9 +17,16 @@ export default function StoriesLayout({
   return (
     <html lang='en'>
       <body className='p-10'>
-        <Toaster />
-        <Navbar />
-        <div className='max-w-xl md:max-w-5xl mx-auto'>{children}</div>
+        <ThemeProvider
+          attribute='class'
+          defaultTheme='system'
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Toaster />
+          <Navbar />
+          <div className='max-w-xl md:max-w-5xl mx-auto'>{children}</div>
+        </ThemeProvider>
       </body>
     </html>
   );

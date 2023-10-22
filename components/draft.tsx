@@ -25,8 +25,6 @@ export default function Draft({
     });
   };
 
-  if (!prompt || !story) return null;
-
   return (
     <div className='space-y-5'>
       <section className='flex flex-col'>

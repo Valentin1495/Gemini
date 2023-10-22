@@ -1,5 +1,6 @@
 import '@/app/globals.css';
 import Navbar from '@/components/navbar';
+import { ThemeProvider } from '@/components/theme-provider';
 import type { Metadata } from 'next';
 import { Toaster } from 'react-hot-toast';
 
@@ -16,9 +17,16 @@ export default function GenerateTopicLayout({
   return (
     <html lang='en'>
       <body className='p-10'>
-        <Toaster />
-        <Navbar />
-        <div className='max-w-5xl mx-auto'>{children}</div>
+        <ThemeProvider
+          attribute='class'
+          defaultTheme='system'
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Toaster />
+          <Navbar />
+          <div className='max-w-5xl mx-auto'>{children}</div>
+        </ThemeProvider>
       </body>
     </html>
   );

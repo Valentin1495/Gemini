@@ -17,6 +17,7 @@ import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import Draft from './draft';
 import { FileTextIcon } from '@radix-ui/react-icons';
+import DraftSkeleton from './draft-skeleton';
 
 type Props = {
   email: string;
@@ -24,7 +25,6 @@ type Props = {
 
 export default function RealtimeDrafts({ email }: Props) {
   const [draftList, setDraftList] = useState<DraftType[]>();
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const deleteEmptyDocs = async () => {
@@ -35,6 +35,7 @@ export default function RealtimeDrafts({ email }: Props) {
 
       const querySnapshotEmptyDrafts = await getDocs(qEmptyDrafts);
       const emptyDrafsIdList: string[] = [];
+
       querySnapshotEmptyDrafts.docs.map((doc) => {
         emptyDrafsIdList.push(doc.id);
       });
@@ -56,12 +57,15 @@ export default function RealtimeDrafts({ email }: Props) {
       qDrafts,
       (snapshot) => {
         const list = snapshot.docs.map((doc) => doc.data()) as DraftType[];
+
+        if (list[0] && (!list[0].prompt || !list[0].story)) {
+          list.shift();
+        }
+
         setDraftList(list);
-        setLoading(false);
       },
       (error) => {
         toast.error(error.message);
-        setLoading(false);
       }
     );
 
@@ -70,25 +74,27 @@ export default function RealtimeDrafts({ email }: Props) {
     };
   }, []);
 
+  if (!draftList) return <DraftSkeleton />;
+
   return (
     <div className='space-y-5'>
-      {draftList?.[0]?.prompt && draftList?.[0]?.story && (
-        <span className='flex items-center gap-x-1.5'>
-          <FileTextIcon className='w-5 h-5' />
-          {draftList?.length}
-        </span>
+      <span className='flex items-center gap-x-1.5'>
+        <FileTextIcon className='w-5 h-5' />
+        {draftList.length}
+      </span>
+
+      {draftList.length ? (
+        draftList.map((draft, i) => (
+          <Draft
+            key={draft.storyId}
+            idx={i}
+            numOfDrafts={draftList.length}
+            {...draft}
+          />
+        ))
+      ) : (
+        <p>You have no drafts.</p>
       )}
-      {draftList?.length
-        ? draftList.map((draft, i) => (
-            <Draft
-              key={draft.storyId}
-              idx={i}
-              numOfDrafts={draftList.length}
-              {...draft}
-            />
-          ))
-        : !loading && <p>You have no drafts.</p>}
-      {loading && <p>loading...</p>}
     </div>
   );
 }

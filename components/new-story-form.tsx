@@ -34,7 +34,6 @@ export default function NewStoryForm({ session }: Props) {
     const data = {
       author: session.user?.email,
       username: session.user?.name,
-      profilePic: session.user?.image,
       prompt: debouncedPrompt,
       story: debouncedStory,
       storyId,

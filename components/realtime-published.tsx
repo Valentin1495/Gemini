@@ -13,6 +13,8 @@ import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import Published from './published';
 import { ReaderIcon } from '@radix-ui/react-icons';
+import StorySkeleton from './story-skeleton';
+import { Skeleton } from './ui/skeleton';
 
 type Props = {
   author: string;
@@ -20,7 +22,6 @@ type Props = {
 
 export default function RealtimePublished({ author }: Props) {
   const [publishedList, setPublishedList] = useState<PublishedType[]>();
-  const [loading, setLoading] = useState(true);
 
   const q = query(
     collection(db, 'published'),
@@ -36,11 +37,9 @@ export default function RealtimePublished({ author }: Props) {
           return { ...doc.data(), storyId: doc.id };
         }) as PublishedType[];
         setPublishedList(list);
-        setLoading(false);
       },
       (error) => {
         toast.error(error.message);
-        setLoading(false);
       }
     );
 
@@ -49,19 +48,29 @@ export default function RealtimePublished({ author }: Props) {
     };
   }, []);
 
+  if (!publishedList)
+    return (
+      <div className='space-y-5'>
+        <Skeleton className='w-10 h-5 mt-10' />
+        <StorySkeleton />
+      </div>
+    );
+
   return (
     <div className='space-y-5'>
       <span className='flex items-center gap-x-1.5 mt-10'>
         <ReaderIcon className='w-5 h-5' />
-        {publishedList?.length}
+        {publishedList.length}
       </span>
-      <section className='grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2'>
-        {publishedList?.length
-          ? publishedList.map((story) => (
-              <Published key={story.storyId} {...story} />
-            ))
-          : !loading && <p>You have no stories.</p>}
-        {loading && <p>loading...</p>}
+
+      <section className='grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1.5'>
+        {publishedList.length ? (
+          publishedList.map((story) => (
+            <Published key={story.storyId} {...story} />
+          ))
+        ) : (
+          <p>You have no stories.</p>
+        )}
       </section>
     </div>
   );

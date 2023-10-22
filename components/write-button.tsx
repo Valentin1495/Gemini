@@ -19,8 +19,9 @@ export default function WriteButton() {
       username,
       prompt: '',
       story: '',
-      timestamp: new Date(),
+      timestamp: Date.now(),
     };
+
     const doc = await addDoc(collection(db, 'drafts'), data);
 
     router.push(`/new_story?story_id=${doc.id}`);

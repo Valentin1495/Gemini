@@ -20,7 +20,7 @@ export default function Published({
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger className='relative aspect-square w-full rounded-sm overflow-hidden'>
+      <DialogTrigger className='relative aspect-square w-full overflow-hidden'>
         <Image
           src={karloImage}
           alt='Thumbnail'

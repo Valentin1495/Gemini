@@ -95,4 +95,8 @@
     text-overflow: ellipsis;
     overflow: hidden;
   }
+
+  .story-skeleton {
+    @apply w-full aspect-square;
+  }
 }

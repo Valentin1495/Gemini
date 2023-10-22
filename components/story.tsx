@@ -24,7 +24,7 @@ export default function Story({
 
   return (
     <Dialog>
-      <DialogTrigger className='relative aspect-square w-full rounded-sm overflow-hidden'>
+      <DialogTrigger className='relative aspect-square w-full overflow-hidden'>
         <Image
           src={karloImage}
           alt='Story thumbnail'
