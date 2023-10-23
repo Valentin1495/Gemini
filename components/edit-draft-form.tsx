@@ -54,7 +54,15 @@ export default function EditDraftForm({ storyId, profilePic, draft }: Props) {
         setLoading(false);
       });
     }
-  }, [debouncedPrompt, debouncedStory]);
+  }, [
+    debouncedPrompt,
+    debouncedStory,
+    prompt,
+    story,
+    newPrompt,
+    newStory,
+    storyId,
+  ]);
 
   const publishStory = async (formData: FormData) => {
     const result = await getNewImageUrl(formData);

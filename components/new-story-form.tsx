@@ -12,10 +12,10 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import Loader from './loader';
-import { UserType } from '@/types';
+import { SessionType } from '@/types';
 
 type Props = {
-  session: UserType;
+  session: SessionType;
 };
 
 export default function NewStoryForm({ session }: Props) {
@@ -25,15 +25,17 @@ export default function NewStoryForm({ session }: Props) {
   const formRef = useRef<HTMLFormElement>(null);
   const searchParams = useSearchParams();
   const storyId = searchParams.get('story_id') as string;
-
   const debouncedPrompt = useDebounce(prompt);
   const debouncedStory = useDebounce(story);
   const router = useRouter();
+  const email = session.user.email;
+  const username = session.user.name;
+  const profilePic = session.user.image;
 
   useEffect(() => {
     const data = {
-      author: session.user?.email,
-      username: session.user?.name,
+      author: email,
+      username,
       prompt: debouncedPrompt,
       story: debouncedStory,
       storyId,
@@ -45,7 +47,7 @@ export default function NewStoryForm({ session }: Props) {
     };
 
     autoSave();
-  }, [debouncedStory, debouncedPrompt]);
+  }, [debouncedStory, debouncedPrompt, email, username, storyId]);
 
   const publishStory = async (formData: FormData) => {
     const result = await getNewImageUrl(formData);
@@ -53,9 +55,9 @@ export default function NewStoryForm({ session }: Props) {
     await deleteDoc(doc(db, 'drafts', storyId));
 
     await addDoc(collection(db, 'published'), {
-      author: session.user?.email,
-      username: session.user?.name,
-      profilePic: session.user?.image,
+      author: email,
+      username,
+      profilePic,
       prompt: debouncedPrompt,
       story: debouncedStory,
       timestamp: Date.now(),

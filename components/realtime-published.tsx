@@ -46,7 +46,7 @@ export default function RealtimePublished({ author }: Props) {
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [q]);
 
   if (!publishedList)
     return (

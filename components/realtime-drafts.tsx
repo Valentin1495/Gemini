@@ -72,7 +72,7 @@ export default function RealtimeDrafts({ email }: Props) {
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [email]);
 
   if (!draftList) return <DraftSkeleton />;
 

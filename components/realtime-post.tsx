@@ -40,7 +40,7 @@ export default function RealtimePost({ storyId }: Props) {
     return () => {
       unsub();
     };
-  }, []);
+  }, [q]);
 
   if (loading) return <PostSkeleton />;
 

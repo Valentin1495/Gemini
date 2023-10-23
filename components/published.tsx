@@ -25,7 +25,7 @@ export default function Published({
     };
 
     addStoryId();
-  }, []);
+  }, [storyId]);
 
   const formattedTimestamp = format(new Date(timestamp), 'MMM dd, yyyy');
   const [open, setOpen] = useState(false);

@@ -4,6 +4,10 @@ export type User = {
   image: string;
 };
 
+export type SessionType = {
+  user: User;
+};
+
 export type D = {
   numOfDrafts: number;
   idx: number;
