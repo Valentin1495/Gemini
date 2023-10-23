@@ -7,28 +7,30 @@ import {
   DropdownMenuItem,
 } from '@/components/ui/dropdown-menu';
 import UserAvatar from './user-avatar';
-import { UserType } from '@/types';
+import { User } from '@/types';
 import LogoutButton from './logout-button';
 import Link from 'next/link';
 import WriteButton from './write-button';
 import { ArchiveIcon } from '@radix-ui/react-icons';
 
-export default function UserDropdownMenu({ user }: UserType) {
+export default function UserDropdownMenu({ user }: { user: User }) {
+  const { image, name, email } = user;
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <UserAvatar user={user} />
+        <UserAvatar image={image} className='w-8 h-8' />
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className='mr-3'>
         <DropdownMenuLabel>
-          <h3>{user?.name}</h3>
-          <h3>{user?.email}</h3>
+          <h3>{name}</h3>
+          <h3>{email}</h3>
         </DropdownMenuLabel>
 
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <WriteButton />
+          <WriteButton user={user} />
         </DropdownMenuItem>
         <DropdownMenuSeparator />
 

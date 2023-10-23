@@ -24,7 +24,7 @@ export default function IdeationForm({}: Props) {
       toast.error(result.message);
     } else {
       setPending(false);
-      toast.success('Created a new story');
+      toast.success('Created new topics');
       formRef.current?.reset();
       setPrompt(result.prompt as string);
     }
@@ -40,7 +40,7 @@ export default function IdeationForm({}: Props) {
         className='mx-auto space-y-2.5'
       >
         <label htmlFor='context' className='text-xl text-primary font-bold'>
-          Start with a keyword
+          Generate topics with a keyword
         </label>
         <Input
           id='context'
@@ -63,7 +63,7 @@ export default function IdeationForm({}: Props) {
       {extractedPrompt.length ? (
         <div>
           <section className='mt-10 mb-5 bg-secondary rounded-lg space-y-2.5 w-fit p-5'>
-            <h2 className='text-lg'>Topic Ideation Result</h2>
+            <h2 className='text-lg'>Topics Ideation Result</h2>
             {extractedPrompt.map((el, i) => (
               <article
                 key={i}

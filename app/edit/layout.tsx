@@ -15,7 +15,7 @@ export default function EditLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en'>
+    <html lang='en' suppressHydrationWarning>
       <body className='p-10'>
         <ThemeProvider
           attribute='class'

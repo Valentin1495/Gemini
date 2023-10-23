@@ -1,22 +1,20 @@
 'use client';
 
-import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import { Pencil2Icon } from '@radix-ui/react-icons';
+import { User } from '@/types';
 
-export default function WriteButton() {
-  const { data: session } = useSession();
+export default function WriteButton({ user }: { user: User }) {
   const router = useRouter();
 
-  const email = session?.user?.email;
-  const username = session?.user?.name;
+  const { email, name } = user;
 
   const writeNewStory = async () => {
     const data = {
       author: email,
-      username,
+      username: name,
       prompt: '',
       story: '',
       timestamp: Date.now(),

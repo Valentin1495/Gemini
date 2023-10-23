@@ -1,7 +1,7 @@
-import type { User } from 'next-auth';
-
-export type UserType = {
-  user?: Omit<User, 'id'>;
+export type User = {
+  name: string;
+  email: string;
+  image: string;
 };
 
 export type D = {

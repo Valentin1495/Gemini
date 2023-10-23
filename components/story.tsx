@@ -10,6 +10,7 @@ import { CopyIcon } from '@radix-ui/react-icons';
 import { copyToClipboard } from '@/lib/copy-to-clipboard';
 import { format } from 'date-fns';
 import Link from 'next/link';
+import UserAvatar from './user-avatar';
 
 export default function Story({
   prompt,
@@ -35,25 +36,14 @@ export default function Story({
         <section className='bg-black/75 inset-0 text-left text-white/90 p-1.5 font-bold opacity-0 hover:opacity-100 absolute transition'>
           <article className='bottom-2 absolute '>
             {prompt}
-            <Image
-              src={profilePic}
-              alt='Profile picture'
-              width={40}
-              height={40}
-              className='object-cover rounded-full mt-2.5'
-            />
+            <UserAvatar image={profilePic} className='w-10 h-10 mt-2.5' />
           </article>
         </section>
       </DialogTrigger>
       <DialogContent className='max-w-fit'>
         <DialogHeader className='flex flex-row items-center gap-x-2'>
-          <Image
-            src={profilePic}
-            alt='Profile picture'
-            width={36}
-            height={36}
-            className='object-cover rounded-full mt-2.5'
-          />
+          <UserAvatar image={profilePic} className='w-8 h-8 mt-2.5' />
+
           <h1 className='text-primary text-sm'>{username}</h1>
         </DialogHeader>
         <section className='relative aspect-square w-80 overflow-hidden rounded-lg'>

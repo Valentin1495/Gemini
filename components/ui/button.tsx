@@ -20,7 +20,7 @@ const buttonVariants = cva(
         ghost: 'hover:bg-accent hover:text-accent-foreground transition',
         link: 'text-primary underline-offset-4 hover:underline transition',
         login:
-          'bg-gradient-to-r from-sky-500 via-blue-500 to-cyan-500 text-white font-bold hover:opacity-90 transition transition',
+          'w-60 bg-gradient-to-r from-sky-500 via-blue-500 to-cyan-500 text-white font-bold hover:opacity-90 transition',
       },
       size: {
         default: 'h-9 px-4 py-2',

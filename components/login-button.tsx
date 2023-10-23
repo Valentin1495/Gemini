@@ -10,7 +10,7 @@ export default function LoginButton() {
       variant={'login'}
       size={'lg'}
     >
-      Get Inspired
+      Continue with Google
     </Button>
   );
 }

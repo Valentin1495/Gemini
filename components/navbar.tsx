@@ -3,6 +3,7 @@ import { getServerSession } from 'next-auth';
 import { options } from '@/app/api/auth/[...nextauth]/options';
 import UserDropdownMenu from './user-dropdown-menu';
 import { ModeToggle } from './mode-toggle';
+import { User } from '@/types';
 
 export default async function Navbar() {
   const session = await getServerSession(options);
@@ -18,7 +19,7 @@ export default async function Navbar() {
         </Link>
         <div className='flex items-center gap-x-2'>
           <ModeToggle />
-          <UserDropdownMenu user={session?.user} />
+          {session && <UserDropdownMenu user={session.user as User} />}
         </div>
       </div>
     </nav>
