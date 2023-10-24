@@ -8,6 +8,7 @@ export const options: NextAuthOptions = {
       clientSecret: process.env.Google_SECRET as string,
     }),
   ],
+  secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: '/',
   },
