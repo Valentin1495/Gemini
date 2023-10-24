@@ -2,13 +2,7 @@
 
 import { db } from '@/lib/firebase';
 import { PublishedType } from '@/types';
-import {
-  collection,
-  onSnapshot,
-  orderBy,
-  query,
-  where,
-} from 'firebase/firestore';
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import Story from './story';
