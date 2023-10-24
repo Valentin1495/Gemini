@@ -2,7 +2,6 @@ import '@/app/globals.css';
 import type { Metadata } from 'next';
 import Navbar from '@/components/navbar';
 import { ThemeProvider } from '@/components/theme-provider';
-import AuthProvider from '@/components/auth-provider';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -23,10 +22,8 @@ export default function NewStoryLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <AuthProvider>
-            <Navbar />
-            <div className='max-w-5xl mx-auto'>{children}</div>
-          </AuthProvider>
+          <Navbar />
+          <div className='max-w-5xl mx-auto'>{children}</div>
         </ThemeProvider>
       </body>
     </html>

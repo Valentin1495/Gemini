@@ -1,5 +1,4 @@
 import '@/app/globals.css';
-import AuthProvider from '@/components/auth-provider';
 import Navbar from '@/components/navbar';
 import { ThemeProvider } from '@/components/theme-provider';
 import type { Metadata } from 'next';
@@ -24,11 +23,9 @@ export default function GenerateTopicLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <AuthProvider>
-            <Toaster />
-            <Navbar />
-            <div className='max-w-5xl mx-auto'>{children}</div>
-          </AuthProvider>
+          <Toaster />
+          <Navbar />
+          <div className='max-w-5xl mx-auto'>{children}</div>
         </ThemeProvider>
       </body>
     </html>
