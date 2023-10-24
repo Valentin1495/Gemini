@@ -1,4 +1,4 @@
-import { options } from '@/app/api/auth/[...nextauth]/options';
+import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions';
 import EditDraftForm from '@/components/edit-draft-form';
 import { db } from '@/lib/firebase';
 import { DraftType } from '@/types';
@@ -12,7 +12,7 @@ type Props = {
 };
 
 export default async function EditDraft({ searchParams }: Props) {
-  const session = await getServerSession(options);
+  const session = await getServerSession(authOptions);
   const profilePic = session?.user?.image as string;
   const { story_id } = searchParams;
   const q = query(collection(db, 'drafts'), where('storyId', '==', story_id));

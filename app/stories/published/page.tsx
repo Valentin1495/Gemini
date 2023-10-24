@@ -1,8 +1,7 @@
-import { options } from '@/app/api/auth/[...nextauth]/options';
+import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions';
 import ActiveLinks from '@/components/active-links';
 import RealtimePublished from '@/components/realtime-published';
 import { getServerSession } from 'next-auth';
-import { redirect } from 'next/navigation';
 
 type Props = {
   searchParams?: {
@@ -11,12 +10,8 @@ type Props = {
 };
 
 export default async function PublishedStories({ searchParams }: Props) {
-  const session = await getServerSession(options);
+  const session = await getServerSession(authOptions);
   const email = session?.user?.email as string;
-
-  if (!session) {
-    redirect('/');
-  }
 
   return (
     <main className='pt-16'>

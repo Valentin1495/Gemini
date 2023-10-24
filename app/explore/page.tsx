@@ -3,12 +3,12 @@ import SynopsisDialog from '@/components/synopsis-dialog';
 import WriteButton from '@/components/write-button';
 import RealtimeStories from '@/components/realtime-stories';
 import { getServerSession } from 'next-auth';
-import { options } from '../api/auth/[...nextauth]/options';
+import { authOptions } from '../api/auth/[...nextauth]/authOptions';
 import { User } from '@/types';
 import LoginDialog from '@/components/login-dialog';
 
 export default async function Explore() {
-  const session = await getServerSession(options);
+  const session = await getServerSession(authOptions);
 
   return (
     <main className='pt-16'>
