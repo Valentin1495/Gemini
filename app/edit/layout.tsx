@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import Navbar from '@/components/navbar';
 import { Toaster } from 'react-hot-toast';
 import { ThemeProvider } from '@/components/theme-provider';
+import AuthProvider from '@/components/auth-provider';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -23,9 +24,11 @@ export default function EditLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Toaster />
-          <Navbar />
-          <div className='max-w-5xl mx-auto'>{children}</div>
+          <AuthProvider>
+            <Toaster />
+            <Navbar />
+            <div className='max-w-5xl mx-auto'>{children}</div>
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>
