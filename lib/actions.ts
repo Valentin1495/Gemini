@@ -1,16 +1,11 @@
 'use server';
 
-import { getServerSession } from 'next-auth';
 import { createImage } from './create-image';
 import { generatePrompt } from './generate-prompt';
 import { makeUpStory } from './make-up-story';
-import { options } from '@/app/api/auth/[...nextauth]/options';
 import { uploadFile } from './upload-file';
 
 export async function createStory(formData: FormData) {
-  const session = await getServerSession(options);
-  const email = session?.user?.email as string;
-
   try {
     const topic = formData.get('topic') as string;
     const synopsis = await makeUpStory(topic);

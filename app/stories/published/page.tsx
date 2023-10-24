@@ -1,7 +1,6 @@
 import { options } from '@/app/api/auth/[...nextauth]/options';
 import ActiveLinks from '@/components/active-links';
 import RealtimePublished from '@/components/realtime-published';
-
 import { getServerSession } from 'next-auth';
 
 type Props = {
