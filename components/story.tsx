@@ -30,12 +30,11 @@ export default function Story({
           src={karloImage}
           alt='Story thumbnail'
           fill
-          className='object-cover absolute
-          '
+          className='object-cover absolute'
         />
         <section className='bg-black/75 inset-0 text-left text-white/90 p-1.5 font-bold opacity-0 hover:opacity-100 absolute transition'>
-          <article className='bottom-2 absolute '>
-            {prompt}
+          <article className='bottom-2 absolute'>
+            <p className='prompt-summary px-1.5'>{prompt}</p>
             <UserAvatar image={profilePic} className='w-10 h-10 mt-2.5' />
           </article>
         </section>

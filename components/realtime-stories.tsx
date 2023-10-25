@@ -35,7 +35,7 @@ export default function RealtimeStories() {
   if (!allPublished) return <StorySkeleton />;
 
   return (
-    <div className='grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1.5'>
+    <div className='story-skeleton-container'>
       {allPublished.length ? (
         allPublished.map((story) => <Story key={story.storyId} {...story} />)
       ) : (

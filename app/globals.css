@@ -99,4 +99,12 @@
   .story-skeleton {
     @apply w-full aspect-square;
   }
+
+  .story-skeleton-container {
+    @apply grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-3 sm:gap-1;
+  }
+
+  .container {
+    @apply max-w-5xl 2xl:max-w-full 2xl:px-52 py-28 mx-auto;
+  }
 }

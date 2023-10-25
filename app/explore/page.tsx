@@ -11,7 +11,7 @@ export default async function Explore() {
   const session = await getServerSession(authOptions);
 
   return (
-    <main className='pt-16'>
+    <main>
       <div className='flex items-center justify-between'>
         <h1 className='text-xl text-primary font-bold'>Explore</h1>
         <div className='flex items-center gap-x-3'>
