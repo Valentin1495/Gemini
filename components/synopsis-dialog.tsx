@@ -17,7 +17,6 @@ import Link from 'next/link';
 import toast from 'react-hot-toast';
 import Loader from './loader';
 import { useSearchParams } from 'next/navigation';
-import { copyToClipboard } from '@/lib/copy-to-clipboard';
 
 export default function SynopsisDialog() {
   const searchParams = useSearchParams();
@@ -87,7 +86,7 @@ export default function SynopsisDialog() {
             <Link
               href={'/generate_topic'}
               aria-disabled={pending}
-              className='flex gap-x-1.5 items-center bg-secondary font-bold px-2 py-1.5 rounded-md hover:bg-slate-200 dark:hover:bg-slate-700 transition aria-disabled:pointer-events-none aria-disabled:opacity-50'
+              className='flex gap-x-1.5 items-center bg-secondary font-bold px-2 py-1.5 rounded-md hover:bg-slate-700 transition aria-disabled:pointer-events-none aria-disabled:opacity-50'
             >
               <MagicWandIcon className='w-3.5 h-3.5' />
               <span className='text-sm'>Ideation</span>
@@ -96,7 +95,7 @@ export default function SynopsisDialog() {
         </form>
         {synopsis && (
           <p
-            onClick={() => copyToClipboard(synopsis)}
+            // onClick={() => {}}
             className='mt-5 text-primary transition hover:cursor-pointer bg-secondary hover:bg-secondary/75 py-1.5 px-3 rounded-lg'
           >
             {synopsis}

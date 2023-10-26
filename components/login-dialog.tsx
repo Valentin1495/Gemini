@@ -19,7 +19,7 @@ export default function LoginDialog() {
       <DialogContent className='max-w-fit px-10'>
         <DialogHeader>
           <DialogTitle>Wanna write your own story?</DialogTitle>
-          <DialogDescription>Log in and start your journey!</DialogDescription>
+          <DialogDescription>Sign in and start the journey!</DialogDescription>
         </DialogHeader>
         <LoginButton />
       </DialogContent>

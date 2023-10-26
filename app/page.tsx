@@ -10,7 +10,7 @@ export default async function Home() {
         href={'/explore'}
         className='h-10 rounded-md px-5 leading-10 bg-gradient-to-r from-sky-500 via-blue-500 to-cyan-500 text-white font-bold hover:opacity-90 transition'
       >
-        Get Inspired
+        Get inspiration
       </Link>
     </main>
   );

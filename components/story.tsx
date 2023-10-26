@@ -7,10 +7,11 @@ import {
 } from '@/components/ui/dialog';
 import Image from 'next/image';
 import { CopyIcon } from '@radix-ui/react-icons';
-import { copyToClipboard } from '@/lib/copy-to-clipboard';
 import { format } from 'date-fns';
 import Link from 'next/link';
 import UserAvatar from './user-avatar';
+import useCopy from '@/hooks/use-copy';
+import { useToast } from './ui/use-toast';
 
 export default function Story({
   prompt,
@@ -22,6 +23,7 @@ export default function Story({
 }: PublishedType) {
   const formattedDate = format(new Date(timestamp), 'MM/dd/yyyy');
   const modifiedUsername = username.split(' ').join('');
+  const copyToClipboard = useCopy(prompt);
 
   return (
     <Dialog>
@@ -32,11 +34,14 @@ export default function Story({
           fill
           className='object-cover absolute'
         />
-        <section className='bg-black/75 inset-0 text-left text-white/90 p-1.5 font-bold opacity-0 hover:opacity-100 absolute transition'>
-          <article className='bottom-2 absolute'>
-            <p className='prompt-summary px-1.5'>{prompt}</p>
-            <UserAvatar image={profilePic} className='w-10 h-10 mt-2.5' />
-          </article>
+        <section className='bg-black/75 inset-0  p-1.5  opacity-0 hover:opacity-100 absolute transition'>
+          <p className='top-2 absolute prompt-summary px-1.5 text-left text-white/90 font-bold'>
+            {prompt}
+          </p>
+          <UserAvatar
+            image={profilePic}
+            className='bottom-2 absolute w-8 h-8 mt-2.5'
+          />
         </section>
       </DialogTrigger>
       <DialogContent className='max-w-fit'>
@@ -57,7 +62,7 @@ export default function Story({
           <article className='flex items-center gap-x-2.5'>
             <h1 className='text-primary font-bold'>Prompt</h1>
             <button
-              onClick={() => copyToClipboard(prompt)}
+              onClick={copyToClipboard}
               className='text-sm flex items-center text-slate-400 gap-x-0.5'
             >
               <CopyIcon className='w-4 h-4' />

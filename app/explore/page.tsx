@@ -13,7 +13,7 @@ export default async function Explore() {
   return (
     <main>
       <div className='flex items-center justify-between'>
-        <h1 className='text-xl text-primary font-bold'>Explore</h1>
+        <h1 className='text-3xl text-primary font-bold'>Explore</h1>
         <div className='flex items-center gap-x-3'>
           <SynopsisDialog />
           {session ? (
