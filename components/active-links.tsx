@@ -15,7 +15,7 @@ export default function ActiveLinks({ showToast }: Props) {
 
   useEffect(() => {
     if (showToast === 'y') {
-      toast({ title: '🥳 Published a new story.' });
+      toast({ title: '🥳 Published a new story!' });
     }
   }, [showToast]);
 

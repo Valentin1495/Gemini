@@ -89,7 +89,7 @@ export default function NewStoryForm({ session }: Props) {
         name='prompt'
         id='prompt'
         type='text'
-        placeholder='a teddy bear on a skateboard in Times Square'
+        placeholder='e.g. A cute cate in a red house'
         value={prompt}
         onChange={(e) => setPrompt(e.target.value)}
         required

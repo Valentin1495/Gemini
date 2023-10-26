@@ -11,17 +11,14 @@ import {
 import { MagicWandIcon, RocketIcon } from '@radix-ui/react-icons';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
-import { createStory } from '@/lib/actions';
+import { createSynopsis } from '@/lib/actions';
 import useCopy from '@/hooks/use-copy';
 import Loader from './loader';
 import { useToast } from './ui/use-toast';
 
 export default function SynopsisDialog() {
-  const searchParams = useSearchParams();
-  const showDialog = searchParams.get('show_dialog');
   const [pending, setPending] = useState(false);
   const [open, setOpen] = useState(false);
   const [synopsis, setSynopsis] = useState('');
@@ -29,8 +26,8 @@ export default function SynopsisDialog() {
   const copyToClipboard = useCopy(synopsis);
   const { toast } = useToast();
 
-  const createSynopsis = async (formData: FormData) => {
-    const result = await createStory(formData);
+  const getSynopsis = async (formData: FormData) => {
+    const result = await createSynopsis(formData);
 
     if (result?.message) {
       setPending(false);
@@ -43,16 +40,10 @@ export default function SynopsisDialog() {
     if (result?.synopsis) {
       setPending(false);
       formRef.current?.reset();
-      toast({ title: '🎉 Created a synopsis.' });
+      toast({ title: '🎉 Created a synopsis!' });
       setSynopsis(result.synopsis);
     }
   };
-
-  useEffect(() => {
-    if (showDialog === 'y') {
-      setOpen(true);
-    }
-  }, [showDialog]);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -68,7 +59,7 @@ export default function SynopsisDialog() {
           </DialogDescription>
         </DialogHeader>
         <form
-          action={createSynopsis}
+          action={getSynopsis}
           onSubmit={() => setPending(true)}
           className='space-y-2'
           ref={formRef}
@@ -90,7 +81,7 @@ export default function SynopsisDialog() {
             </Button>
 
             <Link
-              href={'/generate_topic'}
+              href={'/generate_story'}
               aria-disabled={pending}
               className='flex gap-x-1.5 items-center bg-secondary font-bold px-2 py-1.5 rounded-md hover:bg-slate-700 transition aria-disabled:pointer-events-none aria-disabled:opacity-50'
             >

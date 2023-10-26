@@ -1,12 +1,6 @@
 import '@/app/globals.css';
-import type { Metadata } from 'next';
 import Navbar from '@/components/navbar';
 import { Toaster } from '@/components/ui/toaster';
-
-export const metadata: Metadata = {
-  title: 'AIStoryteller - Get inspired by AI',
-  description: 'Generate impressive images and synopses from AI',
-};
 
 export default function StoriesLayout({
   children,
@@ -14,7 +8,7 @@ export default function StoriesLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en'>
+    <html lang='en' suppressHydrationWarning>
       <body>
         <Toaster />
         <Navbar />

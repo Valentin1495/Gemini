@@ -2,13 +2,13 @@
 
 import { createImage } from './create-image';
 import { generatePrompt } from './generate-prompt';
-import { makeUpStory } from './make-up-story';
+import { generateSynopsis } from './generate-synopsis';
 import { uploadFile } from './upload-file';
 
-export async function createStory(formData: FormData) {
+export async function createSynopsis(formData: FormData) {
   try {
     const topic = formData.get('topic') as string;
-    const synopsis = await makeUpStory(topic);
+    const synopsis = await generateSynopsis(topic);
 
     return { synopsis };
   } catch (error: any) {
