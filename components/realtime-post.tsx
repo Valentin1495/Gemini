@@ -6,10 +6,10 @@ import { format } from 'date-fns';
 import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
 import PostSkeleton from './post-skeleton';
 import UserAvatar from './user-avatar';
 import { notFound } from 'next/navigation';
+import { useToast } from './ui/use-toast';
 
 type Props = {
   storyId: string;
@@ -19,6 +19,8 @@ export default function RealtimePost({ storyId }: Props) {
   const q = query(collection(db, 'published'), where('storyId', '==', storyId));
   const [post, setPost] = useState<PublishedType>();
   const [loading, setLoading] = useState(true);
+  const { toast } = useToast();
+
   const formattedDate =
     post && format(new Date(post.timestamp), 'MMM dd, yyyy');
 
@@ -33,7 +35,10 @@ export default function RealtimePost({ storyId }: Props) {
         setPost(realtimePost);
       },
       (error) => {
-        toast.error(error.message);
+        toast({
+          variant: 'destructive',
+          title: error.message,
+        });
       }
     );
 

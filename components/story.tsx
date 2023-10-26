@@ -11,7 +11,6 @@ import { format } from 'date-fns';
 import Link from 'next/link';
 import UserAvatar from './user-avatar';
 import useCopy from '@/hooks/use-copy';
-import { useToast } from './ui/use-toast';
 
 export default function Story({
   prompt,
@@ -79,7 +78,7 @@ export default function Story({
           href={`/@${modifiedUsername}/${storyId}`}
           className='bg-primary text-primary-foreground shadow hover:bg-primary/90 font-bol transition text-center rounded-sm py-2'
         >
-          Read the Story
+          Read the story
         </Link>
         <section className='flex justify-between'>
           <article>

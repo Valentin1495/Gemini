@@ -4,7 +4,7 @@ import { db } from '@/lib/firebase';
 import { TrashIcon } from '@radix-ui/react-icons';
 import { deleteDoc, doc } from 'firebase/firestore';
 import { Dispatch, SetStateAction } from 'react';
-import toast from 'react-hot-toast';
+import { useToast } from './ui/use-toast';
 
 type Props = {
   storyId: string;
@@ -12,12 +12,12 @@ type Props = {
 };
 
 export default function DeleteButton({ storyId, setOpen }: Props) {
+  const { toast } = useToast();
+
   const deleteStory = async () => {
     await deleteDoc(doc(db, 'published', storyId));
     setOpen(false);
-    toast('Deleted a story', {
-      icon: '🗑️',
-    });
+    toast({ title: '🗑️ Deleted a story.' });
   };
 
   return (

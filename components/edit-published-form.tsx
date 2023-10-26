@@ -9,8 +9,8 @@ import { PublishedType } from '@/types';
 import { doc, updateDoc } from 'firebase/firestore';
 import { useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
-import toast from 'react-hot-toast';
 import Loader from './loader';
+import { useToast } from './ui/use-toast';
 
 type Props = {
   storyId: string;
@@ -25,6 +25,7 @@ export default function EditPublishedForm({ storyId, published }: Props) {
   const formRef = useRef<HTMLFormElement>(null);
   const debouncedStory = useDebounce(newStory);
   const router = useRouter();
+  const { toast } = useToast();
 
   const republishStory = async () => {
     try {
@@ -37,7 +38,10 @@ export default function EditPublishedForm({ storyId, published }: Props) {
       router.push('/stories/published?show_toast=y');
     } catch (error: any) {
       setPending(false);
-      toast.error(error.message);
+      toast({
+        variant: 'destructive',
+        title: error.message,
+      });
     }
   };
 

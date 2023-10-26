@@ -10,11 +10,11 @@ import {
   where,
 } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
 import Published from './published';
 import { ReaderIcon } from '@radix-ui/react-icons';
 import StorySkeleton from './story-skeleton';
 import { Skeleton } from './ui/skeleton';
+import { useToast } from './ui/use-toast';
 
 type Props = {
   author: string;
@@ -22,6 +22,7 @@ type Props = {
 
 export default function RealtimePublished({ author }: Props) {
   const [publishedList, setPublishedList] = useState<PublishedType[]>();
+  const { toast } = useToast();
 
   const q = query(
     collection(db, 'published'),
@@ -39,7 +40,10 @@ export default function RealtimePublished({ author }: Props) {
         setPublishedList(list);
       },
       (error) => {
-        toast.error(error.message);
+        toast({
+          variant: 'destructive',
+          title: error.message,
+        });
       }
     );
 

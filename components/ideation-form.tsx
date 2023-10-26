@@ -6,25 +6,31 @@ import { generateImagePrompt } from '@/lib/actions';
 import { extractPrompt } from '@/lib/extract-prompt';
 import { useRef, useState } from 'react';
 import Link from 'next/link';
-import toast from 'react-hot-toast';
 import Loader from './loader';
-import { copyToClipboard } from '@/lib/copy-to-clipboard';
+import { useToast } from './ui/use-toast';
+import useCopy from '@/hooks/use-copy';
 
 type Props = {};
 export default function IdeationForm({}: Props) {
   const [prompt, setPrompt] = useState('');
   const [pending, setPending] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
+  const { toast } = useToast();
 
   const formAction = async (formData: FormData) => {
     const result = await generateImagePrompt(formData);
 
     if (result?.message) {
       setPending(false);
-      toast.error(result.message);
+      toast({
+        variant: 'destructive',
+        title: result.message,
+      });
     } else {
       setPending(false);
-      toast.success('Created new topics');
+      toast({
+        title: '🎊 Created new topics!',
+      });
       formRef.current?.reset();
       setPrompt(result.prompt as string);
     }
@@ -73,7 +79,10 @@ export default function IdeationForm({}: Props) {
                 <Button
                   className='dark:bg-primary/20 dark:text-primary dark:hover:bg-primary/10 min-w-fit'
                   size={'sm'}
-                  onClick={() => copyToClipboard(el)}
+                  onClick={() => {
+                    const copyToClipboard = useCopy(el);
+                    copyToClipboard();
+                  }}
                 >
                   Copy this
                 </Button>

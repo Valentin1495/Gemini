@@ -16,8 +16,8 @@ import {
 } from 'firebase/firestore';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import toast from 'react-hot-toast';
 import Loader from './loader';
+import { useToast } from './ui/use-toast';
 
 type Props = {
   storyId: string;
@@ -35,6 +35,7 @@ export default function EditDraftForm({ storyId, profilePic, draft }: Props) {
   const debouncedPrompt = useDebounce(newPrompt);
   const debouncedStory = useDebounce(newStory);
   const router = useRouter();
+  const { toast } = useToast();
 
   useEffect(() => {
     const data = {
@@ -81,7 +82,10 @@ export default function EditDraftForm({ storyId, profilePic, draft }: Props) {
 
     if (result?.message) {
       setPending(false);
-      toast.error(result.message);
+      toast({
+        variant: 'destructive',
+        title: result.message,
+      });
     }
 
     if (result?.newImageUrl) {

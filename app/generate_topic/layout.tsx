@@ -1,7 +1,7 @@
 import '@/app/globals.css';
 import Navbar from '@/components/navbar';
+import { Toaster } from '@/components/ui/toaster';
 import type { Metadata } from 'next';
-import { Toaster } from 'react-hot-toast';
 
 export const metadata: Metadata = {
   title: 'AIStoryteller - Get inspired by AI',

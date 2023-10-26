@@ -4,8 +4,8 @@ import { Separator } from './ui/separator';
 import { TrashIcon } from '@radix-ui/react-icons';
 import { deleteDoc, doc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
-import toast from 'react-hot-toast';
 import { format } from 'date-fns';
+import { useToast } from './ui/use-toast';
 
 export default function Draft({
   prompt,
@@ -16,13 +16,12 @@ export default function Draft({
   numOfDrafts,
 }: ExtendedDraft) {
   const formattedTimestamp = format(new Date(timestamp), 'MMM dd, yyyy');
+  const { toast } = useToast();
 
   const deleteDraft = async () => {
     await deleteDoc(doc(db, 'drafts', storyId));
 
-    toast('Deleted a draft', {
-      icon: '🗑️',
-    });
+    toast({ title: '🗑️ Deleted a draft.' });
   };
 
   return (

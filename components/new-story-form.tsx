@@ -10,9 +10,9 @@ import { addDoc, collection, deleteDoc, doc, setDoc } from 'firebase/firestore';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import toast from 'react-hot-toast';
 import Loader from './loader';
 import { SessionType } from '@/types';
+import { useToast } from './ui/use-toast';
 
 type Props = {
   session: SessionType;
@@ -28,14 +28,13 @@ export default function NewStoryForm({ session }: Props) {
   const debouncedPrompt = useDebounce(prompt);
   const debouncedStory = useDebounce(story);
   const router = useRouter();
-  const email = session.user.email;
-  const username = session.user.name;
-  const profilePic = session.user.image;
+  const { toast } = useToast();
+  const { email, name, image } = session.user;
 
   useEffect(() => {
     const data = {
       author: email,
-      username,
+      username: name,
       prompt: debouncedPrompt,
       story: debouncedStory,
       storyId,
@@ -47,7 +46,7 @@ export default function NewStoryForm({ session }: Props) {
     };
 
     autoSave();
-  }, [debouncedStory, debouncedPrompt, email, username, storyId]);
+  }, [debouncedStory, debouncedPrompt, email, name, storyId]);
 
   const publishStory = async (formData: FormData) => {
     const result = await getNewImageUrl(formData);
@@ -56,8 +55,8 @@ export default function NewStoryForm({ session }: Props) {
 
     await addDoc(collection(db, 'published'), {
       author: email,
-      username,
-      profilePic,
+      username: name,
+      profilePic: image,
       prompt: debouncedPrompt,
       story: debouncedStory,
       timestamp: Date.now(),
@@ -66,7 +65,10 @@ export default function NewStoryForm({ session }: Props) {
 
     if (result?.message) {
       setPending(false);
-      toast.error(result.message);
+      toast({
+        variant: 'destructive',
+        title: result.message,
+      });
     }
 
     if (result?.newImageUrl) {

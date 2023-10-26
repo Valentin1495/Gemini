@@ -11,12 +11,13 @@ import {
 import { MagicWandIcon, RocketIcon } from '@radix-ui/react-icons';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
-import { createStory } from '@/lib/actions';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import toast from 'react-hot-toast';
-import Loader from './loader';
 import { useSearchParams } from 'next/navigation';
+import { createStory } from '@/lib/actions';
+import useCopy from '@/hooks/use-copy';
+import Loader from './loader';
+import { useToast } from './ui/use-toast';
 
 export default function SynopsisDialog() {
   const searchParams = useSearchParams();
@@ -25,19 +26,24 @@ export default function SynopsisDialog() {
   const [open, setOpen] = useState(false);
   const [synopsis, setSynopsis] = useState('');
   const formRef = useRef<HTMLFormElement>(null);
+  const copyToClipboard = useCopy(synopsis);
+  const { toast } = useToast();
 
   const createSynopsis = async (formData: FormData) => {
     const result = await createStory(formData);
 
     if (result?.message) {
       setPending(false);
-      toast.error(result.message);
+      toast({
+        variant: 'destructive',
+        title: result.message,
+      });
     }
 
     if (result?.synopsis) {
       setPending(false);
       formRef.current?.reset();
-      toast.success('Created a synopsis');
+      toast({ title: '🎉 Created a synopsis.' });
       setSynopsis(result.synopsis);
     }
   };
@@ -70,7 +76,7 @@ export default function SynopsisDialog() {
           <Input
             id='topic'
             name='topic'
-            placeholder='an astronaut walking in a green desert'
+            placeholder='e.g. an astronaut walking in a green desert'
             required
           />
           <section className='flex gap-x-2.5'>
@@ -95,7 +101,7 @@ export default function SynopsisDialog() {
         </form>
         {synopsis && (
           <p
-            // onClick={() => {}}
+            onClick={copyToClipboard}
             className='mt-5 text-primary transition hover:cursor-pointer bg-secondary hover:bg-secondary/75 py-1.5 px-3 rounded-lg'
           >
             {synopsis}

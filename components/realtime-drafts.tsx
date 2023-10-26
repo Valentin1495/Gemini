@@ -14,10 +14,10 @@ import {
   where,
 } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
 import Draft from './draft';
 import { FileTextIcon } from '@radix-ui/react-icons';
 import DraftSkeleton from './draft-skeleton';
+import { useToast } from './ui/use-toast';
 
 type Props = {
   email: string;
@@ -25,6 +25,7 @@ type Props = {
 
 export default function RealtimeDrafts({ email }: Props) {
   const [draftList, setDraftList] = useState<DraftType[]>();
+  const { toast } = useToast();
 
   useEffect(() => {
     const deleteEmptyDocs = async () => {
@@ -65,7 +66,7 @@ export default function RealtimeDrafts({ email }: Props) {
         setDraftList(list);
       },
       (error) => {
-        toast.error(error.message);
+        toast({ variant: 'destructive', title: error.message });
       }
     );
 

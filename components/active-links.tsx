@@ -3,7 +3,7 @@
 import ActiveLink from '@/components/active-link';
 import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
-import toast from 'react-hot-toast';
+import { useToast } from './ui/use-toast';
 
 type Props = {
   showToast?: string;
@@ -11,12 +11,11 @@ type Props = {
 
 export default function ActiveLinks({ showToast }: Props) {
   const pathname = usePathname();
+  const { toast } = useToast();
 
   useEffect(() => {
     if (showToast === 'y') {
-      toast.success('Published a new story', {
-        id: 'published',
-      });
+      toast({ title: '🥳 Published a new story.' });
     }
   }, [showToast]);
 
