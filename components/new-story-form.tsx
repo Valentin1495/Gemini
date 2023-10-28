@@ -86,8 +86,10 @@ export default function NewStoryForm({ session }: Props) {
       ref={formRef}
       action={publishStory}
     >
-      <Label htmlFor='prompt'>
+      <Label htmlFor='prompt' className='text-xl text-primary'>
         Effortlessly generate a high-quality thumbnail from simple text input.
+        <br />
+        <span className='text-base'>(The story will be auto saved.)</span>
       </Label>
       <Input
         name='prompt'
@@ -98,11 +100,16 @@ export default function NewStoryForm({ session }: Props) {
         onChange={(e) => setPrompt(e.target.value)}
         required
       />
+      <Label
+        htmlFor='content'
+        className='text-xl text-primary inline-block mt-5'
+      >
+        Tell your story...
+      </Label>
       <Textarea
         name='content'
         id='content'
-        placeholder='Tell your story...'
-        className='h-96'
+        className='h-80'
         value={story}
         onChange={(e) => setStory(e.target.value)}
         required

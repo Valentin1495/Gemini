@@ -8,7 +8,7 @@ export default async function Drafts() {
   const email = session?.user?.email as string;
 
   return (
-    <main className='pt-16'>
+    <main>
       <ActiveLinks />
       <div className='space-y-5 mt-10'>
         <RealtimeDrafts email={email} />

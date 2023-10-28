@@ -18,6 +18,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import Loader from './loader';
 import { useToast } from './ui/use-toast';
+import { Label } from './ui/label';
 
 type Props = {
   storyId: string;
@@ -30,7 +31,6 @@ export default function EditDraftForm({ storyId, profilePic, draft }: Props) {
   const [newPrompt, setNewPrompt] = useState(prompt);
   const [newStory, setNewStory] = useState(story);
   const [pending, setPending] = useState(false);
-  const [loading, setLoading] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   const debouncedPrompt = useDebounce(newPrompt);
   const debouncedStory = useDebounce(newStory);
@@ -49,11 +49,7 @@ export default function EditDraftForm({ storyId, profilePic, draft }: Props) {
     };
 
     if (prompt !== newPrompt || story !== newStory) {
-      setLoading(true);
-
-      updateStory().then(() => {
-        setLoading(false);
-      });
+      updateStory();
     }
   }, [
     debouncedPrompt,
@@ -97,11 +93,9 @@ export default function EditDraftForm({ storyId, profilePic, draft }: Props) {
 
   return (
     <div className='space-y-10'>
-      <h1 className='text-xl text-primary'>
+      <h1 className='text-lg text-primary/60'>
         Draft in {draft.username}{' '}
-        <span className='text-sm text-primary/50 ml-3.5'>
-          {loading ? 'Saving...' : 'Saved'}
-        </span>
+        <span className='text-base'>(The draft will be auto saved.)</span>
       </h1>
       <form
         onSubmit={() => setPending(true)}
@@ -109,6 +103,9 @@ export default function EditDraftForm({ storyId, profilePic, draft }: Props) {
         action={publishStory}
         className='space-y-5'
       >
+        <Label htmlFor='prompt' className='text-xl text-primary'>
+          Effortlessly generate a high-quality thumbnail from simple text input.
+        </Label>
         <Input
           name='prompt'
           id='prompt'
@@ -118,11 +115,17 @@ export default function EditDraftForm({ storyId, profilePic, draft }: Props) {
           onChange={(e) => setNewPrompt(e.target.value)}
           required
         />
+        <Label
+          htmlFor='story'
+          className='text-xl text-primary inline-block mt-5'
+        >
+          Tell your story...
+        </Label>
         <Textarea
           name='story'
           id='story'
           placeholder='Tell your story...'
-          className='h-96'
+          className='h-80'
           value={newStory}
           required
           onChange={(e) => setNewStory(e.target.value)}

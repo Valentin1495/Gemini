@@ -31,7 +31,7 @@ export default function WriteButton({ user }: { user: User }) {
       onClick={writeNewStory}
     >
       <Pencil2Icon className='w-6 h-6' />
-      Write
+      <span className='hidden sm:inline'>Write</span>
     </button>
   );
 }

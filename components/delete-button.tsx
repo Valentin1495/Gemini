@@ -23,7 +23,7 @@ export default function DeleteButton({ storyId, setOpen }: Props) {
   return (
     <button
       onClick={deleteStory}
-      className='hover:opacity-75 transition absolute -right-20'
+      className='hover:opacity-75 transition absolute -right-8 sm:-right-20'
     >
       <TrashIcon className='w-6 h-6 text-destructive' />
     </button>

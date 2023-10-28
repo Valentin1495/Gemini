@@ -49,13 +49,14 @@ export default function SynopsisDialog() {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger className='flex gap-x-1.5 items-center'>
         <RocketIcon className='w-6 h-6' />
-        AI
+        <span className='hidden sm:inline'>AI</span>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className='max-w-[250px] sm:max-w-lg'>
         <DialogHeader>
           <DialogTitle>New Synopsis</DialogTitle>
           <DialogDescription>
-            Enter a topic with a detailed description.
+            Enter a topic <br className='sm:hidden' /> with a detailed
+            description.
           </DialogDescription>
         </DialogHeader>
         <form
@@ -93,7 +94,7 @@ export default function SynopsisDialog() {
         {synopsis && (
           <p
             onClick={copyToClipboard}
-            className='mt-5 text-primary transition hover:cursor-pointer bg-secondary hover:bg-secondary/75 py-1.5 px-3 rounded-lg'
+            className='mt-5 text-primary transition hover:cursor-pointer bg-secondary hover:bg-secondary/75 py-1.5 px-3 rounded-lg max-h-80 overflow-y-auto'
           >
             {synopsis}
           </p>

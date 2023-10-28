@@ -12,7 +12,9 @@ export default function StoriesLayout({
       <body>
         <Toaster />
         <Navbar />
-        <div className='p-10 max-w-xl md:max-w-5xl mx-auto'>{children}</div>
+        <div className='px-10 pb-10 pt-32 max-w-xl md:max-w-5xl mx-auto'>
+          {children}
+        </div>
       </body>
     </html>
   );

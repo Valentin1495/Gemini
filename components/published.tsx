@@ -46,7 +46,7 @@ export default function Published({
         </section>
       </DialogTrigger>
       <DialogContent className='p-0 max-w-fit'>
-        <section className='relative aspect-square w-96 overflow-hidden rounded-t-lg'>
+        <section className='relative aspect-square w-64 sm:w-96 overflow-hidden rounded-t-lg'>
           <Image
             src={karloImage}
             alt='Thumbnail'
@@ -54,7 +54,7 @@ export default function Published({
             className='object-cover'
           />
         </section>
-        <section className='w-96 px-5 pb-5 flex flex-col items-center'>
+        <section className='w-64 sm:w-96 px-5 pb-5 flex flex-col items-center'>
           <Link
             className='text-primary font-bold w-fit text-center prompt-summary'
             href={`/edit/published?story_id=${storyId}`}
@@ -67,10 +67,10 @@ export default function Published({
           >
             {story}
           </Link>
-          <article className='flex items-center mt-2.5 relative'>
-            <p className='text-primary/75 text-sm'>
+          <article className='mt-2.5 relative'>
+            <span className='text-primary/75 text-sm'>
               Published on {formattedTimestamp}
-            </p>
+            </span>
             <DeleteButton storyId={storyId} setOpen={setOpen} />
           </article>
         </section>

@@ -49,7 +49,7 @@ export default function Story({
 
           <h1 className='text-primary text-sm'>{username}</h1>
         </DialogHeader>
-        <section className='relative aspect-square w-80 overflow-hidden rounded-lg'>
+        <section className='relative aspect-square w-52 sm:w-80 overflow-hidden rounded-lg'>
           <Image
             src={karloImage}
             alt='Thumbnail'
@@ -57,7 +57,7 @@ export default function Story({
             className='object-cover'
           />
         </section>
-        <section className='w-80 space-y-2'>
+        <section className='w-52 sm:w-80 space-y-2'>
           <article className='flex items-center gap-x-2.5'>
             <h1 className='text-primary font-bold'>Prompt</h1>
             <button

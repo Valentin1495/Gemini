@@ -105,7 +105,7 @@
   }
 
   .story-skeleton-container {
-    @apply grid gap-3 sm:gap-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5;
+    @apply grid gap-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5;
   }
 
   .published-list-container {
@@ -113,6 +113,6 @@
   }
 
   .container {
-    @apply max-w-5xl 2xl:max-w-full 2xl:px-52 py-28 mx-auto;
+    @apply max-w-5xl 2xl:max-w-full 2xl:px-52 py-10 sm:py-28 mx-auto;
   }
 }

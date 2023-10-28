@@ -54,8 +54,7 @@ export default function RealtimePost({ storyId }: Props) {
   }
 
   return (
-    <div className='space-y-10'>
-      <h1 className='text-primary font-bold text-3xl'>{post.prompt}</h1>
+    <div className='space-y-5'>
       <section className='flex items-center gap-x-3.5'>
         <UserAvatar image={post.profilePic as string} className='w-12 h-12' />
 
@@ -64,17 +63,18 @@ export default function RealtimePost({ storyId }: Props) {
           <span className='text-primary/50'>{formattedDate}</span>
         </article>
       </section>
+      <section className='flex flex-col gap-y-5 sm:block'>
+        <article className='relative w-full sm:w-64 md:w-96 aspect-square rounded-sm overflow-hidden float-left mr-5'>
+          <Image
+            src={post.karloImage}
+            alt='Thumbnail'
+            fill
+            className='object-cover'
+          />
+        </article>
 
-      <section className='relative w-full aspect-[3/2] rounded-sm overflow-hidden'>
-        <Image
-          src={post.karloImage}
-          alt='Story thumbnail'
-          fill
-          className='object-cover'
-        />
+        <p className='text-lg sm:w-auto'>{post.story}</p>
       </section>
-
-      <section className='text-lg'>{post.story}</section>
     </div>
   );
 }

@@ -70,7 +70,7 @@ export default function IdeationForm() {
         className='mx-auto space-y-2.5'
       >
         <Label htmlFor='context' className='text-xl text-primary font-bold'>
-          Get prompt to generate story
+          Generate prompt & story
         </Label>
         <Input
           id='context'
@@ -92,38 +92,42 @@ export default function IdeationForm() {
 
       {extractedPrompt.length ? (
         <div>
-          <section className='mt-10 mb-5 space-y-2.5 w-fit'>
+          <div className='mt-10 mb-5 space-y-2.5 w-fit'>
             <h2 className='text-lg'>Prompt Ideation Result</h2>
-            {extractedPrompt.map((el, i) => (
-              <article
-                key={i}
-                className='flex justify-between gap-x-5 items-center'
-              >
-                <p className='text-primary/75'>{el}</p>
-
-                <Button
-                  className='bg-primary/20 text-primary hover:bg-primary/10 w-24'
-                  size={'sm'}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    makeUpStory(el);
-                    setSelectedIndex(i);
-                  }}
-                  disabled={loading || selectedIndex === i}
+            <section className='space-y-5'>
+              {extractedPrompt.map((el, i) => (
+                <article
+                  key={i}
+                  className='flex flex-col sm:flex-row justify-between sm:gap-x-5 items-center gap-y-2.5 sm:gap-y-0'
                 >
-                  {loading && selectedIndex === i && <Loader />}
-                  {!loading && selectedIndex === i && 'Used'}
-                  {selectedIndex !== i && 'Use this'}
-                </Button>
-              </article>
-            ))}
-          </section>
+                  <p className='text-primary/75'>{el}</p>
+
+                  <Button
+                    className='bg-primary/20 text-primary hover:bg-primary/10 w-full sm:w-24'
+                    size={'sm'}
+                    onClick={() => {
+                      makeUpStory(el);
+                      setSelectedIndex(i);
+                    }}
+                    disabled={loading || selectedIndex === i}
+                  >
+                    {loading && selectedIndex === i && <Loader />}
+                    {!loading && selectedIndex === i && 'Used'}
+                    {selectedIndex !== i && 'Use this'}
+                  </Button>
+                </article>
+              ))}
+            </section>
+          </div>
         </div>
       ) : null}
       {story && (
         <section className='mt-10 space-y-5'>
           <h2 className='text-lg'>Generated story</h2>
-          <p className='bg-secondary p-5 rounded-lg'> {story}</p>
+          <p className='bg-secondary p-5 rounded-lg max-h-96 overflow-y-auto sm:max-h-fit'>
+            {' '}
+            {story}
+          </p>
         </section>
       )}
     </div>
