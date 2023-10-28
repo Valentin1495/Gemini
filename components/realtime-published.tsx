@@ -50,13 +50,13 @@ export default function RealtimePublished({ author }: Props) {
     return () => {
       unsubscribe();
     };
-  }, [q]);
+  }, [author]);
 
   if (!publishedList)
     return (
       <div className='space-y-5'>
         <Skeleton className='w-10 h-5 mt-10' />
-        <StorySkeleton />
+        <StorySkeleton className='published-list-container' length={8} />
       </div>
     );
 
@@ -67,7 +67,7 @@ export default function RealtimePublished({ author }: Props) {
         {publishedList.length}
       </span>
 
-      <section className='grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1.5'>
+      <section className='published-list-container'>
         {publishedList.length ? (
           publishedList.map((story) => (
             <Published key={story.storyId} {...story} />

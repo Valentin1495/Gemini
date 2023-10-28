@@ -39,8 +39,10 @@ export default function Published({
           fill
           className='object-cover absolute'
         />
-        <section className='bg-white/75 text-primary dark:text-primary-foreground p-1.5 text-left font-bold inset-0 opacity-0 hover:opacity-100 absolute transition'>
-          {prompt}
+        <section className='bg-black/75 inset-0 p-1.5 opacity-0 hover:opacity-100 absolute transition'>
+          <p className='top-2 absolute prompt-summary px-1.5 text-left text-white/90'>
+            {prompt}
+          </p>
         </section>
       </DialogTrigger>
       <DialogContent className='p-0 max-w-fit'>

@@ -1,10 +1,15 @@
 import { Skeleton } from './ui/skeleton';
 
-export default function StorySkeleton() {
-  const numberArray = Array.from({ length: 15 }, (_, index) => index);
+type Props = {
+  className: string;
+  length: number;
+};
+
+export default function StorySkeleton({ className, length }: Props) {
+  const numberArray = Array.from({ length }, (_, index) => index);
 
   return (
-    <div className='story-skeleton-container'>
+    <div className={className}>
       {numberArray.map((el) => (
         <Skeleton className='story-skeleton' key={el} />
       ))}

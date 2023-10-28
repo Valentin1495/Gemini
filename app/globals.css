@@ -105,7 +105,11 @@
   }
 
   .story-skeleton-container {
-    @apply grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-3 sm:gap-1;
+    @apply grid gap-3 sm:gap-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5;
+  }
+
+  .published-list-container {
+    @apply grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1;
   }
 
   .container {

@@ -33,7 +33,8 @@ export default function RealtimeStories() {
     };
   }, []);
 
-  if (!allPublished) return <StorySkeleton />;
+  if (!allPublished)
+    return <StorySkeleton className='story-skeleton-container' length={15} />;
 
   return (
     <div className='story-skeleton-container'>

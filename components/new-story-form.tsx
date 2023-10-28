@@ -13,6 +13,7 @@ import { useEffect, useRef, useState } from 'react';
 import Loader from './loader';
 import { SessionType } from '@/types';
 import { useToast } from './ui/use-toast';
+import { Label } from './ui/label';
 
 type Props = {
   session: SessionType;
@@ -85,6 +86,9 @@ export default function NewStoryForm({ session }: Props) {
       ref={formRef}
       action={publishStory}
     >
+      <Label htmlFor='prompt'>
+        Effortlessly generate a high-quality thumbnail from simple text input.
+      </Label>
       <Input
         name='prompt'
         id='prompt'

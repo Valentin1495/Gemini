@@ -7,6 +7,7 @@ import { extractPrompt } from '@/lib/extract-prompt';
 import { useRef, useState } from 'react';
 import Loader from './loader';
 import { useToast } from './ui/use-toast';
+import { Label } from './ui/label';
 
 export default function IdeationForm() {
   const [prompt, setPrompt] = useState('');
@@ -68,9 +69,9 @@ export default function IdeationForm() {
         onSubmit={() => setPending(true)}
         className='mx-auto space-y-2.5'
       >
-        <label htmlFor='context' className='text-xl text-primary font-bold'>
+        <Label htmlFor='context' className='text-xl text-primary font-bold'>
           Get prompt to generate story
-        </label>
+        </Label>
         <Input
           id='context'
           name='context'

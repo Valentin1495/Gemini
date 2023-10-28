@@ -12,7 +12,7 @@ export default async function Navbar() {
     <nav className='z-10 fixed inset-x-0 top-0 py-3.5 px-10 backdrop-blur-md shadow-md'>
       <div className='flex justify-between items-center'>
         <Link
-          href={'/'}
+          href={'/explore'}
           className='font-bold text-2xl text-primary hover:opacity-80 transition'
         >
           AIStoryteller
