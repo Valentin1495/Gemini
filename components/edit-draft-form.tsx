@@ -94,8 +94,10 @@ export default function EditDraftForm({ storyId, profilePic, draft }: Props) {
   return (
     <div className='space-y-10'>
       <h1 className='text-lg text-primary/60'>
-        Draft in {draft.username}{' '}
-        <span className='text-base'>(The draft will be auto saved.)</span>
+        Draft in {draft.username} <br className='sm:hidden' />
+        <span className='text-base'>
+          (The draft will be automatically saved.)
+        </span>
       </h1>
       <form
         onSubmit={() => setPending(true)}
