@@ -113,6 +113,6 @@
   }
 
   .container {
-    @apply max-w-5xl 2xl:max-w-full 2xl:px-52 py-10 sm:py-28 mx-auto;
+    @apply max-w-5xl 2xl:max-w-full 2xl:px-52 py-20 sm:py-28 mx-auto;
   }
 }

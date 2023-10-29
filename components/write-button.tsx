@@ -5,8 +5,14 @@ import { addDoc, collection } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import { Pencil2Icon } from '@radix-ui/react-icons';
 import { User } from '@/types';
+import { cn } from '@/lib/utils';
 
-export default function WriteButton({ user }: { user: User }) {
+type Props = {
+  user: User;
+  hidden: boolean;
+};
+
+export default function WriteButton({ user, hidden }: Props) {
   const router = useRouter();
 
   const { email, name } = user;
@@ -31,7 +37,7 @@ export default function WriteButton({ user }: { user: User }) {
       onClick={writeNewStory}
     >
       <Pencil2Icon className='w-6 h-6' />
-      <span className='hidden sm:inline'>Write</span>
+      <span className={cn(hidden && 'hidden sm:inline')}>Write</span>
     </button>
   );
 }

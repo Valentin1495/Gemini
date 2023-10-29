@@ -14,7 +14,7 @@ export default async function PublishedStories({ searchParams }: Props) {
   const email = session?.user?.email as string;
 
   return (
-    <main className='pt-16'>
+    <main>
       <ActiveLinks showToast={searchParams?.show_toast} />
       <RealtimePublished author={email} />
     </main>

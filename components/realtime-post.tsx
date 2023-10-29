@@ -45,7 +45,7 @@ export default function RealtimePost({ storyId }: Props) {
     return () => {
       unsub();
     };
-  }, [q]);
+  }, [storyId]);
 
   if (loading) return <PostSkeleton />;
 
@@ -55,10 +55,14 @@ export default function RealtimePost({ storyId }: Props) {
 
   return (
     <div className='space-y-5'>
+      <h3 className='text-sm sm:text-base text-primary'>{post.prompt}</h3>
       <section className='flex items-center gap-x-3.5'>
-        <UserAvatar image={post.profilePic as string} className='w-12 h-12' />
+        <UserAvatar
+          image={post.profilePic as string}
+          className='w-8 h-8 sm:w-12 sm:h-12'
+        />
 
-        <article className='flex flex-col'>
+        <article className='flex flex-col text-sm sm:text-base'>
           <span>{post.username}</span>
           <span className='text-primary/50'>{formattedDate}</span>
         </article>
@@ -73,7 +77,7 @@ export default function RealtimePost({ storyId }: Props) {
           />
         </article>
 
-        <p className='text-lg sm:w-auto'>{post.story}</p>
+        <p className='text-base sm:text-lg sm:w-auto'>{post.story}</p>
       </section>
     </div>
   );

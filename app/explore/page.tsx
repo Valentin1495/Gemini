@@ -17,7 +17,7 @@ export default async function Explore() {
         <div className='flex items-center gap-x-3'>
           <SynopsisDialog />
           {session ? (
-            <WriteButton user={session.user as User} />
+            <WriteButton user={session.user as User} hidden={true} />
           ) : (
             <LoginDialog />
           )}

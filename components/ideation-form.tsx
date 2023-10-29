@@ -70,7 +70,7 @@ export default function IdeationForm() {
         className='mx-auto space-y-2.5'
       >
         <Label htmlFor='context' className='text-xl text-primary font-bold'>
-          Generate prompt & story
+          Prompt suggestion
         </Label>
         <Input
           id='context'

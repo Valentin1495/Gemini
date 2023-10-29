@@ -13,7 +13,7 @@ export default async function Navbar() {
       <div className='flex justify-between items-center'>
         <Link
           href={'/explore'}
-          className='font-bold text-2xl text-primary hover:opacity-80 transition'
+          className='font-bold text-xl sm:text-2xl text-primary hover:opacity-80 transition'
         >
           AIStoryteller
         </Link>

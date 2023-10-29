@@ -30,7 +30,7 @@ export default function UserDropdownMenu({ user }: { user: User }) {
 
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <WriteButton user={user} />
+          <WriteButton user={user} hidden={false} />
         </DropdownMenuItem>
         <DropdownMenuSeparator />
 

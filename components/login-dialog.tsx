@@ -14,12 +14,12 @@ export default function LoginDialog() {
     <Dialog>
       <DialogTrigger className='w-full text-left flex items-center gap-x-1.5'>
         <Pencil1Icon className='w-6 h-6' />
-        Write
+        <span className='hidden sm:inline'>Write</span>
       </DialogTrigger>
-      <DialogContent className='max-w-fit px-10'>
+      <DialogContent className='max-w-[300px] px-10'>
         <DialogHeader>
-          <DialogTitle>Wanna write your own story?</DialogTitle>
-          <DialogDescription>Sign in and get started!</DialogDescription>
+          <DialogTitle>Write your own story.</DialogTitle>
+          <DialogDescription>Sign in and get started.</DialogDescription>
         </DialogHeader>
         <LoginButton />
       </DialogContent>
