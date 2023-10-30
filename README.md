@@ -32,10 +32,18 @@
 
   ![4](/public/4.gif)
 
-- 프롬프트 입력 / 이미지 생성 / 이야기 작성 with **Server Action** & **PaLM** & **Karlo**
+- 프롬프트 입력 / 이미지 생성 / 이야기 작성 with **Server Action** & **Karlo**
 
   ![5](/public/5.gif)
 
-- 이야기 쓰기 / Draft 자동 저장 / Draft 삭제
+- 이야기 쓰기 / Draft 자동 저장
 
   ![6](/public/6.gif)
+
+- Draft 삭제
+
+  ![7](/public/7.gif)
+
+- 이야기 삭제
+
+  ![8](/public/8.gif)
