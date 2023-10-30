@@ -36,6 +36,6 @@
 
   ![5](/public/5.gif)
 
-- 이야기 쓰기 / Draft 자동 저장
+- 이야기 쓰기 / Draft 자동 저장 / Draft 삭제
 
   ![6](/public/6.gif)

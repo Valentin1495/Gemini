@@ -86,10 +86,10 @@ export default function NewStoryForm({ session }: Props) {
       ref={formRef}
       action={publishStory}
     >
-      <Label htmlFor='prompt' className='text-xl text-primary'>
-        Effortlessly generate a high-quality image from simple text input.
+      <Label htmlFor='prompt' className='text-xl text-primary font-bold'>
+        1. Effortlessly generate a high-quality image from simple text input.
         <br />
-        <span className='text-base'>
+        <span className='text-base font-normal'>
           (The story will be automatically saved.)
         </span>
       </Label>
@@ -104,9 +104,9 @@ export default function NewStoryForm({ session }: Props) {
       />
       <Label
         htmlFor='content'
-        className='text-xl text-primary inline-block mt-5'
+        className='text-xl text-primary inline-block mt-5 font-bold'
       >
-        Tell your story...
+        2. Tell your story...
       </Label>
       <Textarea
         name='content'
@@ -115,6 +115,7 @@ export default function NewStoryForm({ session }: Props) {
         value={story}
         onChange={(e) => setStory(e.target.value)}
         required
+        placeholder='Once upon a time...'
       />
       <section className='flex justify-center'>
         <Button
