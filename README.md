@@ -1,6 +1,6 @@
 # [AIStoryteller](https://aistoryteller-nh.vercel.app/)
 
-이야기 주제만 제시하면 줄거리, 이야기, 이미지를 생성합니다.
+이야기 주제를 제시하고, 이야기와 이미지를 생성해 보세요.
 
 ![landing-page](/public/landing-page.png)
 
@@ -11,7 +11,8 @@
 - **Authentication:** [NextAuth.js](https://next-auth.js.org/)
 - **UI Components:** [shadcn/ui](https://ui.shadcn.com)
 - **Database:** [Firebase](https://firebase.google.com/?hl=ko)
-- **LLM:** [PaLM API](https://developers.generativeai.google/guide/palm_api_overview)
+- **LLM:** [PaLM](https://developers.generativeai.google/guide/palm_api_overview)
+- **Image Generation:** [Karlo](https://developers.kakao.com/product/karlo)
 
 ## Features
 
@@ -19,11 +20,11 @@
 
   ![1](/public/1.gif)
 
-- 주제 입력 / 줄거리 생성
+- 주제 입력 / 줄거리 생성 with **Server Action** & **PaLM**
 
   ![2](/public/2.gif)
 
-- 간단한 키워드 제공 / 디테일한 주제 생성 / 이야기 완성
+- 간단한 키워드 제공 / 디테일한 주제 생성 / 이야기 완성 with **Server Action** & **Route Handler** & **PaLM**
 
   ![3](/public/3.gif)
 
@@ -31,10 +32,10 @@
 
   ![4](/public/4.gif)
 
-- 프롬프트 입력 / 이미지 생성 / 이야기 작성
+- 프롬프트 입력 / 이미지 생성 / 이야기 작성 with **Server Action** & **PaLM** & **Karlo**
 
   ![5](/public/5.gif)
 
-- 이야기 작성 / draft로 자동 저장
+- 이야기 쓰기 / Draft 자동 저장
 
   ![6](/public/6.gif)
