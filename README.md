@@ -18,32 +18,23 @@
 
 - 이야기 / 이미지 / 이미지 프롬프트 확인
 
-  ![1](/public/1.gif)
+  ![1](/public/1.png)
 
 - 주제 입력 / 줄거리 생성 with **Server Action** & **PaLM**
 
-  ![2](/public/2.gif)
+  ![2](/public/2.png)
 
 - 간단한 키워드 제공 / 디테일한 주제 생성 / 이야기 완성 with **Server Action** & **Route Handler** & **PaLM**
 
-  ![3](/public/3.gif)
+  ![3](/public/3.png)
 
-- 구글 로그인 (OAuth)
-
-  ![4](/public/4.gif)
+  ![4](/public/4.png)
 
 - 프롬프트 입력 / 이미지 생성 / 이야기 작성 with **Server Action** & **Karlo**
 
-  ![5](/public/5.gif)
+  ![5](/public/5.png)
 
+- 구글 로그인 (OAuth)
 - 이야기 쓰기 / Draft 자동 저장
-
-  ![6](/public/6.gif)
-
 - Draft 삭제
-
-  ![7](/public/7.gif)
-
 - 이야기 삭제
-
-  ![8](/public/8.gif)
