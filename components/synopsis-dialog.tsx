@@ -94,7 +94,7 @@ export default function SynopsisDialog() {
         {synopsis && (
           <p
             onClick={copyToClipboard}
-            className='mt-5 text-primary transition hover:cursor-pointer bg-secondary hover:bg-secondary/75 py-1.5 px-3 rounded-lg max-h-80 overflow-y-auto'
+            className='mt-5 text-primary transition hover:cursor-pointer bg-secondary hover:bg-secondary/75 py-1.5 px-3 rounded-lg max-h-80 overflow-y-auto no-scrollbar'
           >
             {synopsis}
           </p>
