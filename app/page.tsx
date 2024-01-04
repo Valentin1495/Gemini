@@ -1,12 +1,16 @@
-import { BookOpenText, Image } from 'lucide-react';
+import { BookOpenText, Image as ImageIcon } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default async function Home() {
   return (
     <main className='flex flex-col items-center min-h-screen justify-center gap-y-8'>
-      <h1 className='text-7xl text-center font-bold text-primary'>
-        AIStoryteller
-      </h1>
+      <div className='flex items-center gap-x-5'>
+        <Image src='/logo.png' alt='Logo' width={90} height={90} />
+        <h1 className='text-7xl text-center font-bold text-primary'>
+          AIStoryteller
+        </h1>
+      </div>
       <p className='text-3xl text-primary/50 font-semibold'>
         Experience the power of AI
       </p>
@@ -26,7 +30,7 @@ export default async function Home() {
           href='/thumbnail'
         >
           <article className='bg-rose-200 p-2 rounded-md'>
-            <Image className='w-5 h-5 text-rose-700' />
+            <ImageIcon className='w-5 h-5 text-rose-700' />
           </article>
           Thumbnail
         </Link>
