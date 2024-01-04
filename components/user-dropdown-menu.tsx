@@ -11,7 +11,6 @@ import { User } from '@/types';
 import LogoutButton from './logout-button';
 import Link from 'next/link';
 import WriteButton from './write-button';
-import { ArchiveIcon } from '@radix-ui/react-icons';
 
 export default function UserDropdownMenu({ user }: { user: User }) {
   const { image, name, email } = user;
@@ -39,7 +38,6 @@ export default function UserDropdownMenu({ user }: { user: User }) {
             href={'/stories/drafts'}
             className='w-full flex items-center gap-x-1.5'
           >
-            <ArchiveIcon className='w-6 h-6' />
             Stories
           </Link>
         </DropdownMenuItem>
