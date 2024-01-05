@@ -1,9 +1,9 @@
 'use server';
 
+import { image } from '@/types';
 import { createImage } from './create-image';
 import { generatePrompt } from './generate-prompt';
 import { generateSynopsis } from './generate-synopsis';
-import { uploadFile } from './upload-file';
 
 export async function createSynopsis(formData: FormData) {
   try {
@@ -11,8 +11,8 @@ export async function createSynopsis(formData: FormData) {
     const synopsis = await generateSynopsis(topic);
 
     return { synopsis };
-  } catch (error: any) {
-    return { message: error.message };
+  } catch (error) {
+    throw new Error('Failed to create synopsis');
   }
 }
 
@@ -20,21 +20,22 @@ export async function generateImagePrompt(formData: FormData) {
   try {
     const context = formData.get('context') as string;
     const prompt = await generatePrompt(context);
+
     return { prompt };
-  } catch (error: any) {
-    return { message: error.message };
+  } catch (error) {
+    throw new Error('Failed to generate prompt');
   }
 }
 
-export async function getNewImageUrl(formData: FormData) {
+export async function getImageUrl(formData: FormData) {
   try {
     const prompt = formData.get('prompt') as string;
-    const imageData = await createImage(prompt);
-    const url = imageData.images[0].image;
-    const newImageUrl = await uploadFile(url, prompt);
+    const sampleAmount = formData.get('amount') as string;
 
-    return { newImageUrl };
-  } catch (error: any) {
-    return { message: error.message };
+    const imageData = await createImage(prompt, parseInt(sampleAmount));
+
+    return { imageUrls: imageData.images as image[] };
+  } catch (error) {
+    throw new Error('Failed to get image url');
   }
 }

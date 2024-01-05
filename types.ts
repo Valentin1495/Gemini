@@ -35,3 +35,8 @@ export type PublishedType = DraftType & {
 export type ExtendedDraft = DraftType & D;
 
 export type ExtendedPublished = PublishedType & P;
+
+export type image = {
+  id: string;
+  image: string;
+};
