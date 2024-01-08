@@ -1,4 +1,5 @@
 import '@/app/globals.css';
+import Navbar from '@/components/navbar';
 
 export default function ThumbnailLayout({
   children,
@@ -7,6 +8,7 @@ export default function ThumbnailLayout({
 }) {
   return (
     <div>
+      <Navbar />
       <div className='container'>{children}</div>
     </div>
   );
