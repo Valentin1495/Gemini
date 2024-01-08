@@ -90,7 +90,13 @@ export default function Thumbnails() {
                 key={photo.id}
                 className='relative aspect-square rounded-lg overflow-hidden'
               >
-                <Image src={photo.image} alt='Thumbnail' fill />
+                <Image
+                  src={photo.image}
+                  alt='Thumbnail'
+                  fill
+                  className='hover:opacity-80 hover:cursor-pointer transition'
+                  onClick={() => window.open(photo.image)}
+                />
               </div>
             ))
           : null}
