@@ -1,8 +1,6 @@
 import { textServiceClient } from '@/lib/text-service-client';
 
-export async function POST(req: Request) {
-  const { topic } = await req.json();
-
+const makeUpStory = async (topic: string) => {
   const response = await textServiceClient.generateText({
     model: 'models/text-bison-001',
     temperature: 1, // Optional. Value `0.0` always uses the highest-probability result.
@@ -15,5 +13,7 @@ export async function POST(req: Request) {
 
   const answer = response[0].candidates![0].output;
 
-  return Response.json({ story: answer });
-}
+  return answer;
+};
+
+export default makeUpStory;

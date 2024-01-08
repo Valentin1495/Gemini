@@ -3,16 +3,16 @@
 import { image } from '@/types';
 import { createImage } from './create-image';
 import { generatePrompt } from './generate-prompt';
-import { generateSynopsis } from './generate-synopsis';
+import makeUpStory from './make-up-story';
 
-export async function createSynopsis(formData: FormData) {
+export async function generateStory(formData: FormData) {
   try {
     const topic = formData.get('topic') as string;
-    const synopsis = await generateSynopsis(topic);
+    const story = await makeUpStory(topic);
 
-    return { synopsis };
+    return { story };
   } catch (error) {
-    throw new Error('Failed to create synopsis');
+    throw new Error('Failed to create story');
   }
 }
 

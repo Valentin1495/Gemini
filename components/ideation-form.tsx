@@ -8,7 +8,6 @@ import { useState } from 'react';
 import { Label } from './ui/label';
 import SubmitButton from './submit-button';
 import { toast } from 'sonner';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 export default function IdeationForm() {
@@ -16,7 +15,7 @@ export default function IdeationForm() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const router = useRouter();
 
-  const generatePrompt = async (formData: FormData) => {
+  const formAction = async (formData: FormData) => {
     const result = await generateImagePrompt(formData);
 
     if (result) {
@@ -30,7 +29,7 @@ export default function IdeationForm() {
 
   return (
     <div>
-      <form action={generatePrompt} className='mx-auto space-y-2.5'>
+      <form action={formAction} className='mx-auto space-y-2.5'>
         <Label htmlFor='context' className='text-xl text-primary font-bold'>
           Prompt suggestion
         </Label>
