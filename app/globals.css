@@ -77,7 +77,7 @@
 
 @layer components {
   .loader {
-    @apply border-4 border-slate-300 border-t-4 border-t-slate-500 rounded-full animate-spin;
+    @apply border-4 border-slate-300 border-t-4 border-t-slate-500 rounded-full animate-spin w-6 h-6;
   }
 
   .story-summary {

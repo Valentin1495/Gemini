@@ -1,10 +1,9 @@
-import { cn } from '@/lib/utils';
+import Image from 'next/image';
 
-type LoaderProps = {
-  width?: string;
-  height?: string;
-};
-
-export default function Loader({ width = 'w-6', height = 'h-6' }: LoaderProps) {
-  return <div className={cn('loader', width, height)}></div>;
+export default function Loader() {
+  return (
+    <div className='w-6 h-6 relative animate-spin'>
+      <Image alt='Logo' src='/logo.png' fill />
+    </div>
+  );
 }

@@ -1,6 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import AuthProvider from '@/components/auth-provider';
+import { Toaster } from '@/components/ui/sonner';
 
 export const metadata: Metadata = {
   title: 'AIStoryteller - Get inspired by AI',
@@ -19,8 +20,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en' suppressHydrationWarning>
+    <html lang='en'>
       <body>
+        <Toaster />
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
