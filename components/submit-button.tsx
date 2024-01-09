@@ -35,7 +35,7 @@ export default function SubmitButton({
       disabled={pending}
       className={className}
     >
-      {pending ? <Loader /> : text}
+      {pending ? <Loader className='w-6 h-6' /> : text}
     </Button>
   );
 }

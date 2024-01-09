@@ -9,8 +9,7 @@ import {
 import UserAvatar from './user-avatar';
 import { User } from '@/types';
 import LogoutButton from './logout-button';
-import Link from 'next/link';
-import WriteButton from './write-button';
+import DropdownMenuLink from './dropdown-menu-link';
 
 export default function UserDropdownMenu({ user }: { user: User }) {
   const { image, name, email } = user;
@@ -28,21 +27,25 @@ export default function UserDropdownMenu({ user }: { user: User }) {
         </DropdownMenuLabel>
 
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <WriteButton user={user} hidden={false} />
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
 
         <DropdownMenuItem>
-          <Link
-            href={'/stories/drafts'}
-            className='w-full flex items-center gap-x-1.5'
-          >
-            Stories
-          </Link>
+          <DropdownMenuLink href='/story' text='Generate story' />
         </DropdownMenuItem>
 
         <DropdownMenuSeparator />
+
+        <DropdownMenuItem>
+          <DropdownMenuLink href='/thumbnail' text='Generate thumbnail' />
+        </DropdownMenuItem>
+
+        <DropdownMenuSeparator />
+
+        <DropdownMenuItem>
+          <DropdownMenuLink href='/saved_stories' text='Saved stories' />
+        </DropdownMenuItem>
+
+        <DropdownMenuSeparator />
+
         <DropdownMenuItem>
           <LogoutButton />
         </DropdownMenuItem>

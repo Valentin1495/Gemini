@@ -9,6 +9,8 @@ import { toast } from 'sonner';
 import { Button } from './ui/button';
 import LoginDialog from './login-dialog';
 import { Session } from 'next-auth';
+import { addDoc, collection } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
 
 export default function StoryForm({ session }: { session: Session | null }) {
   const [story, setStory] = useState<string>('');
@@ -19,6 +21,23 @@ export default function StoryForm({ session }: { session: Session | null }) {
     if (result) {
       toast('👏 Created new story!');
       setStory(result.story as string);
+    }
+  };
+
+  const data = {
+    email: session?.user?.email,
+    username: session?.user?.name,
+    story,
+    timestamp: Date.now(),
+  };
+
+  const saveStory = async () => {
+    try {
+      await addDoc(collection(db, 'stories'), data);
+
+      toast('🔖 Saved story!');
+    } catch (error: any) {
+      toast('❌' + error.message);
     }
   };
 
@@ -53,7 +72,9 @@ export default function StoryForm({ session }: { session: Session | null }) {
           </article>
           <article className='text-center mt-3'>
             {session ? (
-              <Button variant='outline'>Save</Button>
+              <Button variant='outline' onClick={saveStory}>
+                Save
+              </Button>
             ) : (
               <LoginDialog />
             )}

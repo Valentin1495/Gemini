@@ -3,12 +3,12 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { generateImagePrompt } from '@/lib/actions';
-import { extractPrompt } from '@/lib/extract-prompt';
 import { useState } from 'react';
 import { Label } from './ui/label';
 import SubmitButton from './submit-button';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
+import { extractPrompt } from '@/lib/utils';
 
 export default function IdeationForm() {
   const [prompt, setPrompt] = useState('');

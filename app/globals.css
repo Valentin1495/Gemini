@@ -76,52 +76,7 @@
 }
 
 @layer components {
-  .loader {
-    @apply border-4 border-slate-300 border-t-4 border-t-slate-500 rounded-full animate-spin w-6 h-6;
-  }
-
-  .story-summary {
-    display: -webkit-box;
-    -webkit-line-clamp: 6;
-    -webkit-box-orient: vertical;
-    text-overflow: ellipsis;
-    overflow: hidden;
-  }
-
-  .prompt-summary {
-    display: -webkit-box;
-    -webkit-line-clamp: 5;
-    -webkit-box-orient: vertical;
-    text-overflow: ellipsis;
-    overflow: hidden;
-
-    @apply text-sm;
-  }
-
-  .story-skeleton {
-    @apply w-full aspect-square;
-  }
-
-  .story-skeleton-container {
-    @apply grid gap-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5;
-  }
-
-  .published-list-container {
-    @apply grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1;
-  }
-
   .container {
     @apply max-w-5xl 2xl:max-w-full 2xl:px-52 py-20 sm:py-28 mx-auto;
-  }
-
-  /* Hide scrollbar for Chrome, Safari and Opera */
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Hide scrollbar for IE, Edge and Firefox */
-  .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
   }
 }
