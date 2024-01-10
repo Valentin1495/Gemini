@@ -6,7 +6,7 @@ export default async function Home() {
     <main className='flex flex-col items-center min-h-screen justify-center gap-y-8'>
       <div className='flex items-center gap-x-5'>
         <h1 className='text-4xl sm:text-7xl text-center font-bold text-primary'>
-          AIStoryteller
+          Gemini
         </h1>
       </div>
       <p className='text-xl sm:text-3xl text-primary/50 font-semibold'>

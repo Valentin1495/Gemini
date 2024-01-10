@@ -4,7 +4,7 @@ import AuthProvider from '@/components/auth-provider';
 import { Toaster } from '@/components/ui/sonner';
 
 export const metadata: Metadata = {
-  title: 'AIStoryteller - Get inspired by AI',
+  title: 'Gemini - Get inspired by AI',
   description: 'Generate impressive images and stories from AI',
   icons: [
     {

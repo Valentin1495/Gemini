@@ -15,7 +15,7 @@ export default async function Navbar() {
           href='/'
           className='font-bold text-xl sm:text-2xl text-primary hover:opacity-80 transition'
         >
-          AIStoryteller
+          Gemini
         </Link>
         <div className='flex items-center gap-x-2'>
           {session ? (
