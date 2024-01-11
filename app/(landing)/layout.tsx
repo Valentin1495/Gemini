@@ -1,4 +1,4 @@
-import LandingNavbar from '@/components/landing-navbar';
+import Navbar from '@/components/navbar';
 
 export default function LandingPageLayout({
   children,
@@ -6,8 +6,8 @@ export default function LandingPageLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className='mx-auto max-w-screen-xl bg-[#111827]'>
-      <LandingNavbar />
+    <div className='mx-auto max-w-screen-xl bg-secondary'>
+      <Navbar />
       <div className='min-h-screen flex justify-center items-center'>
         {children}
       </div>

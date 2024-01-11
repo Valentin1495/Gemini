@@ -13,7 +13,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { amountOptions } from '@/app/(routes)/thumbnail/constants';
 import { Wand2 } from 'lucide-react';
 import SubmitButton from './submit-button';
 import { toast } from 'sonner';
@@ -66,11 +65,11 @@ export default function Thumbnails() {
               <SelectValue defaultValue='1' placeholder='1 Photo' />
             </SelectTrigger>
             <SelectContent>
-              {amountOptions.map((option) => (
+              {/* {amountOptions.map((option) => (
                 <SelectItem key={option.value} value={option.value}>
                   {option.label}
                 </SelectItem>
-              ))}
+              ))} */}
             </SelectContent>
           </Select>
           <SubmitButton

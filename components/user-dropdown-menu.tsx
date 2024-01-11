@@ -29,19 +29,13 @@ export default function UserDropdownMenu({ user }: { user: User }) {
         <DropdownMenuSeparator />
 
         <DropdownMenuItem>
-          <DropdownMenuLink href='/story' text='Generate story' />
+          <DropdownMenuLink href='/conversation' text='Conversation' />
         </DropdownMenuItem>
 
         <DropdownMenuSeparator />
 
         <DropdownMenuItem>
-          <DropdownMenuLink href='/thumbnail' text='Generate thumbnail' />
-        </DropdownMenuItem>
-
-        <DropdownMenuSeparator />
-
-        <DropdownMenuItem>
-          <DropdownMenuLink href='/saved_stories' text='Saved stories' />
+          <DropdownMenuLink href='/image' text='Image generation' />
         </DropdownMenuItem>
 
         <DropdownMenuSeparator />

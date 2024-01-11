@@ -1,41 +1,41 @@
 'use server';
 
-import { image } from '@/types';
-import { createImage } from './create-image';
-import { generatePrompt } from './generate-prompt';
-import makeUpStory from './make-up-story';
+// import { image } from '@/types';
+// import { createImage } from './create-image';
+// import { generatePrompt } from './generate-prompt';
+import talkToGenmini from './talk-to-gemini';
 
-export async function generateStory(formData: FormData) {
+export async function generateAnswer(formData: FormData) {
   try {
-    const topic = formData.get('topic') as string;
-    const story = await makeUpStory(topic);
+    const msg = formData.get('msg') as string;
+    const answer = await talkToGenmini(msg);
 
-    return { story };
+    return { answer };
   } catch (error) {
-    throw new Error('Failed to create story');
+    throw new Error('Failed to generate answer');
   }
 }
 
-export async function generateImagePrompt(formData: FormData) {
-  try {
-    const context = formData.get('context') as string;
-    const prompt = await generatePrompt(context);
+// export async function generateImagePrompt(formData: FormData) {
+//   try {
+//     const context = formData.get('context') as string;
+//     const prompt = await generatePrompt(context);
 
-    return { prompt };
-  } catch (error) {
-    throw new Error('Failed to generate prompt');
-  }
-}
+//     return { prompt };
+//   } catch (error) {
+//     throw new Error('Failed to generate prompt');
+//   }
+// }
 
-export async function getImageUrl(formData: FormData) {
-  try {
-    const prompt = formData.get('prompt') as string;
-    const sampleAmount = formData.get('amount') as string;
+// export async function getImageUrl(formData: FormData) {
+//   try {
+//     const prompt = formData.get('prompt') as string;
+//     const sampleAmount = formData.get('amount') as string;
 
-    const imageData = await createImage(prompt, parseInt(sampleAmount));
+//     const imageData = await createImage(prompt, parseInt(sampleAmount));
 
-    return { imageUrls: imageData.images as image[] };
-  } catch (error) {
-    throw new Error('Failed to get image url');
-  }
-}
+//     return { imageUrls: imageData.images as image[] };
+//   } catch (error) {
+//     throw new Error('Failed to get image url');
+//   }
+// }

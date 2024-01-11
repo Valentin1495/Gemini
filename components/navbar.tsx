@@ -1,30 +1,28 @@
+import { Montserrat } from 'next/font/google';
+import Image from 'next/image';
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions';
-import UserDropdownMenu from './user-dropdown-menu';
-import { User } from '@/types';
-import LoginButton from './login-button';
+import NavbarRight from './navbar-right';
+
+const font = Montserrat({ weight: '600', subsets: ['latin'] });
 
 export default async function Navbar() {
   const session = await getServerSession(authOptions);
 
   return (
-    <nav className='z-10 fixed inset-x-0 top-0 py-3.5 px-5 sm:px-10 backdrop-blur-md shadow-sm'>
-      <div className='flex justify-between items-center'>
-        <Link
-          href='/'
-          className='font-bold text-xl sm:text-2xl text-primary hover:opacity-80 transition'
-        >
-          Gemini
-        </Link>
-        <div className='flex items-center gap-x-2'>
-          {session ? (
-            <UserDropdownMenu user={session.user as User} />
-          ) : (
-            <LoginButton />
-          )}
+    <nav className='p-4 bg-transparent flex items-center justify-between fixed w-full backdrop-blur-md z-10'>
+      <Link href='/' className='flex items-center'>
+        <div className='relative h-8 w-8 mr-4'>
+          <Image fill alt='Logo' src='/logo.png' />
         </div>
-      </div>
+        <h1 className={cn('text-2xl font-bold text-white', font.className)}>
+          Gemini
+        </h1>
+      </Link>
+
+      <NavbarRight session={session} />
     </nav>
   );
 }
