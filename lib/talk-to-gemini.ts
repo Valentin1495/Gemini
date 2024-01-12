@@ -1,6 +1,6 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
-const talkToGenmini = async (msg: string) => {
+const talkToGemini = async (msg: string) => {
   const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY as string);
   const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
 
@@ -20,8 +20,6 @@ const talkToGenmini = async (msg: string) => {
     },
   });
 
-  // const msg = "How many paws are in my house?";
-
   const result = await chat.sendMessage(msg);
   const response = result.response;
   const text = response.text();
@@ -29,4 +27,4 @@ const talkToGenmini = async (msg: string) => {
   return text;
 };
 
-export default talkToGenmini;
+export default talkToGemini;

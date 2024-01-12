@@ -1,4 +1,4 @@
-export const createImage = async (prompt: string, samples: number) => {
+export const generateImage = async (prompt: string, samples: number) => {
   const response = await fetch(process.env.KAKAO_API_URL as string, {
     method: 'POST',
     headers: {

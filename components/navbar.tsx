@@ -4,7 +4,8 @@ import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions';
-import NavbarRight from './navbar-right';
+import UserDropdownMenu from './user-dropdown-menu';
+import { User } from '@/types';
 
 const font = Montserrat({ weight: '600', subsets: ['latin'] });
 
@@ -22,7 +23,9 @@ export default async function Navbar() {
         </h1>
       </Link>
 
-      <NavbarRight session={session} />
+      <div className='flex items-center gap-x-2'>
+        <UserDropdownMenu user={session?.user as User} />
+      </div>
     </nav>
   );
 }

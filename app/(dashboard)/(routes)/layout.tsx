@@ -7,7 +7,7 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className='bg-secondary'>
+    <div>
       <Navbar />
       <div className='container'>{children}</div>
     </div>

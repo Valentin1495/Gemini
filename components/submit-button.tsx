@@ -13,7 +13,7 @@ type ButtonProps = {
     | 'secondary'
     | 'ghost'
     | 'link'
-    | 'login';
+    | 'premium';
   className: string;
   text: string;
   size: 'default' | 'sm' | 'lg' | 'icon';

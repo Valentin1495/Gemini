@@ -1,9 +1,9 @@
-import LandingHero from '@/components/landing-hero';
+import Landing from '@/components/landing';
 
 export default function LandingPage() {
   return (
     <main>
-      <LandingHero />
+      <Landing />
     </main>
   );
 }

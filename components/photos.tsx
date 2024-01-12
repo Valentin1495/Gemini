@@ -1,10 +1,9 @@
 'use client';
 
 import { Input } from '@/components/ui/input';
-import { getImageUrl } from '@/lib/actions';
+import { getImageUrls } from '@/lib/actions';
 import { useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { image } from '@/types';
 import {
   Select,
@@ -13,16 +12,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Wand2 } from 'lucide-react';
 import SubmitButton from './submit-button';
 import { toast } from 'sonner';
+import { amountOptions } from '@/app/(dashboard)/(routes)/image/constants';
 
-export default function Thumbnails() {
+export default function Photos() {
   const [photos, setPhotos] = useState<image[]>([]);
   const [amount, setAmount] = useState<string>('1');
 
   const generateThumbnail = async (formData: FormData) => {
-    const result = await getImageUrl(formData);
+    const result = await getImageUrls(formData);
 
     if (result) {
       let message =
@@ -40,15 +39,6 @@ export default function Thumbnails() {
           <h1 className='text-primary/50 font-semibold text-sm'>
             Start with a detailed description
           </h1>
-          <Link
-            href='/ideation'
-            className='h-9 px-4 py-2
-            bg-secondary text-secondary-foreground font-bold shadow-sm hover:bg-secondary/80 transition inline-flex items-center gap-x-1.5
-            rounded-md text-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring'
-          >
-            <Wand2 className='w-3.5 h-3.5' />
-            Ideation
-          </Link>
         </section>
         <Input
           name='prompt'
@@ -65,15 +55,15 @@ export default function Thumbnails() {
               <SelectValue defaultValue='1' placeholder='1 Photo' />
             </SelectTrigger>
             <SelectContent>
-              {/* {amountOptions.map((option) => (
+              {amountOptions.map((option) => (
                 <SelectItem key={option.value} value={option.value}>
                   {option.label}
                 </SelectItem>
-              ))} */}
+              ))}
             </SelectContent>
           </Select>
           <SubmitButton
-            variant='default'
+            variant='premium'
             className='w-32'
             text='Generate'
             size='lg'

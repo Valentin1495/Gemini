@@ -1,9 +1,9 @@
-import Thumbnails from '@/components/thumbnails';
+import Photos from '@/components/photos';
 
-export default function GenerateThumbnail() {
+export default function ImageGeneration() {
   return (
-    <main>
-      <Thumbnails />
+    <main className='min-h-screen pt-24 pb-16'>
+      <Photos />
     </main>
   );
 }
