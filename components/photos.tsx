@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/select';
 import SubmitButton from './submit-button';
 import { toast } from 'sonner';
+import { Image as ImageIcon } from 'lucide-react';
 import { amountOptions } from '@/app/(dashboard)/(routes)/image/constants';
 
 export default function Photos() {
@@ -34,8 +35,11 @@ export default function Photos() {
 
   return (
     <div>
-      <form className='space-y-3 max-w-3xl mx-auto' action={generateThumbnail}>
+      <form className='space-y-3' action={generateThumbnail}>
         <section className='gap-x-4 flex items-center'>
+          <article className='bg-rose-200 p-2 rounded-md'>
+            <ImageIcon className='w-4 h-4 sm:w-5 sm:h-5 text-rose-700' />
+          </article>
           <h1 className='text-primary/50 font-semibold text-sm'>
             Start with a detailed description
           </h1>
