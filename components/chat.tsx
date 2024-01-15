@@ -115,7 +115,7 @@ export default function Chat() {
               ) : (
                 <BotAvatar />
               )}
-              <p className='text-sm'>{el.parts}</p>
+              <pre className='text-sm whitespace-pre-wrap'>{el.parts}</pre>
             </div>
           ))}
         </div>
