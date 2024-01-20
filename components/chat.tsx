@@ -1,11 +1,9 @@
 'use client';
 
-import { generateAnswer } from '@/lib/actions';
 import SubmitButton from './submit-button';
 import { Input } from './ui/input';
-import { Label } from './ui/label';
-import { useEffect, useState } from 'react';
-import { cn } from '@/lib/utils';
+import { FormEvent, useState } from 'react';
+import { cn, startChat, updateUI } from '@/lib/utils';
 import UserAvatar from './user-avatar';
 import BotAvatar from './bot-avatar';
 import { toast } from 'sonner';
@@ -14,62 +12,59 @@ import { MessageSquareText } from 'lucide-react';
 import { Button } from './ui/button';
 import { examplePropmts } from '@/app/(dashboard)/(routes)/conversation/constants';
 import { useSession } from 'next-auth/react';
-
-type ChatHistory = {
-  role: string;
-  parts: string;
-};
+import { Msg } from '@/lib/types';
 
 export default function Chat() {
   const { data: session } = useSession();
-  const [chatHistory, setChatHistory] = useState<ChatHistory[]>([]);
-  const [value, setValue] = useState<string>('');
+  const [userParts, setUserParts] = useState<string>('');
+  const [modelParts, setModelParts] = useState<string>('');
+  const [chatHistory, setChatHistory] = useState<Msg[]>([]);
   const image = session?.user?.image as string;
-  const [idx, setIdx] = useState<number>(-1);
+  const [idx, setIdx] = useState<number>(0);
 
   const surprise = () => {
     setIdx((prev) => {
+      setUserParts(examplePropmts[idx]);
       return prev === 6 ? 0 : prev + 1;
     });
   };
 
-  useEffect(() => {
-    setValue(examplePropmts[idx]);
-  }, [idx]);
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-  const formAction = async (formData: FormData) => {
     const userMsg = {
       role: 'user',
-      parts: formData.get('msg') as string,
+      parts: userParts,
+    };
+    const modelMsg = {
+      role: 'model',
+      parts: modelParts,
     };
 
-    const result = await generateAnswer(formData);
+    const modifiedChatHistory = [...chatHistory, userMsg, modelMsg];
 
-    if (result) {
-      const modelMsg = {
-        role: 'model',
-        parts: result.answer as string,
-      };
+    const chat = startChat(modifiedChatHistory);
 
-      setChatHistory((prev) => [...prev, userMsg, modelMsg]);
-      setValue('');
-      toast('🥳 Gemini responded!');
-    }
+    await updateUI({
+      chatHistory: modifiedChatHistory,
+      setChatHistory,
+      setModelParts,
+      getResult: () => chat.sendMessageStream(userParts),
+      streaming: true,
+    });
+
+    setModelParts('');
+    toast('🥳 Gemini responded!');
   };
 
   return (
     <div>
-      <form action={formAction} className='mx-auto space-y-2.5'>
+      <form onSubmit={handleSubmit} className='mx-auto space-y-2.5'>
         <section className='flex items-center gap-x-3'>
-          <Label
-            htmlFor='msg'
-            className='text-xl text-primary font-bold flex items-center gap-x-2'
-          >
-            <section className='bg-violet-200 p-2 rounded-md w-fit'>
-              <MessageSquareText className='w-4 h-4 sm:w-5 sm:h-5 text-violet-700' />
-            </section>
-            Conversation
-          </Label>
+          <article className='bg-violet-200 p-2 rounded-md w-fit'>
+            <MessageSquareText className='w-4 h-4 sm:w-5 sm:h-5 text-violet-700' />
+          </article>
+
           <Button
             variant='secondary'
             size='sm'
@@ -81,14 +76,14 @@ export default function Chat() {
         </section>
 
         <Input
-          id='msg'
-          name='msg'
+          id='userParts'
+          name='userParts'
           className='focus-visible:ring-0 border-none bg-secondary placeholder:text-primary/50 text-primary'
           placeholder='Message Gemini...'
           required
           autoFocus
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
+          value={userParts}
+          onChange={(e) => setUserParts(e.target.value)}
         />
         <section className='flex justify-end'>
           <SubmitButton
@@ -100,11 +95,11 @@ export default function Chat() {
         </section>
       </form>
 
-      {chatHistory.length ? (
+      {chatHistory.length && chatHistory[1].parts ? (
         <div className='flex flex-col gap-y-4 mt-10'>
-          {chatHistory.map((el) => (
+          {chatHistory.map((el, idx) => (
             <div
-              key={el.parts}
+              key={idx}
               className={cn(
                 'p-8 w-full flex items-start gap-x-8 rounded-lg',
                 el.role === 'user' ? 'bg-primary-foreground' : 'bg-slate-900'

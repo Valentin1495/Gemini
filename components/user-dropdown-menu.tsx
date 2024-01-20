@@ -7,7 +7,7 @@ import {
   DropdownMenuItem,
 } from '@/components/ui/dropdown-menu';
 import UserAvatar from './user-avatar';
-import { User } from '@/types';
+import { User } from '@/lib/types';
 import LogoutButton from './logout-button';
 import DropdownMenuLink from './dropdown-menu-link';
 

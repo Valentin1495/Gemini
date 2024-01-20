@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions';
 import UserDropdownMenu from './user-dropdown-menu';
-import { User } from '@/types';
+import { User } from '@/lib/types';
 
 const font = Montserrat({ weight: '600', subsets: ['latin'] });
 

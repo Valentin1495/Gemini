@@ -1,10 +1,10 @@
 'use client';
 
 import { Input } from '@/components/ui/input';
-import { getImageUrls } from '@/lib/actions';
+import { getImageUrls } from '@/app/actions';
 import { useState } from 'react';
 import Image from 'next/image';
-import { image } from '@/types';
+import { image } from '@/lib/types';
 import {
   Select,
   SelectContent,
