@@ -32,7 +32,12 @@ export default function Photos() {
       setPhotos(result.imageUrls);
     }
   };
-
+  // const surprise = () => {
+  //   setIdx((prev) => {
+  //     setUserParts(examplePropmts[idx]);
+  //     return prev === 6 ? 0 : prev + 1;
+  //   });
+  // };
   return (
     <div>
       <form className='space-y-3' action={generateThumbnail}>
@@ -66,12 +71,13 @@ export default function Photos() {
               ))}
             </SelectContent>
           </Select>
-          <SubmitButton
+          {/* <SubmitButton
             variant='premium'
             className='w-32'
             text='Generate'
             size='lg'
-          />
+            
+          /> */}
           <Input type='hidden' name='amount' id='amount' value={amount} />
         </section>
       </form>

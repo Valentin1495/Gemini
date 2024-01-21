@@ -1,36 +1,28 @@
 'use client';
 
-import SubmitButton from './submit-button';
-import { Input } from './ui/input';
 import { FormEvent, useState } from 'react';
 import { cn, startChat, updateUI } from '@/lib/utils';
 import UserAvatar from './user-avatar';
 import BotAvatar from './bot-avatar';
 import { toast } from 'sonner';
 import Image from 'next/image';
-import { MessageSquareText } from 'lucide-react';
+import { MessageSquareText, Send } from 'lucide-react';
 import { Button } from './ui/button';
-import { examplePropmts } from '@/app/(dashboard)/(routes)/conversation/constants';
 import { useSession } from 'next-auth/react';
 import { Msg } from '@/lib/types';
+import TextareaAutosize from 'react-textarea-autosize';
 
 export default function Chat() {
   const { data: session } = useSession();
   const [userParts, setUserParts] = useState<string>('');
   const [modelParts, setModelParts] = useState<string>('');
   const [chatHistory, setChatHistory] = useState<Msg[]>([]);
+  const [pending, setPending] = useState<boolean>(false);
   const image = session?.user?.image as string;
-  const [idx, setIdx] = useState<number>(0);
-
-  const surprise = () => {
-    setIdx((prev) => {
-      setUserParts(examplePropmts[idx]);
-      return prev === 6 ? 0 : prev + 1;
-    });
-  };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setPending(true);
 
     const userMsg = {
       role: 'user',
@@ -40,11 +32,9 @@ export default function Chat() {
       role: 'model',
       parts: modelParts,
     };
-
     const modifiedChatHistory = [...chatHistory, userMsg, modelMsg];
 
-    const chat = startChat(modifiedChatHistory);
-
+    const chat = startChat();
     await updateUI({
       chatHistory: modifiedChatHistory,
       setChatHistory,
@@ -53,45 +43,44 @@ export default function Chat() {
       streaming: true,
     });
 
+    setPending(false);
+    setUserParts('');
     setModelParts('');
     toast('🥳 Gemini responded!');
   };
 
+  {
+    /* <article className='bg-violet-200 p-2 rounded-md w-fit'>
+    <MessageSquareText className='w-4 h-4 sm:w-5 sm:h-5 text-violet-700' />
+  </article> */
+  }
   return (
     <div>
-      <form onSubmit={handleSubmit} className='mx-auto space-y-2.5'>
-        <section className='flex items-center gap-x-3'>
-          <article className='bg-violet-200 p-2 rounded-md w-fit'>
-            <MessageSquareText className='w-4 h-4 sm:w-5 sm:h-5 text-violet-700' />
-          </article>
+      <form
+        onSubmit={handleSubmit}
+        className='space-y-2.5 fixed bottom-3 -translate-x-1/2 left-1/2 inset-x-0'
+      >
+        <section className='relative'>
+          <TextareaAutosize
+            id='userParts'
+            name='userParts'
+            rows={1}
+            className='absolute bottom-0 w-full resize-none bg-secondary placeholder:text-primary/50 text-primary min-h-fit focus-within:outline-none p-5 rounded-lg'
+            placeholder='Message Gemini...'
+            required
+            autoFocus
+            value={userParts}
+            onChange={(e) => setUserParts(e.target.value)}
+          />
 
           <Button
-            variant='secondary'
-            size='sm'
-            type='button'
-            onClick={surprise}
+            type='submit'
+            size='icon'
+            className='absolute right-3 bottom-3'
+            disabled={pending || !userParts.trim()}
           >
-            Surprise me
+            <Send className='w-6 h-6' />
           </Button>
-        </section>
-
-        <Input
-          id='userParts'
-          name='userParts'
-          className='focus-visible:ring-0 border-none bg-secondary placeholder:text-primary/50 text-primary'
-          placeholder='Message Gemini...'
-          required
-          autoFocus
-          value={userParts}
-          onChange={(e) => setUserParts(e.target.value)}
-        />
-        <section className='flex justify-end'>
-          <SubmitButton
-            variant='premium'
-            className='w-32'
-            text='Generate'
-            size='lg'
-          />
         </section>
       </form>
 
@@ -110,7 +99,16 @@ export default function Chat() {
               ) : (
                 <BotAvatar />
               )}
-              <pre className='text-sm whitespace-pre-wrap'>{el.parts}</pre>
+              {el.role === 'model' ? (
+                <pre className='text-sm whitespace-pre-wrap'>
+                  {el.parts}
+                  {modelParts && (
+                    <span className='cursor-default animate-pulse'>▍</span>
+                  )}
+                </pre>
+              ) : (
+                <pre className='text-sm whitespace-pre-wrap'>{el.parts}</pre>
+              )}
             </div>
           ))}
         </div>
