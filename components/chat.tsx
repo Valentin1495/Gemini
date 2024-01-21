@@ -5,12 +5,12 @@ import { cn, startChat, updateUI } from '@/lib/utils';
 import UserAvatar from './user-avatar';
 import BotAvatar from './bot-avatar';
 import { toast } from 'sonner';
-import Image from 'next/image';
-import { MessageSquareText, Send } from 'lucide-react';
+import { ArrowRight, MessageSquareText, Send } from 'lucide-react';
 import { Button } from './ui/button';
 import { useSession } from 'next-auth/react';
 import { Msg } from '@/lib/types';
 import TextareaAutosize from 'react-textarea-autosize';
+import { examplePropmts } from '@/app/(dashboard)/(routes)/conversation/constants';
 
 export default function Chat() {
   const { data: session } = useSession();
@@ -49,11 +49,6 @@ export default function Chat() {
     toast('🥳 Gemini responded!');
   };
 
-  {
-    /* <article className='bg-violet-200 p-2 rounded-md w-fit'>
-    <MessageSquareText className='w-4 h-4 sm:w-5 sm:h-5 text-violet-700' />
-  </article> */
-  }
   return (
     <div>
       <form
@@ -62,8 +57,6 @@ export default function Chat() {
       >
         <section className='relative'>
           <TextareaAutosize
-            id='userParts'
-            name='userParts'
             rows={1}
             className='absolute bottom-0 w-full resize-none bg-secondary placeholder:text-primary/50 text-primary min-h-fit focus-within:outline-none p-5 rounded-lg'
             placeholder='Message Gemini...'
@@ -113,12 +106,28 @@ export default function Chat() {
           ))}
         </div>
       ) : (
-        <div className='space-y-3 mt-32'>
-          <section className='bg-primary w-fit mx-auto rounded-full p-4 animate-pulse'>
-            <Image src='/logo.png' alt='Logo' width={50} height={50} />
-          </section>
-          <p className='text-center text-2xl font-bold text-primary'>
-            How can I help you today?
+        <div className='bg-secondary p-8 rounded-md space-y-2'>
+          <h1 className='font-bold text-lg flex items-center gap-x-3'>
+            <section className='bg-violet-200 p-2 rounded-md w-fit'>
+              <MessageSquareText className='w-4 h-4 sm:w-5 sm:h-5 text-violet-700' />
+            </section>
+            Welcome!
+          </h1>
+          <p className='text-primary/50'>
+            You can start a conversation here or try the following examples:
+          </p>
+          <p className='flex flex-col gap-y-2'>
+            {examplePropmts.map((el) => (
+              <Button
+                variant='link'
+                type='button'
+                className='w-fit underline-offset-8 text-base p-0'
+                onClick={() => setUserParts(el)}
+              >
+                <ArrowRight className='mr-2' />
+                {el}
+              </Button>
+            ))}
           </p>
         </div>
       )}
