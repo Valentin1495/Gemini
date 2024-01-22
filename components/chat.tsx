@@ -13,6 +13,7 @@ import TextareaAutosize from 'react-textarea-autosize';
 import { examplePropmts } from '@/app/(dashboard)/(routes)/conversation/constants';
 import Loader from './loader';
 import { ButtonScrollToBottom } from './button-scroll-to-bottom';
+import CopyButton from './copy-button';
 
 export default function Chat() {
   const { data: session } = useSession();
@@ -73,7 +74,7 @@ export default function Chat() {
                 <BotAvatar />
               )}
               {el.role === 'model' ? (
-                <section className='space-y-3'>
+                <section className='space-y-3 group'>
                   <article className='font-bold text-base mt-1'>Gemini</article>
                   <pre className='text-sm whitespace-pre-wrap'>
                     {el.parts}
@@ -81,6 +82,7 @@ export default function Chat() {
                       <span className='cursor-default animate-pulse'>▍</span>
                     )}
                   </pre>
+                  <CopyButton message={el.parts} />
                 </section>
               ) : (
                 <section className='space-y-3'>
