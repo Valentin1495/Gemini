@@ -80,6 +80,7 @@ export async function updateUI({
 
           return prev + chunkText; // Update the state with the modified value
         });
+        scrollToDocumentBottom();
       }
     } else {
       const response = await result.response;

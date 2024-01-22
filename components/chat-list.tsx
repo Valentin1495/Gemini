@@ -38,8 +38,8 @@ export default function ChatList({
           )}
           {el.role === 'model' ? (
             <section className='space-y-3 group'>
-              <article className='font-bold text-base mt-1'>Gemini</article>
-              <pre
+              <h1 className='font-bold text-base mt-1'>Gemini</h1>
+              <p
                 className={cn(
                   'font-sans whitespace-pre-wrap',
                   quicksand.variable
@@ -49,20 +49,20 @@ export default function ChatList({
                 {modelParts && (
                   <span className='cursor-default animate-pulse'>▍</span>
                 )}
-              </pre>
+              </p>
               <CopyButton message={el.parts} />
             </section>
           ) : (
             <section className='space-y-3'>
-              <article className='font-bold text-base mt-1'>You</article>
-              <pre
+              <h1 className='font-bold text-base mt-1'>You</h1>
+              <p
                 className={cn(
                   'whitespace-pre-wrap font-sans',
                   quicksand.variable
                 )}
               >
                 {el.parts}
-              </pre>
+              </p>
             </section>
           )}
         </div>
