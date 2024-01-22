@@ -2,6 +2,8 @@
 
 import { Button } from '@/components/ui/button';
 import Loader from './loader';
+// @ts-expect-error
+import { useFormStatus } from 'react-dom';
 
 type ButtonProps = {
   variant:
@@ -15,7 +17,6 @@ type ButtonProps = {
   className: string;
   text: string;
   size: 'default' | 'sm' | 'lg' | 'icon';
-  pending: boolean;
 };
 
 export default function SubmitButton({
@@ -23,8 +24,9 @@ export default function SubmitButton({
   className,
   text,
   size,
-  pending,
 }: ButtonProps) {
+  const { pending } = useFormStatus();
+
   return (
     <Button
       variant={variant}
@@ -33,7 +35,11 @@ export default function SubmitButton({
       disabled={pending}
       className={className}
     >
-      {pending ? <Loader className='w-6 h-6' /> : text}
+      {pending ? (
+        <Loader className='w-6 h-6 border-primary/50 border-t-primary' />
+      ) : (
+        text
+      )}
     </Button>
   );
 }

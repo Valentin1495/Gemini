@@ -87,7 +87,7 @@ export default function Chat() {
             disabled={pending || !userParts.trim()}
           >
             {pending ? (
-              <Loader className='w-6 h-6' />
+              <Loader className='w-6 h-6 border-secondary/50 border-t-secondary' />
             ) : (
               <Send className='w-6 h-6' />
             )}
