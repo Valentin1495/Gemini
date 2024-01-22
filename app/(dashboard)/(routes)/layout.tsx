@@ -9,7 +9,7 @@ export default function DashboardLayout({
   return (
     <div>
       <Navbar />
-      <div className='container'>{children}</div>
+      {children}
     </div>
   );
 }

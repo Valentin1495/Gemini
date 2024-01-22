@@ -11,6 +11,8 @@ import { useSession } from 'next-auth/react';
 import { Msg } from '@/lib/types';
 import TextareaAutosize from 'react-textarea-autosize';
 import { examplePropmts } from '@/app/(dashboard)/(routes)/conversation/constants';
+import Loader from './loader';
+import { ButtonScrollToBottom } from './button-scroll-to-bottom';
 
 export default function Chat() {
   const { data: session } = useSession();
@@ -22,6 +24,10 @@ export default function Chat() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!userParts.trim()) {
+      return;
+    }
+    setUserParts('');
     setPending(true);
 
     const userMsg = {
@@ -32,11 +38,12 @@ export default function Chat() {
       role: 'model',
       parts: modelParts,
     };
-    const modifiedChatHistory = [...chatHistory, userMsg, modelMsg];
+
+    const updatedChatHistory = [...chatHistory, userMsg, modelMsg];
 
     const chat = startChat();
     await updateUI({
-      chatHistory: modifiedChatHistory,
+      chatHistory: updatedChatHistory,
       setChatHistory,
       setModelParts,
       getResult: () => chat.sendMessageStream(userParts),
@@ -44,46 +51,19 @@ export default function Chat() {
     });
 
     setPending(false);
-    setUserParts('');
     setModelParts('');
     toast('🥳 Gemini responded!');
   };
 
   return (
     <div>
-      <form
-        onSubmit={handleSubmit}
-        className='space-y-2.5 fixed bottom-3 -translate-x-1/2 left-1/2 inset-x-0'
-      >
-        <section className='relative'>
-          <TextareaAutosize
-            rows={1}
-            className='absolute bottom-0 w-full resize-none bg-secondary placeholder:text-primary/50 text-primary min-h-fit focus-within:outline-none p-5 rounded-lg'
-            placeholder='Message Gemini...'
-            required
-            autoFocus
-            value={userParts}
-            onChange={(e) => setUserParts(e.target.value)}
-          />
-
-          <Button
-            type='submit'
-            size='icon'
-            className='absolute right-3 bottom-3'
-            disabled={pending || !userParts.trim()}
-          >
-            <Send className='w-6 h-6' />
-          </Button>
-        </section>
-      </form>
-
-      {chatHistory.length && chatHistory[1].parts ? (
-        <div className='flex flex-col gap-y-4 mt-10'>
+      {chatHistory.length ? (
+        <div className='flex flex-col gap-y-4'>
           {chatHistory.map((el, idx) => (
             <div
               key={idx}
               className={cn(
-                'p-8 w-full flex items-start gap-x-8 rounded-lg',
+                'p-8 w-full flex gap-x-3 rounded-xl',
                 el.role === 'user' ? 'bg-primary-foreground' : 'bg-slate-900'
               )}
             >
@@ -93,14 +73,20 @@ export default function Chat() {
                 <BotAvatar />
               )}
               {el.role === 'model' ? (
-                <pre className='text-sm whitespace-pre-wrap'>
-                  {el.parts}
-                  {modelParts && (
-                    <span className='cursor-default animate-pulse'>▍</span>
-                  )}
-                </pre>
+                <section className='space-y-3'>
+                  <article className='font-bold text-base mt-1'>Gemini</article>
+                  <pre className='text-sm whitespace-pre-wrap'>
+                    {el.parts}
+                    {modelParts && (
+                      <span className='cursor-default animate-pulse'>▍</span>
+                    )}
+                  </pre>
+                </section>
               ) : (
-                <pre className='text-sm whitespace-pre-wrap'>{el.parts}</pre>
+                <section className='space-y-3'>
+                  <article className='font-bold text-base mt-1'>You</article>
+                  <pre className='text-sm whitespace-pre-wrap'>{el.parts}</pre>
+                </section>
               )}
             </div>
           ))}
@@ -117,20 +103,50 @@ export default function Chat() {
             You can start a conversation here or try the following examples:
           </p>
           <p className='flex flex-col gap-y-2'>
-            {examplePropmts.map((el) => (
+            {examplePropmts.map((el, idx) => (
               <Button
-                variant='link'
+                key={idx}
+                variant='ghost'
                 type='button'
-                className='w-fit underline-offset-8 text-base p-0'
+                className='w-fit text-base p-2 h-auto hover:bg-primary/10'
                 onClick={() => setUserParts(el)}
               >
-                <ArrowRight className='mr-2' />
-                {el}
+                <ArrowRight className='mr-2 w-5 h-5 min-w-fit' />
+                <span className='text-left'>{el}</span>
               </Button>
             ))}
           </p>
         </div>
       )}
+      <form
+        onSubmit={handleSubmit}
+        className='fixed bottom-0 -translate-x-1/2 left-1/2 w-full max-w-3xl px-5'
+      >
+        <section className='relative bg-background h-4'>
+          <ButtonScrollToBottom />
+          <TextareaAutosize
+            rows={1}
+            className='absolute bottom-3 w-full resize-none bg-secondary placeholder:text-primary/50 text-primary min-h-fit max-h-48 focus-within:outline-none pl-6 py-5 pr-16 rounded-lg'
+            placeholder='Message Gemini...'
+            autoFocus
+            value={userParts}
+            onChange={(e) => setUserParts(e.target.value)}
+          />
+
+          <Button
+            type='submit'
+            size='icon'
+            className='absolute right-6 bottom-[26px]'
+            disabled={pending || !userParts.trim()}
+          >
+            {pending ? (
+              <Loader className='w-6 h-6' />
+            ) : (
+              <Send className='w-6 h-6' />
+            )}
+          </Button>
+        </section>
+      </form>
     </div>
   );
 }
