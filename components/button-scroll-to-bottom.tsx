@@ -6,7 +6,7 @@ import { Button, type ButtonProps } from '@/components/ui/button';
 import { ArrowDown } from 'lucide-react';
 
 export function ButtonScrollToBottom({ className, ...props }: ButtonProps) {
-  const isAtBottom = useAtBottom();
+  const isAtBottom = useAtBottom(100);
 
   return (
     <Button
@@ -14,7 +14,7 @@ export function ButtonScrollToBottom({ className, ...props }: ButtonProps) {
       variant='ghost'
       size='icon'
       className={cn(
-        'absolute bottom-20 -translate-x-1/2 left-1/2 z-10 bg-background transition-opacity duration-300 rounded-full',
+        'absolute bottom-20 -translate-x-1/2 left-1/2 z-10 bg-foreground/20 hover:bg-foreground/20 rounded-full',
         isAtBottom ? 'opacity-0 pointer-events-none' : 'opacity-100',
         className
       )}

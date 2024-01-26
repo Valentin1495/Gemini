@@ -25,11 +25,6 @@ export async function generateImage(prompt: string, samples: number) {
   return data;
 }
 
-export function scrollToDocumentBottom() {
-  const scrollingElement = document.scrollingElement || document.body;
-  scrollingElement.scrollTop = scrollingElement.scrollHeight;
-}
-
 export function startChat() {
   const genAI = new GoogleGenerativeAI(
     process.env.NEXT_PUBLIC_GEMINI_API_KEY as string
@@ -80,7 +75,6 @@ export async function updateUI({
 
           return prev + chunkText; // Update the state with the modified value
         });
-        scrollToDocumentBottom();
       }
     } else {
       const response = await result.response;
@@ -90,6 +84,4 @@ export async function updateUI({
   } catch (error) {
     console.error(error);
   }
-
-  scrollToDocumentBottom();
 }

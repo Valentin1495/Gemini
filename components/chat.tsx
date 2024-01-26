@@ -12,6 +12,7 @@ import Loader from './loader';
 import { ButtonScrollToBottom } from './button-scroll-to-bottom';
 import EmptyScreen from './empty-screen';
 import ChatList from './chat-list';
+import ChatScrollAnchor from './chat-scroll-anchor';
 
 export default function Chat() {
   const { data: session } = useSession();
@@ -39,6 +40,7 @@ export default function Chat() {
     };
 
     const updatedChatHistory = [...chatHistory, userMsg, modelMsg];
+    setChatHistory(updatedChatHistory);
 
     const chat = startChat();
     await updateUI({
@@ -55,20 +57,21 @@ export default function Chat() {
   };
 
   return (
-    <div>
+    <div className='flex flex-col justify-between min-h-screen pt-20'>
       {chatHistory.length ? (
-        <ChatList
-          chatHistory={chatHistory}
-          modelParts={modelParts}
-          profilePic={profilePic}
-        />
+        <>
+          <ChatList
+            chatHistory={chatHistory}
+            pending={pending}
+            profilePic={profilePic}
+          />
+          <ChatScrollAnchor />
+        </>
       ) : (
         <EmptyScreen setUserParts={setUserParts} />
       )}
-      <form
-        onSubmit={handleSubmit}
-        className='fixed bottom-0 -translate-x-1/2 left-1/2 w-full max-w-3xl px-5'
-      >
+
+      <form onSubmit={handleSubmit} className='sticky bottom-0 mt-24'>
         <section className='relative bg-background h-4'>
           <ButtonScrollToBottom />
           <TextareaAutosize

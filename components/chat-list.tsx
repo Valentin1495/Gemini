@@ -12,13 +12,13 @@ const quicksand = Quicksand({
 
 type ChatListProps = {
   chatHistory: Msg[];
-  modelParts: string;
+  pending: boolean;
   profilePic: string;
 };
 
 export default function ChatList({
   chatHistory,
-  modelParts,
+  pending,
   profilePic,
 }: ChatListProps) {
   return (
@@ -27,8 +27,10 @@ export default function ChatList({
         <div
           key={idx}
           className={cn(
-            'p-8 w-full flex gap-x-3 rounded-xl',
-            el.role === 'user' ? 'bg-primary-foreground' : 'bg-slate-900'
+            'w-full flex gap-x-3 rounded-xl',
+            el.role === 'user'
+              ? 'p-8 bg-primary-foreground'
+              : 'pt-8 px-8 pb-1 bg-slate-900'
           )}
         >
           {el.role === 'user' ? (
@@ -37,16 +39,16 @@ export default function ChatList({
             <BotAvatar />
           )}
           {el.role === 'model' ? (
-            <section className='space-y-3 group'>
-              <h1 className='font-bold text-base mt-1'>Gemini</h1>
+            <section className='group'>
+              <h1 className='font-bold text-base mt-1 mb-3'>Gemini</h1>
               <p
                 className={cn(
-                  'font-sans whitespace-pre-wrap',
+                  'font-sans whitespace-pre-wrap mb-1',
                   quicksand.variable
                 )}
               >
                 {el.parts}
-                {modelParts && (
+                {idx === chatHistory.length - 1 && pending && (
                   <span className='cursor-default animate-pulse'>▍</span>
                 )}
               </p>
