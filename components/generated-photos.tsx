@@ -16,7 +16,7 @@ export default function GeneratedPhotos({ photos }: GeneratedPhotosProps) {
             >
               <Image
                 src={photo.image}
-                alt='Thumbnail'
+                alt='Karlo'
                 fill
                 className='hover:opacity-80 hover:cursor-pointer transition'
                 onClick={() => window.open(photo.image)}

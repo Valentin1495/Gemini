@@ -19,7 +19,9 @@ export default function Photos() {
 
     if (result) {
       let message =
-        amount === '1' ? '🎉 Created new photo' : '🎉 Created new photos';
+        amount === '1'
+          ? '🎉 New photo is showing up...'
+          : '🎉 New photos are showing up...';
 
       toast(message);
       setPhotos(result.imageUrls);

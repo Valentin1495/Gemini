@@ -9,7 +9,7 @@ export default function ChatScrollAnchor() {
   const { ref, entry, inView } = useInView({
     trackVisibility: true,
     delay: 100,
-    rootMargin: '0px 0px -111px 0px',
+    rootMargin: '0px 0px -112px 0px',
   });
 
   useEffect(() => {
