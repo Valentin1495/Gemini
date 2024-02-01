@@ -14,7 +14,7 @@ export default function Photos() {
   const [photos, setPhotos] = useState<image[]>([]);
   const [amount, setAmount] = useState<string>('1');
 
-  const generateThumbnail = async (formData: FormData) => {
+  const formAction = async (formData: FormData) => {
     const result = await getImageUrls(formData);
 
     if (result) {
@@ -30,7 +30,7 @@ export default function Photos() {
 
   return (
     <div>
-      <form className='space-y-3' action={generateThumbnail}>
+      <form className='space-y-3' action={formAction}>
         <section className='gap-x-4 flex items-center'>
           <article className='bg-rose-200 p-2 rounded-md'>
             <ImageIcon className='w-4 h-4 sm:w-5 sm:h-5 text-rose-700' />
