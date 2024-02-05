@@ -9,7 +9,7 @@
 
 ## Introduction
 
-Chat and generate images.
+Chat. Generate images.
 
 ## Tech Stack + Features
 
