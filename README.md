@@ -9,7 +9,8 @@
 
 ## Introduction
 
-Chat. Generate images.
+- Chat
+- Generate Image from Text
 
 ## Tech Stack + Features
 
