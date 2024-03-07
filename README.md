@@ -3,7 +3,7 @@
 <h1 align="center">Gemini</h1>
 
 <p align="center">
-  The best AI tool for chatbot/image generation
+  Chat with [Gemini](https://ai.google.dev/) and generate images from [Karlo](https://developers.kakao.com/product/karlo)
 </p>
 <br/>
 
