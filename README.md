@@ -3,7 +3,7 @@
 <h1 align="center">Gemini</h1>
 
 <p align="center">
-  Chat with <a href='https://ai.google.dev/'>Gemini</a> and generate images from <a href='https://developers.kakao.com/product/karlo'>Karlo</a>
+  Chat with <a href="https://ai.google.dev/" target="_blank" rel="noopener noreferrer">Gemini</a> and generate images from <a href="https://developers.kakao.com/product/karlo" target="_blank" rel="noopener noreferrer">Karlo</a>
 </p>
 <br/>
 
