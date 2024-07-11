@@ -1,4 +1,4 @@
-![dashboard](https://github.com/Valentin1495/Gemini/assets/69514169/65d56cff-ea1d-4b44-b106-feb08b2f0a3b)
+![dashboard](https://github.com/Valentin1495/Gemini/assets/69514169/89b4c2f6-0fe7-4ba6-bb65-f93e0213f207)
 
 <h1 align="center">Gemini</h1>
 
