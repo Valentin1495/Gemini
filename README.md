@@ -14,9 +14,9 @@
 
 ## Tech Stack + Features
 
-https://github.com/Valentin1495/Gemini/assets/69514169/7d0ea1b0-068e-423b-86bf-1571c2dca45f
+https://github.com/Valentin1495/Gemini/assets/69514169/1f1927fa-33d4-4a51-babf-c9630ce915e3
 
-https://github.com/Valentin1495/Gemini/assets/69514169/2f9f701e-a7b7-4b66-a33f-217242c22349
+https://github.com/Valentin1495/Gemini/assets/69514169/91fbea23-2c87-4cd1-a924-e19f142d6c9a
 
 ### Frameworks
 
