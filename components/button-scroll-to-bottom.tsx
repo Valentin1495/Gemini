@@ -14,7 +14,7 @@ export function ButtonScrollToBottom({ className, ...props }: ButtonProps) {
       variant='ghost'
       size='icon'
       className={cn(
-        'absolute bottom-20 -translate-x-1/2 left-1/2 z-10 bg-foreground/20 hover:bg-foreground/20 rounded-full',
+        'absolute bottom-24 -translate-x-1/2 left-1/2 z-10 bg-foreground/20 hover:bg-foreground/20 rounded-full',
         isAtBottom ? 'opacity-0 pointer-events-none' : 'opacity-100',
         className
       )}

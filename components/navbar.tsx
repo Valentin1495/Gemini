@@ -2,15 +2,16 @@ import { Montserrat } from 'next/font/google';
 import Image from 'next/image';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions';
-import UserDropdownMenu from './user-dropdown-menu';
-import { User } from '@/lib/types';
+// import { getServerSession } from 'next-auth';
+// import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions';
+import GuestDropdownMenu from './guest-dropdown-menu';
+// import UserDropdownMenu from './user-dropdown-menu';
+// import { User } from '@/lib/types';
 
 const font = Montserrat({ weight: '600', subsets: ['latin'] });
 
 export default async function Navbar() {
-  const session = await getServerSession(authOptions);
+  // const session = await getServerSession(authOptions);
 
   return (
     <nav className='p-4 bg-transparent flex items-center justify-between fixed w-full backdrop-blur-md z-10'>
@@ -24,7 +25,8 @@ export default async function Navbar() {
       </Link>
 
       <div className='flex items-center gap-x-2'>
-        <UserDropdownMenu user={session?.user as User} />
+        {/* <UserDropdownMenu user={session?.user as User} /> */}
+        <GuestDropdownMenu />
       </div>
     </nav>
   );

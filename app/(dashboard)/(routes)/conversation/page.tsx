@@ -1,6 +1,6 @@
 import Chat from '@/components/chat';
 
-export default async function Conversation() {
+export default function Conversation() {
   return (
     <main className='mx-auto max-w-3xl px-5'>
       <Chat />

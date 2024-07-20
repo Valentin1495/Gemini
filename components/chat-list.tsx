@@ -1,6 +1,6 @@
 import { Msg } from '@/lib/types';
 import { cn } from '@/lib/utils';
-import UserAvatar from './user-avatar';
+// import UserAvatar from './user-avatar';
 import BotAvatar from './bot-avatar';
 import CopyButton from './copy-button';
 import { Quicksand } from 'next/font/google';
@@ -19,8 +19,8 @@ type ChatListProps = {
 export default function ChatList({
   chatHistory,
   pending,
-  profilePic,
-}: ChatListProps) {
+}: // profilePic,
+ChatListProps) {
   return (
     <div className='flex flex-col gap-y-4'>
       {chatHistory.map((el, idx) => (
@@ -29,21 +29,16 @@ export default function ChatList({
           className={cn(
             'w-full flex gap-x-3 rounded-xl',
             el.role === 'user'
-              ? 'p-8 bg-primary-foreground'
-              : 'pt-8 px-8 pb-1 bg-slate-900'
+              ? 'p-8 bg-primary-foreground w-2/3 ml-auto'
+              : 'pb-1 mt-8'
           )}
         >
-          {el.role === 'user' ? (
-            <UserAvatar image={profilePic} className='w-8 h-8' />
-          ) : (
-            <BotAvatar />
-          )}
+          {el.role === 'model' && <BotAvatar />}
           {el.role === 'model' ? (
             <section className='group'>
-              <h1 className='font-bold text-base mt-1 mb-3'>Gemini</h1>
               <p
                 className={cn(
-                  'font-sans whitespace-pre-wrap mb-1',
+                  'font-sans whitespace-pre-wrap mb-1 leading-8',
                   quicksand.variable
                 )}
               >
@@ -52,11 +47,14 @@ export default function ChatList({
                   <span className='cursor-default animate-pulse'>▍</span>
                 )}
               </p>
-              <CopyButton message={el.parts} />
+
+              <CopyButton
+                message={el.parts}
+                isLast={idx === chatHistory.length - 1 && !pending}
+              />
             </section>
           ) : (
-            <section className='space-y-3'>
-              <h1 className='font-bold text-base mt-1'>You</h1>
+            <section>
               <p
                 className={cn(
                   'whitespace-pre-wrap font-sans',

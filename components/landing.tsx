@@ -2,21 +2,21 @@
 
 import TypewriterComponent from 'typewriter-effect';
 import { Button } from '@/components/ui/button';
-import { signIn, useSession } from 'next-auth/react';
+// import { signIn, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 
 export default function Landing() {
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
   const router = useRouter();
 
-  const handleClick = () => {
-    if (session) {
-      router.push('/dashboard');
-    } else {
-      signIn('google', { callbackUrl: '/dashboard' });
-    }
-  };
+  // const handleClick = () => {
+  //   if (session) {
+  //     router.push('/dashboard');
+  //   } else {
+  //     signIn('google', { callbackUrl: '/dashboard' });
+  //   }
+  // };
 
   return (
     <div className='text-white font-bold text-center space-y-5'>
@@ -42,7 +42,7 @@ export default function Landing() {
         <Button
           variant='premium'
           className='md:text-lg p-4 md:p-6 rounded-full font-semibold'
-          onClick={handleClick}
+          onClick={() => router.push('/dashboard')}
         >
           Get Started
         </Button>

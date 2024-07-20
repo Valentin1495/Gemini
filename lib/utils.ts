@@ -1,7 +1,7 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { GoogleGenerativeAI } from '@google/generative-ai';
-import { chatParams } from './types';
+import { chatParams, Msg } from './types';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -25,15 +25,16 @@ export async function generateImage(prompt: string, samples: number) {
   return data;
 }
 
-export function startChat() {
+export function startChat(history: Msg[]) {
   const genAI = new GoogleGenerativeAI(
     process.env.NEXT_PUBLIC_GEMINI_API_KEY as string
   );
-  const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+  const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
   const chat = model.startChat({
+    history,
     generationConfig: {
-      maxOutputTokens: 2048,
+      maxOutputTokens: 200,
     },
   });
 
