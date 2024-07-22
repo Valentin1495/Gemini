@@ -16,7 +16,7 @@
 
 https://github.com/Valentin1495/Gemini/assets/69514169/1f1927fa-33d4-4a51-babf-c9630ce915e3
 
-https://github.com/Valentin1495/Gemini/assets/69514169/91fbea23-2c87-4cd1-a924-e19f142d6c9a
+https://github.com/user-attachments/assets/6e01d7ea-45cc-442e-a5dd-396c908a0687
 
 ## 기술 스택
 
