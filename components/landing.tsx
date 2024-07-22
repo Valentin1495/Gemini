@@ -2,21 +2,11 @@
 
 import TypewriterComponent from 'typewriter-effect';
 import { Button } from '@/components/ui/button';
-// import { signIn, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 
 export default function Landing() {
-  // const { data: session } = useSession();
   const router = useRouter();
-
-  // const handleClick = () => {
-  //   if (session) {
-  //     router.push('/dashboard');
-  //   } else {
-  //     signIn('google', { callbackUrl: '/dashboard' });
-  //   }
-  // };
 
   return (
     <div className='text-white font-bold text-center space-y-5'>

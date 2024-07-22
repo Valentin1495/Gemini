@@ -1,6 +1,5 @@
 import { Msg } from '@/lib/types';
 import { cn } from '@/lib/utils';
-// import UserAvatar from './user-avatar';
 import BotAvatar from './bot-avatar';
 import CopyButton from './copy-button';
 import { Quicksand } from 'next/font/google';
@@ -13,24 +12,19 @@ const quicksand = Quicksand({
 type ChatListProps = {
   chatHistory: Msg[];
   pending: boolean;
-  profilePic: string;
 };
 
-export default function ChatList({
-  chatHistory,
-  pending,
-}: // profilePic,
-ChatListProps) {
+export default function ChatList({ chatHistory, pending }: ChatListProps) {
   return (
     <div className='flex flex-col gap-y-4'>
       {chatHistory.map((el, idx) => (
         <div
           key={idx}
           className={cn(
-            'w-full flex gap-x-3 rounded-xl',
+            'rounded-2xl',
             el.role === 'user'
-              ? 'p-8 bg-primary-foreground w-2/3 ml-auto'
-              : 'pb-1 mt-8'
+              ? 'p-4 bg-primary-foreground w-2/3 ml-auto'
+              : 'flex gap-x-3 w-full pb-1 mt-8'
           )}
         >
           {el.role === 'model' && <BotAvatar />}

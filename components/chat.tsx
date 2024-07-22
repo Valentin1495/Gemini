@@ -4,7 +4,6 @@ import { FormEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { startChat, updateUI } from '@/lib/utils';
 import { Send } from 'lucide-react';
 import { Button } from './ui/button';
-// import { useSession } from 'next-auth/react';
 import { Msg } from '@/lib/types';
 import TextareaAutosize from 'react-textarea-autosize';
 import Loader from './loader';
@@ -13,13 +12,11 @@ import EmptyScreen from './empty-screen';
 import ChatList from './chat-list';
 
 export default function Chat() {
-  // const { data: session } = useSession();
   const [userParts, setUserParts] = useState<string>('');
   const [modelParts, setModelParts] = useState<string>('');
   const [chatHistory, setChatHistory] = useState<Msg[]>([]);
   const [pending, setPending] = useState<boolean>(false);
   const chatEndRef = useRef<HTMLDivElement | null>(null);
-  // const profilePic = session?.user?.image as string;
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -71,12 +68,7 @@ export default function Chat() {
     <>
       <div className='flex flex-col justify-between min-h-screen pt-20'>
         {chatHistory.length ? (
-          <ChatList
-            chatHistory={chatHistory}
-            pending={pending}
-            // profilePic={profilePic}
-            profilePic=''
-          />
+          <ChatList chatHistory={chatHistory} pending={pending} />
         ) : (
           <EmptyScreen setUserParts={setUserParts} />
         )}
