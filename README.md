@@ -14,7 +14,7 @@
 
 ## 데모
 
-https://github.com/Valentin1495/Gemini/assets/69514169/1f1927fa-33d4-4a51-babf-c9630ce915e3
+https://github.com/user-attachments/assets/bf6360bf-c4c5-4f15-b04e-a963694139b9
 
 https://github.com/user-attachments/assets/6e01d7ea-45cc-442e-a5dd-396c908a0687
 
