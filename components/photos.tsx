@@ -5,7 +5,6 @@ import { getImageUrls } from '@/app/actions';
 import { useState } from 'react';
 import { image } from '@/lib/types';
 import SubmitButton from './submit-button';
-import { toast } from 'sonner';
 import { Image as ImageIcon } from 'lucide-react';
 import SelectOptions from './select-options';
 import GeneratedPhotos from './generated-photos';
@@ -18,12 +17,6 @@ export default function Photos() {
     const result = await getImageUrls(formData);
 
     if (result) {
-      let message =
-        amount === '1'
-          ? '🎉 Your image has been generated successfully!'
-          : '🎉 Your images have been generated successfully!';
-
-      toast(message);
       setPhotos(result.imageUrls);
     }
   };

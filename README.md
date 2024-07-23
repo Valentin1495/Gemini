@@ -3,22 +3,22 @@
 <h1 align="center">Gemini</h1>
 
 <p align="center">
-  Chat with <a href="https://ai.google.dev/">Gemini</a> and generate images from <a href="https://developers.kakao.com/product/karlo">Karlo
+  AI 기반 챗봇 및 이미지 생성 애플리케이션
 </p>
 <br/>
 
-## 주제
+## Introduction
 
 - 챗봇
 - 텍스트 기반 이미지 생성
 
-## 데모
+## Features
 
 https://github.com/user-attachments/assets/bf6360bf-c4c5-4f15-b04e-a963694139b9
 
-https://github.com/user-attachments/assets/6e01d7ea-45cc-442e-a5dd-396c908a0687
+https://github.com/user-attachments/assets/8519ed35-870e-44e3-a1c1-78b27d9c5bed
 
-## 기술 스택
+## Tech Stack
 
 - 코어: React, TypeScript, Next.js
 - AI 모델: Google의 Gemini, Kakao의 Karlo
