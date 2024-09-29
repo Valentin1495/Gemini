@@ -35,14 +35,14 @@ export default function GuestDropdownMenu() {
           <DropdownMenuLink href='/conversation' text='Conversation' />
         </DropdownMenuItem>
 
-        <DropdownMenuSeparator />
+        {/* <DropdownMenuSeparator /> */}
 
-        <DropdownMenuItem
+        {/* <DropdownMenuItem
           onClick={handleItemClick}
           disabled={pathname === '/image'}
         >
           <DropdownMenuLink href='/image' text='Image generation' />
-        </DropdownMenuItem>
+        </DropdownMenuItem> */}
 
         <DropdownMenuSeparator />
 

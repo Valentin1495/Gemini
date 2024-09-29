@@ -28,7 +28,7 @@ export default async function Home() {
         <ArrowRight className='w-4 h-4 sm:w-5 sm:h-5 ml-auto group-hover:scale-150 transition-transform duration-300' />
       </Link>
 
-      <Link
+      {/* <Link
         className='group text-sm sm:text-lg w-64 sm:w-80 bg-secondary/80 hover:bg-secondary transition-colors duration-300 px-6 py-4 rounded-full font-semibold text-primary flex items-center gap-x-2'
         href='/image'
       >
@@ -37,7 +37,7 @@ export default async function Home() {
         </article>
         Image generation
         <ArrowRight className='w-4 h-4 sm:w-5 sm:h-5 ml-auto group-hover:scale-150 transition-transform duration-300' />
-      </Link>
+      </Link> */}
     </main>
   );
 }
