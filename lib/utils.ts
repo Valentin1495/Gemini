@@ -78,6 +78,20 @@ export async function updateUI({
       const response = await result.response;
 
       setModelParts(response.text());
+
+      const lastIndex = chatHistory.findLastIndex(
+        (msg) => msg.role === 'model'
+      );
+
+      if (lastIndex !== -1) {
+        const updatedChatHistory = [...chatHistory];
+        updatedChatHistory[lastIndex] = {
+          role: 'model',
+          parts: response.text(),
+        };
+
+        setChatHistory(updatedChatHistory);
+      }
     }
   } catch (error) {
     console.error(error);
